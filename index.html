@@ -46,13 +46,44 @@
 </section>
 
 <section id="projects"><h2>Projects</h2>
+<p class="muted">Every number below comes from the project's own README. Flagship projects have a full case study with architecture, key decisions and real code.</p>
 <div class="grid">
-  <article class="card"><h3>jax-property-intelligence</h3><p>Duval County parcels, assessor records and addresses, loaded into PostGIS and explorable on an interactive Leaflet map.</p><p class="tags">PostGIS · Python · Leaflet</p><a href="https://github.com/knightchrism/jax-property-intelligence">Repository →</a> <a href="https://knightchrism.github.io/jax-property-intelligence/">Live map →</a></article>
-  <article class="card"><h3>jax-property-mcp</h3><p>An MCP server and AI agent for Jacksonville (Duval County) property data over 405k assessor records in PostGIS. Ask plain-English questions about property, FEMA flood risk and sales, answered through tested MCP tools.</p><p class="tags">PostGIS · dbt · MCP · Ollama</p><a href="https://github.com/knightchrism/jax-property-mcp">Repository →</a></article>
-  <article class="card"><h3>census-pipeline</h3><p>US Census ACS data → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. Currently covers Florida's 67 counties with margins of error.</p><p class="tags">DuckDB · dbt · FastMCP · Python</p><a href="https://github.com/knightchrism/census-pipeline">Repository →</a></article>
-  <article class="card"><h3>sjrwmd-open-data</h3><p>An unofficial, reproducible mirror of 15 St. Johns River Water Management District GIS layers (727,495 features), harvested from ArcGIS REST into PostGIS and served as PMTiles on a static map.</p><p class="tags">PostGIS · PMTiles · MapLibre</p><a href="https://github.com/knightchrism/sjrwmd-open-data">Repository →</a></article>
-  <article class="card"><h3>GeoRescue</h3><p>Finds, explains and proposes fixes for broken parcel data, with every change logged and nothing applied silently.</p><p class="tags">GeoPandas · DuckDB · MCP</p><a href="https://github.com/knightchrism/georescue">Repository →</a> <a href="https://knightchrism.github.io/georescue/">Live demo →</a></article>
-  <article class="card"><h3>sjrwmd-geodata-qc</h3><p>Rule-driven QA/QC for public SJRWMD groundwater-station GIS data: 8 configurable rules, an auditable CSV/JSON findings trail, and a static Leaflet dashboard. The source data is left untouched.</p><p class="tags">GeoPandas · ArcGIS REST · Leaflet</p><a href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a> <a href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Dashboard →</a></article>
+  <article class="card pcard">
+    <a class="thumb" href="projects/jax-property/" tabindex="-1" aria-hidden="true"><img src="assets/projects/jax-property-intelligence.webp" alt="Screenshot of the live Riverside property explorer: jax-property-intelligence" width="960" height="540" loading="lazy" decoding="async"></a>
+    <div class="body"><span class="flag">Flagship</span><h3>jax-property-intelligence</h3><p>Duval County parcels, assessor records and addresses, loaded into PostGIS (geometry repaired with <code>make_valid</code>, EPSG:2236) and explorable on an interactive Leaflet map.</p>
+    <ul class="badges" aria-label="Tech stack"><li>PostGIS</li><li>Python</li><li>GeoPandas</li><li>Leaflet</li></ul>
+    <div class="links"><a href="https://knightchrism.github.io/jax-property-intelligence/">Live demo →</a> <a href="https://github.com/knightchrism/jax-property-intelligence">Repository →</a> <a href="projects/jax-property/">Case study →</a></div></div>
+  </article>
+  <article class="card pcard">
+    <a class="thumb" href="projects/jax-property/" tabindex="-1" aria-hidden="true"><img src="assets/projects/jax-property-mcp.webp" alt="dbt lineage graph from the repository: jax-property-mcp" width="960" height="540" loading="lazy" decoding="async"></a>
+    <div class="body"><span class="flag">Flagship</span><h3>jax-property-mcp</h3><p>An MCP server and AI agent over 405k Duval County assessor records in PostGIS. Plain-English questions about property, FEMA flood risk and sales, answered through tested MCP tools; 12,288 of 12,288 FEMA flood zones loaded, 0 lost.</p>
+    <ul class="badges" aria-label="Tech stack"><li>PostGIS</li><li>dbt</li><li>MCP</li><li>Ollama</li></ul>
+    <div class="links"><a href="https://github.com/knightchrism/jax-property-mcp">Repository →</a> <a href="projects/jax-property/">Case study →</a></div></div>
+  </article>
+  <article class="card pcard">
+    <a class="thumb" href="projects/census-pipeline/" tabindex="-1" aria-hidden="true"><img src="assets/projects/census-pipeline.webp" alt="Architecture diagram rendered from the README: census-pipeline" width="960" height="540" loading="lazy" decoding="async"></a>
+    <div class="body"><span class="flag">Flagship</span><h3>census-pipeline</h3><p>US Census ACS → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. Florida's 67 counties with margins of error, plus a test that the counties reconcile to the state total.</p>
+    <ul class="badges" aria-label="Tech stack"><li>DuckDB</li><li>dbt</li><li>FastMCP</li><li>Python</li></ul>
+    <div class="links"><a href="https://github.com/knightchrism/census-pipeline">Repository →</a> <a href="projects/census-pipeline/">Case study →</a></div></div>
+  </article>
+  <article class="card pcard">
+    <a class="thumb" href="projects/sjrwmd-geodata-qc/" tabindex="-1" aria-hidden="true"><img src="assets/projects/sjrwmd-geodata-qc.webp" alt="Screenshot of the live QA/QC dashboard: sjrwmd-geodata-qc" width="960" height="540" loading="lazy" decoding="async"></a>
+    <div class="body"><span class="flag">Flagship</span><h3>sjrwmd-geodata-qc</h3><p>Rule-driven QA/QC for public SJRWMD groundwater-station GIS data: 8 configurable rules, an auditable CSV/JSON findings trail, and a static Leaflet dashboard. The source data is left untouched.</p>
+    <ul class="badges" aria-label="Tech stack"><li>GeoPandas</li><li>ArcGIS REST</li><li>Leaflet</li></ul>
+    <div class="links"><a href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Live demo →</a> <a href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a> <a href="projects/sjrwmd-geodata-qc/">Case study →</a></div></div>
+  </article>
+  <article class="card pcard">
+    <a class="thumb" href="https://knightchrism.github.io/georescue/" tabindex="-1" aria-hidden="true"><img src="assets/projects/georescue.webp" alt="Screenshot of the live GeoRescue demo: GeoRescue" width="960" height="540" loading="lazy" decoding="async"></a>
+    <div class="body"><h3>GeoRescue</h3><p>Finds, explains and proposes fixes for broken parcel data, with every change logged and nothing applied silently.</p>
+    <ul class="badges" aria-label="Tech stack"><li>GeoPandas</li><li>DuckDB</li><li>MCP</li></ul>
+    <div class="links"><a href="https://knightchrism.github.io/georescue/">Live demo →</a> <a href="https://github.com/knightchrism/georescue">Repository →</a></div></div>
+  </article>
+  <article class="card pcard">
+    <a class="thumb" href="https://github.com/knightchrism/sjrwmd-open-data" tabindex="-1" aria-hidden="true"><img src="assets/projects/sjrwmd-open-data.webp" alt="Architecture diagram rendered from the README: sjrwmd-open-data" width="960" height="540" loading="lazy" decoding="async"></a>
+    <div class="body"><h3>sjrwmd-open-data</h3><p>An unofficial, reproducible mirror of 15 St. Johns River Water Management District GIS layers (727,495 features), harvested from ArcGIS REST into PostGIS and served as PMTiles on a static map.</p>
+    <ul class="badges" aria-label="Tech stack"><li>PostGIS</li><li>PMTiles</li><li>MapLibre</li></ul>
+    <div class="links"><a href="https://github.com/knightchrism/sjrwmd-open-data">Repository →</a></div></div>
+  </article>
 </div>
 </section>
 
