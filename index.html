@@ -11,29 +11,32 @@
 <meta property="og:url" content="https://knightchrism.github.io/">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#0b1220">
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="wip-banner" role="status">🚧 Work in progress — this site is still being built. Check back soon!</div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
-  <a class="brand" href="#top">CK<span>·</span>KnightGeo</a>
-  <nav aria-label="Main"><a href="#map">Map</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#contact">Contact</a></nav>
+  <a class="brand" href="#top">Christopher Knight <span>· KnightGeo</span></a>
+  <nav aria-label="Main"><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#follow">Follow</a><a href="#contact">Contact</a></nav>
 </header>
 <main id="main">
 <section id="top" class="hero">
-  <p class="eyebrow">Jacksonville, Florida</p>
+  <div class="stars" aria-hidden="true"></div>
+  <div id="globe" class="globe" role="img" aria-label="Satellite globe centered on Florida"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-inner">
+  <p class="eyebrow">GIS &amp; Data Engineering · Jacksonville, Florida</p>
   <h1>Christopher Knight</h1>
   <p class="tagline">GIS &amp; Data Engineer · Founder, KnightGeo</p>
   <p class="lead">I build tested spatial data pipelines, clean up messy GIS data, and connect geodata to AI agents through MCP servers. KnightGeo brings county-wide address data QC and spatial data services to Florida.</p>
-  <div class="ctas"><a class="btn primary" href="#projects">View projects</a><a class="btn" href="#services">KnightGeo services</a><a class="btn ghost" href="https://github.com/knightchrism">GitHub</a></div>
-</section>
-
-<section id="map" class="mapwrap" aria-labelledby="map-h">
-  <h2 id="map-h">Northeast Florida</h2>
-  <p class="muted">Live MapLibre GL JS map. Markers are <strong>sample</strong> points for illustration only.</p>
-  <div id="mapel" role="region" aria-label="Interactive map of Jacksonville and Northeast Florida with sample markers"></div>
+  <div class="ctas"><a class="btn primary" href="#projects">View projects</a><a class="btn" href="#services">KnightGeo services</a><a class="btn" href="https://github.com/knightchrism">GitHub</a></div>
+  </div>
+  <div class="sun-toggle" role="group" aria-label="Globe lighting"><button type="button" data-mode="dusk" aria-pressed="true">Dusk</button><button type="button" data-mode="live" aria-pressed="false">Live sun</button></div>
+  <p class="credit">Imagery: <a href="https://earthobservatory.nasa.gov/features/BlueMarble">NASA Blue Marble</a> &amp; <a href="https://earthobservatory.nasa.gov/features/NightLights">Black Marble</a> via <a href="https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api">NASA GIBS</a> · USGS The National Map</p>
 </section>
 
 <section id="skills"><h2>Skills</h2>
@@ -63,6 +66,14 @@
 </section>
 
 
+<section id="follow"><h2>Follow along</h2>
+<p>Map builds, GIS tips, and behind-the-scenes looks at KnightGeo.</p>
+<div class="social-cards">
+  <a class="social-card" href="#" data-todo="x"><span class="social-name">X</span><span class="social-handle">TODO: @handle</span><span class="social-desc">Quick takes, maps, and project updates</span></a>
+  <a class="social-card" href="#" data-todo="youtube"><span class="social-name">YouTube</span><span class="social-handle">TODO: channel</span><span class="social-desc">Tutorials and walkthroughs on GIS, PostGIS, and data QC</span></a>
+</div>
+</section>
+
 <section id="contact"><h2>Contact</h2>
 <ul class="contact">
   <li>GitHub: <a href="https://github.com/knightchrism">github.com/knightchrism</a></li>
@@ -71,8 +82,8 @@
 </ul>
 </section>
 </main>
-<footer><p>© <span id="yr"></span> Christopher Knight · KnightGeo · Map data © OpenStreetMap contributors, OpenFreeMap</p></footer>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<footer><p>© <span id="yr"></span> Christopher Knight · KnightGeo · Imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's ESDIS · Map services and data available from U.S. Geological Survey, National Geospatial Program · Florida outline: US Census Bureau (public domain)</p></footer>
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
