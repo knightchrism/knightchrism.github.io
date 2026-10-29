@@ -94,13 +94,86 @@
 </section>
 
 <section id="services" class="services"><h2>GeoKnight GIS services</h2>
-<p class="muted">Spatial data services for Florida counties, municipalities and organizations.</p>
-<div class="grid three">
-  <article class="card"><h3>Address data QC</h3><p>County-wide address point and street centerline checks: duplicates, missing or invalid attributes, geometry problems and range inconsistencies, delivered as a reviewable findings report.</p></article>
-  <article class="card"><h3>Spatial data cleanup</h3><p>Parcel, address and asset layers repaired with documented, auditable fixes. Every change is logged, and nothing is overwritten silently.</p></article>
-  <article class="card"><h3>Data pipelines</h3><p>Repeatable ingestion from ArcGIS REST and public sources into PostGIS or DuckDB, with tested dbt models and an optional AI-agent access layer via MCP.</p></article>
+<div class="svc-value svc-combined" aria-labelledby="svc-h">
+  <h3 id="svc-h" class="svc-headline">Fast, AI-driven real-world accuracy at a fraction of the cost</h3>
+  <p class="svc-sub">Up to 75% less than traditional QC workflows.</p>
+<div class="proof-tiles">
+  <a class="proof-tile" href="projects/jax-property/"><span class="proof-num">12,288 / 12,288</span><span class="proof-lbl">FEMA flood zones loaded, with zero lost</span><span class="proof-src">Jax Property →</span></a>
+  <a class="proof-tile" href="projects/jax-property/"><span class="proof-num">405,722</span><span class="proof-lbl">parcels joined into one tested table</span><span class="proof-src">Jax Property →</span></a>
+  <a class="proof-tile" href="projects/jax-property/"><span class="proof-num">99.8%</span><span class="proof-lbl">of 75,878 Florida sales matched to a parcel</span><span class="proof-src">Jax Property →</span></a>
+  <a class="proof-tile" href="projects/census-pipeline/"><span class="proof-num">67 / 67</span><span class="proof-lbl">counties reconciled to the state total</span><span class="proof-src">Census Pipeline →</span></a>
+  <a class="proof-tile" href="projects/sjrwmd-geodata-qc/"><span class="proof-num">940</span><span class="proof-lbl">findings across 850 stations and 8 rules</span><span class="proof-src">SJRWMD GeoData QC →</span></a>
 </div>
-<div class="ctas"><a class="btn primary" href="#contact">Start a project</a></div>
+<p class="proof-how"><em>Rule-driven checks plus AI-assisted review. Every change is logged, and a human approves each fix.</em></p>
+</div>
+<p class="svc-who"><strong>Who it's for:</strong> counties, cities, utilities, engineering &amp; survey firms, and real estate/proptech teams.</p>
+<div class="grid three svc-grid">
+  <article class="card svc">
+    <h3>Address &amp; Parcel Data QC Audit</h3>
+    <p>Find duplicates, gaps, geometry errors and range conflicts without touching your source data.</p>
+    <ul class="svc-list"><li>Findings report (CSV/JSON + map dashboard)</li><li>Confidence score per record</li><li>Prioritized fix list</li></ul>
+    <p class="svc-proof">Proof: <a href="projects/sjrwmd-geodata-qc/">Case study</a> <a href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Live demo</a> <a href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repo</a></p>
+    <a class="btn primary" href="https://cal.com/christopher-uzhh5z">Get a free sample audit</a>
+  </article>
+  <article class="card svc">
+    <h3>Spatial Data Repair</h3>
+    <p>Logged, reviewable fixes for parcel and asset layers, including deed/COGO checks.</p>
+    <ul class="svc-list"><li>Proposed fixes with a plain-English reason for each</li><li>Change log of every edit, nothing applied silently</li><li>Deed/COGO consistency checks</li></ul>
+    <p class="svc-proof">Proof: <a href="https://knightchrism.github.io/georescue/">Live demo</a> <a href="https://github.com/knightchrism/georescue">Repo</a></p>
+    <a class="btn primary" href="https://cal.com/christopher-uzhh5z">Book a call</a>
+  </article>
+  <article class="card svc">
+    <h3>Utility Network QC &amp; Tracing</h3>
+    <p>Topology checks plus valve-isolation, outage and sewershed traces and hydrant coverage.</p>
+    <ul class="svc-list"><li>Topology/connectivity QC findings</li><li>Valve-isolation, outage and sewershed trace results</li><li>Hydrant coverage analysis and map</li></ul>
+    <p class="svc-proof">Proof: <a href="https://knightchrism.github.io/jax-utility-network/">Live demo</a> <a href="https://github.com/knightchrism/jax-utility-network">Repo</a> <span class="svc-note">(demo pipe/wire networks are synthetic)</span></p>
+    <a class="btn primary" href="https://cal.com/christopher-uzhh5z">Book a call</a>
+  </article>
+  <article class="card svc">
+    <h3>Property &amp; Flood-Risk Intelligence</h3>
+    <p>Parcels, assessor records and FEMA flood zones joined in PostGIS, with an interactive map.</p>
+    <ul class="svc-list"><li>PostGIS database of parcels + assessor data</li><li>FEMA flood-zone overlay per parcel</li><li>Interactive web map</li></ul>
+    <p class="svc-proof">Proof: <a href="projects/jax-property/">Case study</a> <a href="https://knightchrism.github.io/jax-property-intelligence/">Live demo</a> <a href="https://github.com/knightchrism/jax-property-intelligence">Repo</a> <a href="https://github.com/knightchrism/jax-property-mcp">MCP repo</a></p>
+    <a class="btn primary" href="https://cal.com/christopher-uzhh5z">Book a call</a>
+  </article>
+  <article class="card svc">
+    <h3>Data Pipelines &amp; Open-Data Publishing</h3>
+    <p>ArcGIS REST and Census sources into PostGIS/DuckDB, modeled with tested dbt and published to the web.</p>
+    <ul class="svc-list"><li>Reproducible pipeline with tested dbt models</li><li>PMTiles web maps</li><li>Metadata drafts for each layer</li></ul>
+    <p class="svc-proof">Proof: <a href="https://knightchrism.github.io/sjrwmd-open-data/">Open-data map</a> <a href="https://github.com/knightchrism/sjrwmd-open-data">Repo</a> <a href="projects/census-pipeline/">Census case study</a> <a href="https://github.com/knightchrism/census-pipeline">Repo</a></p>
+    <a class="btn primary" href="https://cal.com/christopher-uzhh5z">Book a call</a>
+  </article>
+  <article class="card svc">
+    <h3>AI Agent Access to GIS Data (MCP)</h3>
+    <p>Let staff ask plain-English questions of your GIS data through read-only, tested MCP tools.</p>
+    <ul class="svc-list"><li>Read-only MCP server with tested tools</li><li>Plain-English question answering over your data</li><li>Local LLM option (no data leaves your network)</li></ul>
+    <p class="svc-proof">Proof: <a href="https://github.com/knightchrism/jax-property-mcp">jax-property-mcp</a> <a href="projects/census-pipeline/">Census case study</a> <a href="https://github.com/knightchrism/census-pipeline">Repo</a></p>
+    <a class="btn primary" href="https://cal.com/christopher-uzhh5z">Book a call</a>
+  </article>
+</div>
+
+<h3 class="svc-h">How it works</h3>
+<ol class="svc-steps">
+  <li><b>Free sample</b><span>Run checks on a sample of your data so you see real findings first.</span></li>
+  <li><b>Scope</b><span>Agree on layers, rules and deliverables.</span></li>
+  <li><b>Deliver findings &amp; fixes</b><span>Reviewable reports, logged fixes and maps.</span></li>
+  <li><b>Handoff &amp; training</b><span>Your team gets the outputs and learns to rerun them.</span></li>
+</ol>
+
+<div class="svc-data card">
+  <h3>How your data is handled</h3>
+  <ul class="svc-list"><li>Source data is never overwritten.</li><li>Every change is logged.</li><li>Your data is never resold.</li><li>Data licenses are tracked.</li></ul>
+</div>
+
+<h3 class="svc-h">FAQ</h3>
+<div class="svc-faq">
+  <details class="work"><summary>Esri or open source?</summary><p>Both. I work with ArcGIS data and with open-source tools like PostGIS, QGIS and DuckDB.</p></details>
+  <details class="work"><summary>Can you work in our ArcGIS environment?</summary><p>Yes. I can work with your existing ArcGIS data and services and deliver outputs your team can use there.</p></details>
+  <details class="work"><summary>Is the AI local or cloud?</summary><p>A local LLM option via Ollama is available, so data can stay on your own machines.</p></details>
+  <details class="work"><summary>Who owns the deliverables?</summary><p>You do.</p></details>
+  <details class="work"><summary>Florida only?</summary><p>GeoKnight GIS is Florida-focused, but open to projects elsewhere.</p></details>
+</div>
+<div class="ctas"><a class="btn primary" href="https://cal.com/christopher-uzhh5z">Get a free sample audit</a><a class="btn" href="#contact">Contact</a></div>
 </section>
 
 
