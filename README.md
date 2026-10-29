@@ -1,21 +1,38 @@
-# knightchrism-site
+# GeoKnight GIS
 
-Static personal + GeoKnight GIS site. Plain HTML/CSS/JS, no build step.
+**GIS · Spatial Data · AI Integration Engineering**
 
-## Files
-- `index.html`: content (all sections). Edit text directly.
-- `styles.css`: colors live in `:root` variables at the top.
-- `main.js`: MapLibre GL JS v5 day/night globe. A custom `daynight://` protocol blends NASA GIBS `BlueMarble_NextGeneration` (day) and `VIIRS_Black_Marble` 2016 (night lights) per pixel using a solar terminator computed from the date and time, with a soft twilight band. Defaults to a cinematic Dusk-over-Florida sun; the Live sun toggle uses the real sun position and refreshes every 5 min. USGS National Map imagery shows at zoom ≥8. Fly-in plus a gentle drift on desktop, both disabled for prefers-reduced-motion. All public domain, no API key; keep the acknowledgments.
-- `florida.geojson`: Florida outline (simplified, derived from US Census boundaries) drawn in gold.
-- Fonts: EB Garamond (headings) + Inter (body) from Google Fonts.
+Christopher Knight, GIS & data engineer in Jacksonville, Florida.
 
-## Editing TODOs
-- Contact: replace the `TODO: email` / `TODO: LinkedIn` spans in `#contact`.
-- Projects: add a new `<article class="card">` in `#projects`.
-- SEO: update `og:url` in `<head>` once the final domain is known.
+[![Website](https://img.shields.io/badge/website-knightchrism.github.io-0b7285?style=flat-square)](https://knightchrism.github.io)
+[![X](https://img.shields.io/badge/X-@geoknight0015-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/geoknight0015)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![PostGIS](https://img.shields.io/badge/PostGIS-336791?style=flat-square&logo=postgresql&logoColor=white) ![dbt](https://img.shields.io/badge/dbt-FF694B?style=flat-square&logo=dbt&logoColor=white) ![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=flat-square&logo=duckdb&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-000000?style=flat-square&logo=anthropic&logoColor=white) ![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=flat-square&logo=leaflet&logoColor=white) ![QGIS](https://img.shields.io/badge/QGIS-589632?style=flat-square&logo=qgis&logoColor=white)
 
-## Preview locally
-`python3 -m http.server 8000` then open http://localhost:8000
+## Services
+- **Florida county-wide address QC**: auditing address points and parcel-linked address data for completeness, consistency and geometry issues, with reviewable findings.
+- **GIS & spatial data services**: PostGIS databases, spatial SQL, data pipelines (dbt, DuckDB, Python), web maps, and AI agent integrations over spatial data via MCP.
 
-## Deploy (GitHub Pages)
-Push to a repo, then Settings → Pages → Deploy from branch → `main` / root. For a user site, name the repo `knightchrism.github.io`.
+## Featured projects
+| Project | Description | Demo |
+|---|---|---|
+| [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records and addresses, loaded into PostGIS and explorable on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
+| [jax-property-mcp](https://github.com/knightchrism/jax-property-mcp) | Plain-English questions about Jacksonville property, flood risk and sales, answered by a local AI agent through tested MCP tools over PostGIS. | |
+| [census-pipeline](https://github.com/knightchrism/census-pipeline) | US Census ACS data → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. | |
+| [sjrwmd-open-data](https://github.com/knightchrism/sjrwmd-open-data) | 15 Florida water-management GIS layers harvested from ArcGIS REST into PostGIS, served as PMTiles on a static map. | |
+| [sjrwmd-geodata-qc](https://github.com/knightchrism/sjrwmd-geodata-qc) | Rule-driven QA/QC for public groundwater-station GIS data, with findings you can filter, inspect and export. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
+| [georescue](https://github.com/knightchrism/georescue) | Find, explain and propose fixes for broken parcel data, with every change logged and nothing applied silently. | [Live demo](https://knightchrism.github.io/georescue/) |
+
+## Skills
+PostGIS & spatial SQL · Python (GeoPandas, Shapely) · dbt · DuckDB · QGIS · ArcGIS REST · Leaflet & MapLibre · MCP servers & AI agents · data QA/QC
+
+## Contact
+- Website: https://knightchrism.github.io
+- X: https://x.com/geoknight0015
+- GitHub: https://github.com/knightchrism
+- YouTube: https://www.youtube.com/channel/UC-wT8_8Y-vrqF0BFr9dOtYw
+
+## About this site
+Static HTML/CSS/JS, no build step (`index.html`, `styles.css`, `main.js`, `florida.geojson`). Preview with `python3 -m http.server 8000`. Deployed via GitHub Pages from `main`.
+
+---
+<sub>Projects built with Grok Bot as an AI teammate.</sub>
