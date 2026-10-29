@@ -96,3 +96,21 @@ details.work p.src{margin:0;padding:.6rem 1.3rem;font-size:.8rem;border-top:1px 
 .crumbs{font-size:.85rem;color:var(--muted);margin:0 0 .6rem}.crumbs a{text-decoration:none}
 @media(max-width:700px){.case-hero{padding:3rem 6vw 1rem}}
 @media(prefers-reduced-motion:reduce){.pcard,.pcard .thumb img{transition:none}.pcard:hover .thumb img{transform:none}}
+
+/* ---- Services ---- */
+.svc-value{margin:1.2rem 0 .6rem;padding:1.4rem 1.6rem;border:1px solid rgba(232,182,90,.45);border-left:4px solid var(--gold);border-radius:14px;background:linear-gradient(135deg,rgba(232,182,90,.1),rgba(232,182,90,.02))}
+.svc-headline{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.3rem);line-height:1.15;margin:0;color:var(--fg)}
+.svc-sub{margin:.4rem 0 0;color:var(--gold2);font-weight:600}
+.svc-who{color:var(--muted)}.svc-who strong{color:var(--fg)}
+.svc{display:flex;flex-direction:column}
+.svc-list{margin:.6rem 0;padding-left:1.1rem;color:rgba(255,255,255,.85);font-size:.93rem}.svc-list li{margin:.2rem 0}
+.svc-proof{font-size:.88rem;margin-top:auto!important;padding-top:.6rem;border-top:1px solid var(--line)}
+.svc-proof a{margin-right:.7rem!important}.svc-note{font-size:.78rem;color:rgba(255,255,255,.5)}
+.svc .btn{align-self:flex-start;margin-top:.9rem}.card a.btn.primary{color:#1a1408}
+.svc-h{margin-top:3rem;font-size:1.8rem}
+.svc-steps{list-style:none;counter-reset:s;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+.svc-steps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:.3rem}
+.svc-steps li::before{content:counter(s);font-family:var(--serif);font-size:1.8rem;color:var(--gold);line-height:1}
+.svc-steps span{color:var(--muted);font-size:.92rem}
+.svc-data{margin-top:2.5rem}
+.svc-faq details p{margin:0;padding:0 1.3rem 1rem;color:var(--muted)}
