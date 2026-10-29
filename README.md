@@ -1,10 +1,10 @@
-# GeoKnight GIS
+# GeoKnight Geospatial Information Services (GeoKnight GIS)
 
 <p><a href="https://scorecard.dev/viewer/?uri=github.com/knightchrism/knightchrism.github.io"><img alt="OpenSSF Scorecard" src="https://api.scorecard.dev/projects/github.com/knightchrism/knightchrism.github.io/badge"></a></p>
 
 **GIS · Spatial Data · AI Integration Engineering**
 
-Christopher Knight, GIS & data engineer in Jacksonville, Florida.
+GIS, spatial data and AI integration services from Jacksonville, Florida. Founded by Christopher Knight, GIS & data engineer ([About](https://knightchrism.github.io/about.html)).
 
 [![Website](https://img.shields.io/badge/website-knightchrism.github.io-0b7285?style=flat-square)](https://knightchrism.github.io)
 [![X](https://img.shields.io/badge/X-@geoknight0015-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/geoknight0015)
