@@ -32,3 +32,5 @@ h1{font-size:clamp(2.4rem,6vw,4.2rem);margin:.2rem 0;line-height:1.1}
 footer{text-align:center;color:var(--muted);font-size:.85rem;padding:2rem;border-top:1px solid var(--line)}
 @media(max-width:700px){.nav nav{display:none}#mapel{height:360px}section{padding:3rem 6vw}.hero{padding-top:3.5rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.wip-banner{background:#f5c542;color:#1a1a1a;text-align:center;font-weight:600;padding:.5rem 1rem;font-size:.95rem}
