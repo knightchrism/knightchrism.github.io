@@ -21,6 +21,7 @@ Christopher Knight, GIS & data engineer in Jacksonville, Florida.
 | [sjrwmd-open-data](https://github.com/knightchrism/sjrwmd-open-data) | 15 Florida water-management GIS layers harvested from ArcGIS REST into PostGIS, served as PMTiles on a static map. | |
 | [sjrwmd-geodata-qc](https://github.com/knightchrism/sjrwmd-geodata-qc) | Rule-driven QA/QC for public groundwater-station GIS data, with findings you can filter, inspect and export. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
 | [georescue](https://github.com/knightchrism/georescue) | Find, explain and propose fixes for broken parcel data, with every change logged and nothing applied silently. | [Live demo](https://knightchrism.github.io/georescue/) |
+| [jax-utility-network](https://github.com/knightchrism/jax-utility-network) | Water, sewer and electric network topology, QC, outage traces and hydrant coverage for Jacksonville, FL. Real public data plus clearly labeled synthetic networks. | [Live demo](https://knightchrism.github.io/jax-utility-network/) |
 
 ## Skills
 PostGIS & spatial SQL · Python (GeoPandas, Shapely) · dbt · DuckDB · QGIS · ArcGIS REST · Leaflet & MapLibre · MCP servers & AI agents · data QA/QC
