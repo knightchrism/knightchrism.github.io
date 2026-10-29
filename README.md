@@ -31,6 +31,7 @@ PostGIS & spatial SQL · Python (GeoPandas, Shapely) · dbt · DuckDB · QGIS ·
 - GitHub: https://github.com/knightchrism
 - Email: geoknight0015@gmail.com
 - LinkedIn: https://www.linkedin.com/in/christopher-knight-3225a2232/
+- Book a call: https://cal.com/christopher-uzhh5z
 - YouTube: https://www.youtube.com/channel/UC-wT8_8Y-vrqF0BFr9dOtYw
 
 ## About this site
