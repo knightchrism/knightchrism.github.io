@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SJRWMD GeoData Quality Inspector · Case study · GeoKnight GIS</title>
 <meta name="description" content="Rule-driven QA/QC for public groundwater-station GIS data: findings you can filter, inspect and export, with the source data left untouched.">
@@ -36,7 +38,7 @@
 <ul><li><strong>St. Johns River Water Management District</strong> public ArcGIS REST Feature Service: <a href="https://services.arcgis.com/s8wtJX9suxFen6TA/ArcGIS/rest/services/Active_Groundwater_Monitoring_Network_Water_Level_Event_Type/FeatureServer/0">Active Groundwater Monitoring Network, Water Level Event Type</a></li><li>OpenStreetMap basemap for the dashboard</li></ul>
 </section>
 <section><h2>Architecture</h2>
-<figure class="diagram-box"><img style="min-width:1258px" src="../../assets/diagrams/sjrwmd-geodata-qc.svg" alt="Architecture diagram for sjrwmd-geodata-qc, rendered from the Mermaid source in its README" loading="lazy"><figcaption>ArcGIS REST → raw copy → rules engine → findings → Leaflet dashboard · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/sjrwmd-geodata-qc#architecture">sjrwmd-geodata-qc README</a>. Scroll sideways on small screens.</figcaption></figure><img class="shot" src="../../assets/projects/sjrwmd-geodata-qc.webp" alt="Screenshot of the live QA/QC dashboard showing station findings on a Florida map" width="960" height="540" loading="lazy">
+<figure class="diagram-box"><img class="mw-1258" src="../../assets/diagrams/sjrwmd-geodata-qc.svg" alt="Architecture diagram for sjrwmd-geodata-qc, rendered from the Mermaid source in its README" loading="lazy"><figcaption>ArcGIS REST → raw copy → rules engine → findings → Leaflet dashboard · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/sjrwmd-geodata-qc#architecture">sjrwmd-geodata-qc README</a>. Scroll sideways on small screens.</figcaption></figure><img class="shot" src="../../assets/projects/sjrwmd-geodata-qc.webp" alt="Screenshot of the live QA/QC dashboard showing station findings on a Florida map" width="960" height="540" loading="lazy">
 </section>
 <section><h2>Key decisions</h2>
 <ul class="decisions"><li><strong>Rules as config, not code.</strong> All 8 rules live in <code>config/qc_rules.json</code> with id, field, check type, severity and an interpretation, so they can be reviewed and changed without touching Python.</li><li><strong>Raw download preserved.</strong> The original data is saved as-is and never modified by the QA/QC process.</li><li><strong>Findings, not verdicts.</strong> Results are project-defined review findings, not confirmed errors: a record missing UTM attributes can still have valid lat/long and point geometry.</li><li><strong>Severity tiers.</strong> Critical (identity, geometry), warning (county) and info (optional attributes) keep reviewers focused.</li><li><strong>Auditable outputs.</strong> Every finding is written to CSV/JSON; the dashboard filters by rule and severity, shows original values and exports filtered CSV.</li><li><strong>Static hosting.</strong> The dashboard is plain HTML + Leaflet on GitHub Pages, with no server to maintain.</li></ul>
@@ -100,9 +102,9 @@
 </section>
 
 <section><h2>Links</h2><div class="ctas"><a class="btn primary" href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Live dashboard →</a><a class="btn" href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a></div>
-<p class="muted" style="font-size:.85rem">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
+<p class="muted small-note">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
 </main>
 <footer><p>© <span id="yr">2026</span> Christopher Knight · GeoKnight GIS</p></footer>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script src="../../assets/js/year.js"></script>
 </body>
 </html>

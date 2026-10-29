@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Census ACS Pipeline · Case study · GeoKnight GIS</title>
 <meta name="description" content="US Census ACS data → DuckDB → tested dbt marts → governed metrics → a read-only MCP server AI agents can query safely.">
@@ -36,7 +38,7 @@
 <ul><li><strong>Census Data API</strong> (<code>api.census.gov</code>), ACS 5-year estimates, with an API key</li><li><strong>ACS table-based Summary File</strong> (<code>www2.census.gov</code>), the no-key fallback</li><li>Scope today: <strong>Florida (state FIPS 12), 67 counties + the state total</strong>: population, median household income, median age and Hispanic / race counts, each with its margin of error</li></ul>
 </section>
 <section><h2>Architecture</h2>
-<figure class="diagram-box"><img style="min-width:2117px" src="../../assets/diagrams/census-pipeline.svg" alt="Architecture diagram for census-pipeline, rendered from the Mermaid source in its README" loading="lazy"><figcaption>Ingest → DuckDB → dbt → governed metrics → read-only MCP · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/census-pipeline#architecture">census-pipeline README</a>. Scroll sideways on small screens.</figcaption></figure>
+<figure class="diagram-box"><img class="mw-2117" src="../../assets/diagrams/census-pipeline.svg" alt="Architecture diagram for census-pipeline, rendered from the Mermaid source in its README" loading="lazy"><figcaption>Ingest → DuckDB → dbt → governed metrics → read-only MCP · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/census-pipeline#architecture">census-pipeline README</a>. Scroll sideways on small screens.</figcaption></figure>
 </section>
 <section><h2>Key decisions</h2>
 <ul class="decisions"><li><strong>Quality gates before load.</strong> Row counts, columns, duplicate GEOIDs and parse rate are checked before anything is written.</li><li><strong>Idempotent loads.</strong> Each (year, state) is replaced atomically in DuckDB, never duplicated, so re-running is safe.</li><li><strong>Sentinels → NULL + flag.</strong> Staging turns Census “no value” codes into <code>NULL</code> and keeps the code in <code>&lt;metric&gt;_flag</code>, so nothing is lost or miscounted.</li><li><strong>Respect the statistics.</strong> 90% MOEs kept, CV &gt; 0.30 flagged as unreliable, growth only across non-overlapping windows, and state medians taken from the official state row.</li><li><strong>Reconciliation test.</strong> A custom dbt generic test, <code>county_sum_matches_state</code>, proves the 67 counties sum to the official state total.</li><li><strong>Governed metrics.</strong> <code>semantic/metrics.yml</code> defines formula, grain and caveats, compiled to parameterized SQL.</li><li><strong>Defense-in-depth MCP server.</strong> DuckDB opened <code>read_only=True</code>, external access disabled, one SELECT/WITH statement only, row cap and timeout, and every call logged to <code>logs/mcp.log</code>.</li><li><strong>Scales by config.</strong> All 50 states is a change to <code>geography.states</code> in <code>config.yaml</code>.</li></ul>
@@ -95,9 +97,9 @@ def check_sql(sql: str) -&gt; str:
 </section>
 
 <section><h2>Links</h2><div class="ctas"><a class="btn primary" href="https://github.com/knightchrism/census-pipeline">Repository →</a><a class="btn" href="https://github.com/knightchrism/census-pipeline/blob/main/examples/agent_queries.md">Recorded agent queries</a></div>
-<p class="muted" style="font-size:.85rem">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
+<p class="muted small-note">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
 </main>
 <footer><p>© <span id="yr">2026</span> Christopher Knight · GeoKnight GIS</p></footer>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script src="../../assets/js/year.js"></script>
 </body>
 </html>

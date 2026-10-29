@@ -95,6 +95,12 @@ details.work p.src{margin:0;padding:.6rem 1.3rem;font-size:.8rem;border-top:1px 
 @media(max-width:700px){.case-hero{padding:3rem 6vw 1rem}}
 @media(prefers-reduced-motion:reduce){.pcard,.pcard .thumb img{transition:none}.pcard:hover .thumb img{transform:none}}
 
+/* CSP: replaces inline style attributes */
+.small-note{font-size:.85rem}
+.mw-2117{min-width:2117px}
+.mw-1106{min-width:1106px}
+.mw-1110{min-width:1110px}
+.mw-1258{min-width:1258px}
 /* ---- Services ---- */
 .svc-value{margin:1.2rem 0 .6rem;padding:1.4rem 1.6rem;border:1px solid rgba(232,182,90,.45);border-left:4px solid var(--gold);border-radius:14px;background:linear-gradient(135deg,rgba(232,182,90,.1),rgba(232,182,90,.02))}
 .svc-headline{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.3rem);line-height:1.15;margin:0;color:var(--fg)}
