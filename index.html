@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GeoKnight Geospatial Information Services | GeoKnight GIS</title>
@@ -16,14 +16,17 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" integrity="sha384-uTttxo/aOKbdE5RlD/SPzSDoDmNvGlUYPjONi2MN/b7c9HPSvW07OIuyP7uL6jxK" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261029f">
+<link rel="stylesheet" href="styles.css?v=20261029g">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":["ProfessionalService","Organization"],"name":"GeoKnight Geospatial Information Services","alternateName":"GeoKnight GIS","url":"https://knightchrism.github.io/","email":"mailto:geoknight0015@gmail.com","description":"County-wide address data QC and spatial data services. Fast, AI-driven real-world accuracy at a fraction of the cost.","slogan":"Fast, AI-driven real-world accuracy at a fraction of the cost","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"},"areaServed":{"@type":"State","name":"Florida"},"founder":{"@type":"Person","name":"Christopher Knight","sameAs":"https://www.linkedin.com/in/christopher-knight-3225a2232/"},"sameAs":["https://www.linkedin.com/in/christopher-knight-3225a2232/","https://x.com/geoknight0015","https://www.youtube.com/channel/UC-wT8_8Y-vrqF0BFr9dOtYw","https://github.com/knightchrism"],"knowsAbout":["GIS","Address data quality control","Spatial data repair","PostGIS","Utility network tracing","MCP AI agents"]}
+</script>
 </head>
 <body>
 <div class="wip-banner" role="status">🚧 Work in progress — this site is still being built. Check back soon!</div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
   <a class="brand" href="#top">GeoKnight GIS</a>
-  <nav aria-label="Main"><a href="#services">Services</a><a href="#projects">Work</a><a href="about.html">About</a><a href="#contact">Contact</a></nav>
+  <nav aria-label="Main"><a href="#services">Services</a><a href="#projects">Work</a><a href="markets.html">Markets</a><a href="about.html">About</a><a href="#contact">Contact</a></nav>
 </header>
 <main id="main">
 <section id="top" class="hero">
@@ -45,25 +48,25 @@
 <div class="grid">
   <article class="card pcard">
     <a class="thumb" href="projects/jax-property/" tabindex="-1" aria-hidden="true"><img src="assets/projects/jax-property-intelligence.webp" alt="Screenshot of the live Riverside property explorer: jax-property-intelligence" width="960" height="540" loading="lazy" decoding="async"></a>
-    <div class="body"><span class="flag">Flagship</span><h3>jax-property-intelligence</h3><p>Duval County parcels, assessor records and addresses, loaded into PostGIS (geometry repaired with <code>make_valid</code>, EPSG:2236) and explorable on an interactive Leaflet map.</p>
+    <div class="body"><span class="flag">Flagship</span><h3>jax-property-intelligence</h3><span class="demo-label">Self-initiated demonstration on public data</span><p>Duval County parcels, assessor records and addresses, loaded into PostGIS (geometry repaired with <code>make_valid</code>, EPSG:2236) and explorable on an interactive Leaflet map.</p>
     <ul class="badges" aria-label="Tech stack"><li>PostGIS</li><li>Python</li><li>GeoPandas</li><li>Leaflet</li></ul>
     <div class="links"><a href="https://knightchrism.github.io/jax-property-intelligence/">Live demo →</a> <a href="https://github.com/knightchrism/jax-property-intelligence">Repository →</a> <a href="projects/jax-property/">Case study →</a></div></div>
   </article>
   <article class="card pcard">
     <a class="thumb" href="projects/jax-property/" tabindex="-1" aria-hidden="true"><img src="assets/projects/jax-property-mcp.webp" alt="dbt lineage graph from the repository: jax-property-mcp" width="960" height="540" loading="lazy" decoding="async"></a>
-    <div class="body"><span class="flag">Flagship</span><h3>jax-property-mcp</h3><p>An MCP server and AI agent over 405k Duval County assessor records in PostGIS. Plain-English questions about property, FEMA flood risk and sales, answered through tested MCP tools; 12,288 of 12,288 FEMA flood zones loaded, 0 lost.</p>
+    <div class="body"><span class="flag">Flagship</span><h3>jax-property-mcp</h3><span class="demo-label">Self-initiated demonstration on public data</span><p>An MCP server and AI agent over 405k Duval County assessor records in PostGIS. Plain-English questions about property, FEMA flood risk and sales, answered through tested MCP tools; 12,288 of 12,288 FEMA flood zones loaded, 0 lost.</p>
     <ul class="badges" aria-label="Tech stack"><li>PostGIS</li><li>dbt</li><li>MCP</li><li>Ollama</li></ul>
     <div class="links"><a href="https://github.com/knightchrism/jax-property-mcp">Repository →</a> <a href="projects/jax-property/">Case study →</a></div></div>
   </article>
   <article class="card pcard">
     <a class="thumb" href="projects/census-pipeline/" tabindex="-1" aria-hidden="true"><img src="assets/projects/census-pipeline.webp" alt="Architecture diagram rendered from the README: census-pipeline" width="960" height="540" loading="lazy" decoding="async"></a>
-    <div class="body"><span class="flag">Flagship</span><h3>census-pipeline</h3><p>US Census ACS → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. Florida's 67 counties with margins of error, plus a test that the counties reconcile to the state total.</p>
+    <div class="body"><span class="flag">Flagship</span><h3>census-pipeline</h3><span class="demo-label">Self-initiated demonstration on public data</span><p>US Census ACS → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. Florida's 67 counties with margins of error, plus a test that the counties reconcile to the state total.</p>
     <ul class="badges" aria-label="Tech stack"><li>DuckDB</li><li>dbt</li><li>FastMCP</li><li>Python</li></ul>
     <div class="links"><a href="https://github.com/knightchrism/census-pipeline">Repository →</a> <a href="projects/census-pipeline/">Case study →</a></div></div>
   </article>
   <article class="card pcard">
     <a class="thumb" href="projects/sjrwmd-geodata-qc/" tabindex="-1" aria-hidden="true"><img src="assets/projects/sjrwmd-geodata-qc.webp" alt="Screenshot of the live QA/QC dashboard: sjrwmd-geodata-qc" width="960" height="540" loading="lazy" decoding="async"></a>
-    <div class="body"><span class="flag">Flagship</span><h3>sjrwmd-geodata-qc</h3><p>Rule-driven QA/QC for public SJRWMD groundwater-station GIS data: 8 configurable rules, an auditable CSV/JSON findings trail, and a static Leaflet dashboard. The source data is left untouched.</p>
+    <div class="body"><span class="flag">Flagship</span><h3>sjrwmd-geodata-qc</h3><span class="demo-label">Self-initiated demonstration on public data</span><p>Rule-driven QA/QC for public SJRWMD groundwater-station GIS data: 8 configurable rules, an auditable CSV/JSON findings trail, and a static Leaflet dashboard. The source data is left untouched.</p>
     <ul class="badges" aria-label="Tech stack"><li>GeoPandas</li><li>ArcGIS REST</li><li>Leaflet</li></ul>
     <div class="links"><a href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Live demo →</a> <a href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a> <a href="projects/sjrwmd-geodata-qc/">Case study →</a></div></div>
   </article>
@@ -81,7 +84,7 @@
   </article>
   <article class="card pcard">
     <a class="thumb" href="https://knightchrism.github.io/jax-utility-network/" tabindex="-1" aria-hidden="true"><img src="assets/projects/jax-utility-network.webp" alt="Screenshot of the live utility network demo: jax-utility-network" width="960" height="540" loading="lazy" decoding="async"></a>
-    <div class="body"><h3>jax-utility-network</h3><p>Water, sewer and electric network topology, QC, valve-isolation, outage and sewershed traces, and hydrant coverage for Jacksonville, FL. Real public streets, parcels and hydrants; the pipe and wire networks are synthetic and labeled as such, since JEA does not publish them.</p>
+    <div class="body"><h3>jax-utility-network</h3><span class="demo-label">Self-initiated demonstration on public data</span><p>Water, sewer and electric network topology, QC, valve-isolation, outage and sewershed traces, and hydrant coverage for Jacksonville, FL. Real public streets, parcels and hydrants; the pipe and wire networks are synthetic and labeled as such, since JEA does not publish them.</p>
     <ul class="badges" aria-label="Tech stack"><li>Python</li><li>networkx</li><li>GeoPandas</li><li>Leaflet</li></ul>
     <div class="links"><a href="https://knightchrism.github.io/jax-utility-network/">Live demo →</a> <a href="https://github.com/knightchrism/jax-utility-network">Repository →</a></div></div>
   </article>
@@ -101,6 +104,7 @@
 </div>
 <p class="proof-how"><em>Rule-driven checks plus AI-assisted review. Every change is logged, and a human approves each fix.</em></p>
 </div>
+<p class="svc-who"><a class="btn" href="capability.html">Capability statement</a> <a class="btn" href="capability-statement.pdf">PDF</a> <a class="btn" href="markets.html">Markets we serve</a></p>
 <p class="svc-who"><strong>Who it's for:</strong> counties, cities, utilities, engineering &amp; survey firms, and real estate/proptech teams.</p>
 <div class="grid three svc-grid">
   <article class="card svc">
@@ -158,6 +162,7 @@
 <div class="svc-data card">
   <h3>How your data is handled</h3>
   <ul class="svc-list"><li>Source data is never overwritten.</li><li>Every change is logged.</li><li>Your data is never resold.</li><li>Data licenses are tracked.</li></ul>
+  <p><a href="security.html">Data security details →</a></p>
 </div>
 
 <h3 class="svc-h">FAQ</h3>
@@ -187,9 +192,24 @@
   <li>Book a call: <a href="https://cal.com/christopher-uzhh5z">cal.com/christopher-uzhh5z</a></li>
 </ul>
 <p class="muted">Founded by Christopher Knight · <a href="about.html">About →</a></p>
+<h3 class="svc-h">Project intake</h3>
+<p class="muted">Tell us about your data. Submitting opens your email app with the details filled in; nothing is stored on this site. Prefer to talk? <a href="https://cal.com/christopher-uzhh5z">Book a call</a>.</p>
+<!-- No Formspree form ID yet. To switch to Formspree, replace the action with
+     https://formspree.io/f/YOUR_FORM_ID, remove enctype, and add https://formspree.io to the CSP form-action. -->
+<form class="intake card" action="mailto:geoknight0015@gmail.com?subject=Project%20intake" method="post" enctype="text/plain">
+  <label>Name<input name="name" required autocomplete="name"></label>
+  <label>Email<input type="email" name="email" required autocomplete="email"></label>
+  <label>Organization<input name="organization" autocomplete="organization"></label>
+  <label>Sector<select name="sector"><option>Local government / county</option><option>Utility</option><option>Engineering / survey firm</option><option>Real estate / property data</option><option>Other</option></select></label>
+  <label>Service of interest<select name="service"><option>Address &amp; parcel data QC audit</option><option>Spatial data repair</option><option>Utility network QC &amp; tracing</option><option>Property &amp; flood-risk intelligence</option><option>Data pipelines &amp; open-data publishing</option><option>AI agent access to GIS data (MCP)</option><option>Not sure yet</option></select></label>
+  <label>Approximate data size<input name="data_size" placeholder="e.g. 250k address points, one county"></label>
+  <label class="full">Project description<textarea name="description" rows="5" required></textarea></label>
+  <p class="full small-note muted">See our <a href="privacy.html">privacy</a> and <a href="security.html">data security</a> pages. Please do not send confidential data through this form.</p>
+  <div class="full ctas"><button class="btn primary" type="submit">Send project details</button><a class="btn" href="https://cal.com/christopher-uzhh5z">Book a call</a></div>
+</form>
 </section>
 </main>
-<footer><p>© <span id="yr"></span> GeoKnight GIS · <a href="about.html">Founded by Christopher Knight → About</a> · Imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's ESDIS · Map services and data available from U.S. Geological Survey, National Geospatial Program · Florida outline: US Census Bureau (public domain)</p></footer>
+<footer><p>© <span id="yr"></span> GeoKnight GIS · <a href="about.html">Founded by Christopher Knight → About</a> · <a href="capability.html">Capability statement</a> · <a href="markets.html">Markets</a> · <a href="security.html">Data security</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's ESDIS · Map services and data available from U.S. Geological Survey, National Geospatial Program · Florida outline: US Census Bureau (public domain)</p></footer>
 <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js" integrity="sha384-5+cfbwT0iiub6VsQAdn6yz16nr6sDiQoHx6tm4O8OVYXHYOxcffFmCJBL0dgdvGp" crossorigin="anonymous"></script>
 <script src="main.js"></script>
 </body>
