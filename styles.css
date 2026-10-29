@@ -114,3 +114,14 @@ details.work p.src{margin:0;padding:.6rem 1.3rem;font-size:.8rem;border-top:1px 
 .svc-steps span{color:var(--muted);font-size:.92rem}
 .svc-data{margin-top:2.5rem}
 .svc-faq details p{margin:0;padding:0 1.3rem 1rem;color:var(--muted)}
+
+.svc-proof-strip{margin:1.4rem 0 1.6rem;padding:1.2rem 1.3rem;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.proof-h{margin:0 0 .8rem;font-family:var(--serif);font-size:1.25rem;color:var(--gold)}
+.proof-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem}
+.proof-tile{display:flex;flex-direction:column;gap:.25rem;padding:.85rem 1rem;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--fg);transition:border-color .2s}
+.proof-tile:hover,.proof-tile:focus-visible{border-color:var(--gold)}
+.proof-num{font-family:var(--serif);font-size:1.5rem;line-height:1.1;color:var(--gold2)}
+.proof-lbl{font-size:.86rem;color:rgba(255,255,255,.85)}
+.proof-src{margin-top:auto;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.proof-how{margin:.9rem 0 0;font-size:.9rem;color:var(--muted)}.proof-how strong{color:var(--fg)}
+@media(max-width:520px){.proof-tiles{grid-template-columns:1fr 1fr}.proof-num{font-size:1.25rem}}
