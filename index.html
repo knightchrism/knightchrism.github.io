@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christopher Knight · GIS & Data Engineer · KnightGeo</title>
+<meta name="description" content="Christopher Knight, GIS and data engineer in Jacksonville, Florida, and founder of KnightGeo: county-wide address data QC and spatial data services for Florida.">
+<meta property="og:title" content="Christopher Knight · GIS & Data Engineer · KnightGeo">
+<meta property="og:description" content="PostGIS, spatial SQL, dbt, DuckDB, Python and MCP/AI agents. Address data QC and spatial data services for Florida.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knightchrism.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0b1220">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <a class="brand" href="#top">CK<span>·</span>KnightGeo</a>
+  <nav aria-label="Main"><a href="#map">Map</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#contact">Contact</a></nav>
+</header>
+<main id="main">
+<section id="top" class="hero">
+  <p class="eyebrow">Jacksonville, Florida</p>
+  <h1>Christopher Knight</h1>
+  <p class="tagline">GIS &amp; Data Engineer · Founder, KnightGeo</p>
+  <p class="lead">I build tested spatial data pipelines, clean up messy GIS data, and connect geodata to AI agents through MCP servers. KnightGeo brings county-wide address data QC and spatial data services to Florida.</p>
+  <div class="ctas"><a class="btn primary" href="#projects">View projects</a><a class="btn" href="#services">KnightGeo services</a><a class="btn ghost" href="https://github.com/knightchrism">GitHub</a></div>
+</section>
+
+<section id="map" class="mapwrap" aria-labelledby="map-h">
+  <h2 id="map-h">Northeast Florida</h2>
+  <p class="muted">Live MapLibre GL JS map. Markers are <strong>sample</strong> points for illustration only.</p>
+  <div id="mapel" role="region" aria-label="Interactive map of Jacksonville and Northeast Florida with sample markers"></div>
+</section>
+
+<section id="skills"><h2>Skills</h2>
+  <ul class="chips">
+    <li>PostGIS</li><li>Spatial SQL</li><li>dbt</li><li>DuckDB</li><li>Python</li><li>GeoPandas / Shapely</li><li>MCP servers &amp; AI agents</li><li>GIS data QC</li><li>ArcGIS REST harvesting</li><li>MapLibre / PMTiles</li>
+  </ul>
+</section>
+
+<section id="projects"><h2>Projects</h2>
+<div class="grid">
+  <article class="card"><h3>jax-property-mcp</h3><p>An MCP server and AI agent for Jacksonville (Duval County) property data over 405k assessor records in PostGIS. Ask plain-English questions about property, FEMA flood risk and sales, answered through tested MCP tools.</p><p class="tags">PostGIS · dbt · MCP · Ollama</p><a href="https://github.com/knightchrism/jax-property-mcp">Repository →</a></article>
+  <article class="card"><h3>census-pipeline</h3><p>US Census ACS data → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. Currently covers Florida's 67 counties with margins of error.</p><p class="tags">DuckDB · dbt · FastMCP · Python</p><a href="https://github.com/knightchrism/census-pipeline">Repository →</a></article>
+  <article class="card"><h3>sjrwmd-open-data</h3><p>An unofficial, reproducible mirror of 15 St. Johns River Water Management District GIS layers (727,495 features), harvested from ArcGIS REST into PostGIS and served as PMTiles on a static map.</p><p class="tags">PostGIS · PMTiles · MapLibre</p><a href="https://github.com/knightchrism/sjrwmd-open-data">Repository →</a> <a href="https://knightchrism.github.io/sjrwmd-open-data/">Live map →</a></article>
+  <article class="card"><h3>GeoRescue</h3><p>Finds, explains and proposes fixes for broken parcel data, with every change logged and nothing applied silently.</p><p class="tags">GeoPandas · DuckDB · MCP</p><a href="https://github.com/knightchrism/georescue">Repository →</a> <a href="https://knightchrism.github.io/georescue/">Live demo →</a></article>
+  <article class="card"><h3>sjrwmd-geodata-qc</h3><p>Rule-driven QA/QC for public SJRWMD groundwater-station GIS data: 8 configurable rules, an auditable CSV/JSON findings trail, and a static Leaflet dashboard. The source data is left untouched.</p><p class="tags">GeoPandas · ArcGIS REST · Leaflet</p><a href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a> <a href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Dashboard →</a></article>
+</div>
+</section>
+
+<section id="services" class="services"><h2>KnightGeo services</h2>
+<p class="muted">Spatial data services for Florida counties, municipalities and organizations.</p>
+<div class="grid three">
+  <article class="card"><h3>Address data QC</h3><p>County-wide address point and street centerline checks: duplicates, missing or invalid attributes, geometry problems and range inconsistencies, delivered as a reviewable findings report.</p></article>
+  <article class="card"><h3>Spatial data cleanup</h3><p>Parcel, address and asset layers repaired with documented, auditable fixes. Every change is logged, and nothing is overwritten silently.</p></article>
+  <article class="card"><h3>Data pipelines</h3><p>Repeatable ingestion from ArcGIS REST and public sources into PostGIS or DuckDB, with tested dbt models and an optional AI-agent access layer via MCP.</p></article>
+</div>
+<div class="ctas"><a class="btn primary" href="#contact">Start a project</a></div>
+</section>
+
+
+<section id="contact"><h2>Contact</h2>
+<ul class="contact">
+  <li>GitHub: <a href="https://github.com/knightchrism">github.com/knightchrism</a></li>
+  <li>Email: <!-- TODO: add email --> <span class="todo">TODO: email</span></li>
+  <li>LinkedIn: <!-- TODO: add LinkedIn URL --> <span class="todo">TODO: LinkedIn</span></li>
+</ul>
+</section>
+</main>
+<footer><p>© <span id="yr"></span> Christopher Knight · KnightGeo · Map data © OpenStreetMap contributors, OpenFreeMap</p></footer>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
