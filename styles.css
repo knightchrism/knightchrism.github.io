@@ -125,3 +125,7 @@ details.work p.src{margin:0;padding:.6rem 1.3rem;font-size:.8rem;border-top:1px 
 .proof-src{margin-top:auto;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .proof-how{margin:.9rem 0 0;font-size:.9rem;color:var(--muted)}.proof-how strong{color:var(--fg)}
 @media(max-width:520px){.proof-tiles{grid-template-columns:1fr 1fr}.proof-num{font-size:1.25rem}}
+.svc-combined{margin:1.2rem 0 1.6rem;background:linear-gradient(135deg,rgba(232,182,90,.1),rgba(232,182,90,.02)),var(--panel)}
+.svc-combined .proof-tiles{margin-top:1.1rem}.svc-combined .proof-tile{background:rgba(0,0,0,.25)}
+.svc-combined .proof-how{font-style:italic}
+@media(max-width:520px){.svc-combined{padding:1.1rem 1rem}}
