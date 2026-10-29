@@ -96,3 +96,10 @@ details.work p.src{margin:0;padding:.6rem 1.3rem;font-size:.8rem;border-top:1px 
 .crumbs{font-size:.85rem;color:var(--muted);margin:0 0 .6rem}.crumbs a{text-decoration:none}
 @media(max-width:700px){.case-hero{padding:3rem 6vw 1rem}}
 @media(prefers-reduced-motion:reduce){.pcard,.pcard .thumb img{transition:none}.pcard:hover .thumb img{transform:none}}
+
+/* CSP: replaces inline style attributes */
+.small-note{font-size:.85rem}
+.mw-2117{min-width:2117px}
+.mw-1106{min-width:1106px}
+.mw-1110{min-width:1110px}
+.mw-1258{min-width:1258px}

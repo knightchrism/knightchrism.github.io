@@ -1,5 +1,7 @@
 # GeoKnight GIS
 
+<p><a href="https://scorecard.dev/viewer/?uri=github.com/knightchrism/knightchrism.github.io"><img alt="OpenSSF Scorecard" src="https://api.scorecard.dev/projects/github.com/knightchrism/knightchrism.github.io/badge"></a></p>
+
 **GIS · Spatial Data · AI Integration Engineering**
 
 Christopher Knight, GIS & data engineer in Jacksonville, Florida.
