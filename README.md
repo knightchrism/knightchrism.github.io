@@ -1,6 +1,6 @@
 # knightchrism-site
 
-Static personal + KnightGeo site. Plain HTML/CSS/JS, no build step.
+Static personal + GeoKnight GIS site. Plain HTML/CSS/JS, no build step.
 
 ## Files
 - `index.html`: content (all sections). Edit text directly.
