@@ -20,12 +20,8 @@ code{font:.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:#eef1f6;pa
 .muted{color:var(--mu)}.small{font-size:.875rem}.lead{font-size:1.15rem;max-width:62ch}
 .hero{background:radial-gradient(1200px 500px at 85% 20%,#1d3d6b 0,transparent 60%),var(--navy);color:#e8eef8;padding:72px 0 80px;overflow:hidden}
 .hero h1{color:#fff}.hero .lead{color:#cdd7e6}.hero .btn-ghost{color:#fff!important}
-.heroin{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+.heroin{position:relative;z-index:2}.herotext{max-width:640px}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.5em}
-.heroart{display:flex;justify-content:center}
-.globe{width:min(340px,70vw);aspect-ratio:1;border-radius:50%;border:2px solid rgba(201,162,39,.7);
-background:repeating-linear-gradient(0deg,transparent 0 33px,rgba(201,162,39,.28) 33px 34px),repeating-linear-gradient(90deg,transparent 0 33px,rgba(201,162,39,.18) 33px 34px),radial-gradient(circle at 35% 30%,#2a5590,#0b1f3a 70%);
-box-shadow:0 0 0 18px rgba(201,162,39,.06),0 0 0 40px rgba(201,162,39,.035),inset -30px -30px 60px rgba(0,0,0,.35)}
 .band{padding:64px 0}.band.alt{background:var(--alt)}.band.navy{background:var(--navy);color:#dbe4f3}.band.navy h2{color:#fff}.band.navy .btn-ghost{color:#fff!important}
 .pagehead{background:var(--navy);color:#dbe4f3;padding:56px 0}.pagehead h1{color:#fff}.pagehead a{color:var(--gold2)}.pagehead .btn-ghost{color:#fff!important}.pagehead .muted{color:#aab8cc}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
@@ -47,8 +43,17 @@ box-shadow:0 0 0 18px rgba(201,162,39,.06),0 0 0 40px rgba(201,162,39,.035),inse
 .diagram{margin:1.5em 0;overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px}.diagram img{max-width:none;min-width:600px;width:100%}.diagram figcaption{font-size:.85rem;color:var(--mu);margin-top:8px}
 .foot{background:#08172c;color:#aab8cc;padding:40px 0;border-top:3px solid var(--gold)}.footin{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
 .foot nav{display:flex;flex-direction:column;gap:6px}.foot a{color:#dbe4f3;text-decoration:none}.foot a:hover{color:var(--gold2)}.foot .muted{color:#8fa0b8}.foot p.small{grid-column:1/-1;margin:0}
-@media (max-width:900px){.grid3,.steps{grid-template-columns:1fr 1fr}.heroin{grid-template-columns:1fr}.heroart{display:none}}
+@media (max-width:900px){.grid3,.steps{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.grid3,.grid2,.steps,.contact,.hire,.footin{grid-template-columns:1fr}.band{padding:44px 0}.hero{padding:48px 0 56px}
 .navin{padding:10px 20px}.nav nav{gap:4px 14px;font-size:.95rem}.nav .btn-sm{display:none}}
 .built{font-size:.82rem;color:var(--mu);margin:.8em 0 .4em;border-top:1px solid var(--line);padding-top:.6em}
 .disc{font-style:italic}
+.hero.fl{position:relative;background:#0b1220;min-height:clamp(560px,86vh,820px);display:flex;align-items:center;padding:64px 0 72px}
+.fl #stage{position:absolute;inset:-12px;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.fl #stage>*{position:absolute;inset:0;width:100%;height:100%}.fl #stage img{object-fit:cover;object-position:center}
+.fl canvas{opacity:0;transition:opacity 1.2s}.fl.live canvas{opacity:1}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(8,20,40,.94) 0,rgba(8,20,40,.82) 38%,rgba(8,20,40,.35) 68%,rgba(8,20,40,.1) 100%),linear-gradient(0deg,rgba(8,20,40,.6) 0,transparent 30%)}
+.fl h1,.fl .lead,.fl .eyebrow{text-shadow:0 1px 12px rgba(0,0,0,.55)}
+#credit{position:absolute;right:14px;bottom:8px;z-index:2;margin:0;font-size:10px;line-height:1.3;color:#d4af37;opacity:.55;text-align:right;max-width:min(80%,640px);pointer-events:none}
+@media (max-width:640px){.hero-shade{background:linear-gradient(180deg,rgba(8,20,40,.88) 0,rgba(8,20,40,.78) 60%,rgba(8,20,40,.6) 100%)}.hero.fl{min-height:0;padding:56px 0 64px}#credit{left:14px;max-width:none;font-size:9px}}
+@media (prefers-reduced-motion:reduce){.fl canvas{display:none}.fl #stage{transition:none}}
