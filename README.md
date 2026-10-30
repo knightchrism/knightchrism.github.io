@@ -29,3 +29,8 @@ Website: https://knightchrism.github.io · [Book a call](https://cal.com/christo
 
 ## Site
 Plain static HTML/CSS served by GitHub Pages from `main` (root).
+
+## Florida roof data coverage (`coverage.html`)
+The [coverage page](https://knightchrism.github.io/coverage.html) is driven entirely by one file: **`data/coverage.json`**. The page fetches it at runtime, colors the county map (`assets/coverage/florida-counties.svg`, from the US Census 2023 cartographic boundary 500k county file, simplified) and computes all totals from it. No HTML edits are needed to update coverage.
+
+Pipeline (RustGIS Expert): after each county run, update that county's entry and `last_updated`, then commit to this repo. Schema, allowed statuses and an example update: [`data/COVERAGE_SCHEMA.md`](data/COVERAGE_SCHEMA.md).

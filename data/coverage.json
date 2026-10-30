@@ -1,0 +1,212 @@
+{
+ "last_updated": "2026-10-30",
+ "counties": {
+  "Alachua": {
+   "status": "not_checked"
+  },
+  "Baker": {
+   "status": "not_checked"
+  },
+  "Bay": {
+   "status": "not_checked"
+  },
+  "Bradford": {
+   "status": "not_checked"
+  },
+  "Brevard": {
+   "status": "source_found"
+  },
+  "Broward": {
+   "status": "source_found"
+  },
+  "Calhoun": {
+   "status": "not_checked"
+  },
+  "Charlotte": {
+   "status": "not_checked"
+  },
+  "Citrus": {
+   "status": "not_checked"
+  },
+  "Clay": {
+   "status": "source_found"
+  },
+  "Collier": {
+   "status": "source_found"
+  },
+  "Columbia": {
+   "status": "source_found"
+  },
+  "DeSoto": {
+   "status": "not_checked"
+  },
+  "Dixie": {
+   "status": "not_checked"
+  },
+  "Duval": {
+   "status": "have_data",
+   "parcels": 409160,
+   "roof_permits": 150509,
+   "years": "2016–2026",
+   "permit_start": "2016-01-01",
+   "permit_end": "2026-10-30",
+   "match_rate": 0.998
+  },
+  "Escambia": {
+   "status": "not_checked"
+  },
+  "Flagler": {
+   "status": "not_checked"
+  },
+  "Franklin": {
+   "status": "not_checked"
+  },
+  "Gadsden": {
+   "status": "not_checked"
+  },
+  "Gilchrist": {
+   "status": "not_checked"
+  },
+  "Glades": {
+   "status": "not_checked"
+  },
+  "Gulf": {
+   "status": "not_checked"
+  },
+  "Hamilton": {
+   "status": "not_checked"
+  },
+  "Hardee": {
+   "status": "not_checked"
+  },
+  "Hendry": {
+   "status": "not_checked"
+  },
+  "Hernando": {
+   "status": "not_checked"
+  },
+  "Highlands": {
+   "status": "not_checked"
+  },
+  "Hillsborough": {
+   "status": "source_found"
+  },
+  "Holmes": {
+   "status": "not_checked"
+  },
+  "Indian River": {
+   "status": "not_checked"
+  },
+  "Jackson": {
+   "status": "not_checked"
+  },
+  "Jefferson": {
+   "status": "not_checked"
+  },
+  "Lafayette": {
+   "status": "not_checked"
+  },
+  "Lake": {
+   "status": "not_checked"
+  },
+  "Lee": {
+   "status": "source_found"
+  },
+  "Leon": {
+   "status": "not_checked"
+  },
+  "Levy": {
+   "status": "not_checked"
+  },
+  "Liberty": {
+   "status": "not_checked"
+  },
+  "Madison": {
+   "status": "not_checked"
+  },
+  "Manatee": {
+   "status": "source_found"
+  },
+  "Marion": {
+   "status": "source_found"
+  },
+  "Martin": {
+   "status": "not_checked"
+  },
+  "Miami-Dade": {
+   "status": "source_found"
+  },
+  "Monroe": {
+   "status": "not_checked"
+  },
+  "Nassau": {
+   "status": "source_found"
+  },
+  "Okaloosa": {
+   "status": "not_checked"
+  },
+  "Okeechobee": {
+   "status": "not_checked"
+  },
+  "Orange": {
+   "status": "source_found"
+  },
+  "Osceola": {
+   "status": "not_checked"
+  },
+  "Palm Beach": {
+   "status": "source_found"
+  },
+  "Pasco": {
+   "status": "source_found"
+  },
+  "Pinellas": {
+   "status": "source_found"
+  },
+  "Polk": {
+   "status": "source_found"
+  },
+  "Putnam": {
+   "status": "not_checked"
+  },
+  "Santa Rosa": {
+   "status": "not_checked"
+  },
+  "Sarasota": {
+   "status": "source_found"
+  },
+  "Seminole": {
+   "status": "source_found"
+  },
+  "St. Johns": {
+   "status": "source_found"
+  },
+  "St. Lucie": {
+   "status": "not_checked"
+  },
+  "Sumter": {
+   "status": "not_checked"
+  },
+  "Suwannee": {
+   "status": "not_checked"
+  },
+  "Taylor": {
+   "status": "not_checked"
+  },
+  "Union": {
+   "status": "not_checked"
+  },
+  "Volusia": {
+   "status": "source_found"
+  },
+  "Wakulla": {
+   "status": "not_checked"
+  },
+  "Walton": {
+   "status": "not_checked"
+  },
+  "Washington": {
+   "status": "not_checked"
+  }
+ }
+}

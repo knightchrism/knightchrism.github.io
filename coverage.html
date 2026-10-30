@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<title>Florida Roof Data Coverage | GeoKnight GIS</title>
+<meta name="description" content="Which Florida counties GeoKnight GIS has roof-permit and parcel data for, which have a data source found, and which are not yet checked.">
+<link rel="canonical" href="https://knightchrism.github.io/coverage.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="Florida Roof Data Coverage | GeoKnight GIS">
+<meta property="og:description" content="Which Florida counties GeoKnight GIS has roof-permit and parcel data for, which have a data source found, and which are not yet checked.">
+<meta property="og:url" content="https://knightchrism.github.io/coverage.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@geoknight0015">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=20261030f">
+<link rel="stylesheet" href="assets/coverage/coverage.css?v=1">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="services.html">Services</a><a href="work.html">Work</a><a href="coverage.html" aria-current="page">Coverage</a><a href="about.html">About</a><a href="contact.html">Contact</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
+<main id="main">
+<section class="band pagehead"><div class="wrap"><p class="eyebrow gold">Coverage</p><h1>Florida Roof Data Coverage</h1>
+<p class="lead">Which Florida counties we have roof-permit data for today, where we have found a public source, and where we have not looked yet.</p>
+<p class="muted small">Last updated: <span id="cov-updated">loading…</span></p></div></section>
+<section class="band"><div class="wrap">
+<div class="stats" id="cov-stats">
+<div class="stat"><b id="cov-counties">–</b><span>Counties covered</span><small>of 67 Florida counties</small></div>
+<div class="stat"><b id="cov-parcels">–</b><span>Parcels</span><small>in counties we have data for</small></div>
+<div class="stat"><b id="cov-permits">–</b><span>Roof permits</span><small>matched to parcels</small></div>
+<div class="stat"><b id="cov-years">–</b><span>Years covered</span><small>permit dates on file</small></div>
+</div>
+<div class="cov-layout">
+<figure class="cov-map card" id="cov-map"><div id="cov-svg" role="img" aria-label="Map of Florida counties colored by data status"></div><div class="cov-tip" id="cov-tip" hidden></div><figcaption class="muted small">Hover or tap a county for details.</figcaption></figure>
+<aside class="cov-side">
+<h2>Legend</h2>
+<ul class="cov-legend">
+<li><span class="sw have_data"></span><b>Have data</b> <span class="muted" id="cov-n-have_data"></span><br><small class="muted">Roof permits are matched to parcels and ready to use.</small></li>
+<li><span class="sw source_found"></span><b>Source found</b> <span class="muted" id="cov-n-source_found"></span><br><small class="muted">We found where the county publishes permit records. Not processed yet.</small></li>
+<li><span class="sw not_checked"></span><b>Not yet checked</b> <span class="muted" id="cov-n-not_checked"></span><br><small class="muted">We have not looked for a source in this county yet.</small></li>
+</ul>
+<p><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Get a quote</a></p>
+<p class="muted small">Need a county that isn't covered yet? Ask. Counties are added in order of demand.</p>
+</aside>
+</div>
+<noscript><p>This map needs JavaScript. The raw data is in <a href="data/coverage.json">data/coverage.json</a>.</p></noscript>
+</div></section>
+<section class="band alt"><div class="wrap"><h2>What this means for you</h2><div class="grid3">
+<article class="card"><h3>Insurers</h3><p>For a covered county, send us your list of addresses or parcels. We tell you which ones have a roof permit on record and the date it was issued, so you can see how old a roof is likely to be without a site visit.</p></article>
+<article class="card"><h3>Inspectors</h3><p>Before you go out, check whether a property has a recorded roof permit and when. It helps you plan the visit and spot homes where the roof may be older than the owner says.</p></article>
+<article class="card"><h3>Investors</h3><p>Screen a list of properties by roof-permit date in one pass, instead of looking each one up on a county website. Useful for estimating repair costs and insurance questions before you buy.</p></article>
+</div>
+<p class="mt">A permit date shows when roof work was permitted, not the roof's current condition. Counties marked “Source found” or “Not yet checked” can be added on request; we will tell you what is available before you pay.</p>
+<p><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Get a quote</a></p>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap footin">
+<div><a class="brand" href="index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<p class="muted">Geospatial data services · Jacksonville, Florida</p></div>
+<nav aria-label="Footer"><a href="services.html">Services</a><a href="work.html">Work</a><a href="coverage.html">Coverage</a><a href="about.html">About</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></nav>
+<nav aria-label="Legal"><a href="privacy.html">Privacy</a><a href="security.html">Data security</a><a href="terms.html">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="assets/js/year.js" defer></script>
+<script src="assets/coverage/coverage.js?v=1" defer></script>
+</body>
+</html>
