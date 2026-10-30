@@ -50,3 +50,4 @@ box-shadow:0 0 0 18px rgba(201,162,39,.06),0 0 0 40px rgba(201,162,39,.035),inse
 @media (max-width:900px){.grid3,.steps{grid-template-columns:1fr 1fr}.heroin{grid-template-columns:1fr}.heroart{display:none}}
 @media (max-width:640px){.grid3,.grid2,.steps,.contact,.hire,.footin{grid-template-columns:1fr}.band{padding:44px 0}.hero{padding:48px 0 56px}
 .navin{padding:10px 20px}.nav nav{gap:4px 14px;font-size:.95rem}.nav .btn-sm{display:none}}
+.built{font-size:.82rem;color:var(--mu);margin:.8em 0 .4em;border-top:1px solid var(--line);padding-top:.6em}
