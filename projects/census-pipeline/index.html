@@ -2,110 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Census ACS Pipeline · Case study · GeoKnight GIS</title>
-<meta name="description" content="US Census ACS data → DuckDB → tested dbt marts → governed metrics → a read-only MCP server AI agents can query safely.">
-<meta property="og:title" content="Census ACS Pipeline · Case study · GeoKnight GIS">
-<meta property="og:description" content="US Census ACS data → DuckDB → tested dbt marts → governed metrics → a read-only MCP server AI agents can query safely.">
-<meta property="og:type" content="article">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<title>Florida Market-Analysis Pipeline · Case study | GeoKnight GIS</title>
+<meta name="description" content="US Census ACS data for Florida&#x27;s 67 counties → DuckDB → tested dbt models → governed market metrics with margins of error, ready for market-analysis maps and reports.">
+<link rel="canonical" href="https://knightchrism.github.io/projects/census-pipeline/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="Florida Market-Analysis Pipeline · Case study | GeoKnight GIS">
+<meta property="og:description" content="US Census ACS data for Florida&#x27;s 67 counties → DuckDB → tested dbt models → governed market metrics with margins of error, ready for market-analysis maps and reports.">
 <meta property="og:url" content="https://knightchrism.github.io/projects/census-pipeline/">
-<meta name="theme-color" content="#0b1220">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../../styles.css?v=20261029h">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@geoknight0015">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="../../styles.css?v=20261030">
 </head>
-<body class="case">
-<div class="wip-banner" role="status">🚧 Work in progress — this site is still being built. Check back soon!</div>
+<body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="nav">
-  <a class="brand" href="../../">GeoKnight GIS</a>
-  <nav aria-label="Main"><a href="../../#services">Services</a><a href="../../#projects">Work</a><a href="../../markets.html">Markets</a><a href="../../about.html">About</a><a href="../../#contact">Contact</a></nav>
-</header>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="../../services.html">Services</a><a href="../../work.html" aria-current="page">Work</a><a href="../../about.html">About</a><a href="../../contact.html">Contact</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
 <main id="main">
-<div class="case-hero">
-  <p class="demo-label">Self-initiated demonstration on public data</p>
-  <p class="crumbs"><a href="../../#projects">← All projects</a></p>
-  <p class="eyebrow">Case study · DuckDB · dbt · MCP</p>
-  <h1>Census ACS Pipeline</h1>
-  <p class="tagline">GIS · Spatial Data · AI Integration Engineering</p>
-  <p class="lead">US Census ACS data → DuckDB → tested dbt marts → governed metrics → a read-only MCP server AI agents can query safely.</p>
-  <div class="ctas"><a class="btn primary" href="https://github.com/knightchrism/census-pipeline">Repository →</a><a class="btn" href="https://github.com/knightchrism/census-pipeline/blob/main/examples/agent_queries.md">Recorded agent queries</a></div>
-</div>
-<section><h2>Problem</h2>
-<p>Census ACS data is easy to download and easy to get wrong: sentinel codes like <code>-666666666</code> masquerade as numbers, every estimate carries a margin of error, 5-year windows overlap, and medians cannot be summed. Handing raw tables to an AI agent makes those mistakes faster. The goal: a reproducible pipeline that ingests ACS data, tests it, defines metrics once, and gives agents a read-only, guarded way to query it.</p>
-</section>
-<section><h2>Data sources</h2>
-<ul><li><strong>Census Data API</strong> (<code>api.census.gov</code>), ACS 5-year estimates, with an API key</li><li><strong>ACS table-based Summary File</strong> (<code>www2.census.gov</code>), the no-key fallback</li><li>Scope today: <strong>Florida (state FIPS 12), 67 counties + the state total</strong>: population, median household income, median age and Hispanic / race counts, each with its margin of error</li></ul>
-</section>
-<section><h2>Architecture</h2>
-<figure class="diagram-box"><img class="mw-2117" src="../../assets/diagrams/census-pipeline.svg" alt="Architecture diagram for census-pipeline, rendered from the Mermaid source in its README" loading="lazy"><figcaption>Ingest → DuckDB → dbt → governed metrics → read-only MCP · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/census-pipeline#architecture">census-pipeline README</a>. Scroll sideways on small screens.</figcaption></figure>
-</section>
-<section><h2>Key decisions</h2>
-<ul class="decisions"><li><strong>Quality gates before load.</strong> Row counts, columns, duplicate GEOIDs and parse rate are checked before anything is written.</li><li><strong>Idempotent loads.</strong> Each (year, state) is replaced atomically in DuckDB, never duplicated, so re-running is safe.</li><li><strong>Sentinels → NULL + flag.</strong> Staging turns Census “no value” codes into <code>NULL</code> and keeps the code in <code>&lt;metric&gt;_flag</code>, so nothing is lost or miscounted.</li><li><strong>Respect the statistics.</strong> 90% MOEs kept, CV &gt; 0.30 flagged as unreliable, growth only across non-overlapping windows, and state medians taken from the official state row.</li><li><strong>Reconciliation test.</strong> A custom dbt generic test, <code>county_sum_matches_state</code>, proves the 67 counties sum to the official state total.</li><li><strong>Governed metrics.</strong> <code>semantic/metrics.yml</code> defines formula, grain and caveats, compiled to parameterized SQL.</li><li><strong>Defense-in-depth MCP server.</strong> DuckDB opened <code>read_only=True</code>, external access disabled, one SELECT/WITH statement only, row cap and timeout, and every call logged to <code>logs/mcp.log</code>.</li><li><strong>Scales by config.</strong> All 50 states is a change to <code>geography.states</code> in <code>config.yaml</code>.</li></ul>
-</section>
-<section><h2>Verified results</h2>
-<div class="stats"><div class="stat"><b>67</b><span>Florida counties + state total, with margins of error</span><small>Source: census-pipeline README</small></div><div class="stat"><b>Σ 67 = state</b><span>county sums reconciled to the official state total by a dbt test</span><small>Source: census-pipeline README</small></div><div class="stat"><b>5</b><span>read-only MCP tools: list_tables, describe_table, run_query, list_metrics, get_metric</span><small>Source: census-pipeline README</small></div><div class="stat"><b>CV &gt; 0.30</b><span>threshold that flags unreliable income estimates</span><small>Source: census-pipeline README</small></div></div><p>Real agent tool calls and outputs are recorded in <a href="https://github.com/knightchrism/census-pipeline/blob/main/examples/agent_queries.md"><code>examples/agent_queries.md</code></a>.</p>
-</section>
-<section><h2>Show the work</h2>
-<details class="work"><summary>dbt generic test: county_sum_matches_state (SQL + Jinja)</summary><pre><code class="language-sql">{# Generic test on a state-level model: sum of counties must match the official
-   state estimate within a relative tolerance.
-   WHY: proves no counties were dropped/duplicated between API and marts.
-   For additive counts (population, Hispanic population) ACS county estimates
-   sum exactly to the state; medians are NOT additive and must not use this test. #}
-{% test county_sum_matches_state(model, column_name, county_sum_column, tolerance=none) %}
-{% set tol = tolerance if tolerance is not none else var(&#x27;county_state_tolerance&#x27;) %}
-select state_fips, acs_year, {{ column_name }} as state_value, {{ county_sum_column }} as county_sum
-from {{ model }}
-where {{ column_name }} is null
-   or {{ county_sum_column }} is null
-   or abs({{ county_sum_column }} - {{ column_name }}) &gt; {{ tol }} * {{ column_name }}
-{% endtest %}</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/census-pipeline/blob/main/dbt/tests/generic/county_sum_matches_state.sql#L1-L13"><code>census-pipeline/dbt/tests/generic/county_sum_matches_state.sql</code> lines 1–13</a></p></details><details class="work"><summary>MCP SQL guard: one read-only statement, forbidden keywords blocked (Python)</summary><pre><code class="language-python">def _connect() -&gt; duckdb.DuckDBPyConnection:
-    return duckdb.connect(DB_PATH, read_only=True, config={&quot;enable_external_access&quot;: False})
-
-
-# ---------- SQL guard (pure function, unit tested) ----------
-FORBIDDEN = re.compile(
-    r&quot;\b(insert|update|delete|merge|drop|create|alter|attach|detach|copy|export|import|install|load|&quot;
-    r&quot;pragma|set|reset|call|checkpoint|vacuum|truncate|grant|revoke|begin|commit|rollback|use)\b&quot;,
-    re.IGNORECASE,
-)
-FORBIDDEN_FUNCS = re.compile(r&quot;\b(read_\w+|glob|getenv|sniff_csv|query_table|query)\s*\(&quot;, re.IGNORECASE)
-
-
-class UnsafeQueryError(ValueError):
-    pass
-
-
-def check_sql(sql: str) -&gt; str:
-    &quot;&quot;&quot;Return a normalized single statement or raise UnsafeQueryError.&quot;&quot;&quot;
-    s = re.sub(r&quot;--[^\n]*|/\*.*?\*/&quot;, &quot; &quot;, sql, flags=re.S).strip().rstrip(&quot;;&quot;).strip()
-    if not s:
-        raise UnsafeQueryError(&quot;empty query&quot;)
-    # strip string literals before scanning so &#x27;drop&#x27; inside a string is allowed
-    scan = re.sub(r&quot;&#x27;(?:[^&#x27;]|&#x27;&#x27;)*&#x27;&quot;, &quot;&#x27;&#x27;&quot;, s)
-    if &quot;;&quot; in scan:
-        raise UnsafeQueryError(&quot;only one statement allowed&quot;)
-    if not re.match(r&quot;^(select|with)\b&quot;, scan, re.IGNORECASE):
-        raise UnsafeQueryError(&quot;only SELECT / WITH queries are allowed&quot;)
-    m = FORBIDDEN.search(scan) or FORBIDDEN_FUNCS.search(scan)
-    if m:
-        raise UnsafeQueryError(f&quot;forbidden keyword: {m.group(0).strip()}&quot;)
-    return s</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/census-pipeline/blob/main/src/census_mcp/server.py#L69-L100"><code>census-pipeline/src/census_mcp/server.py</code> lines 69–100</a></p></details>
-</section>
-<section><h2>Next steps</h2>
-<ul><li>Activate the API key and add vintage 2014 (2010-2014; API only).</li><li>All 50 states: list every FIPS in <code>geography.states</code> with expected county counts.</li><li>Inflation-adjust incomes (CPI-U-RS) and add MOE for ratios and derived values.</li><li>Expose dbt docs as MCP resources and add an orchestrator (cron / GitHub Actions / Dagster).</li><li>Add more tables: B01001 age bands, B17001 poverty, B25077 home values.</li></ul>
-</section>
-
-<section><h2>Links</h2><div class="ctas"><a class="btn primary" href="https://github.com/knightchrism/census-pipeline">Repository →</a><a class="btn" href="https://github.com/knightchrism/census-pipeline/blob/main/examples/agent_queries.md">Recorded agent queries</a></div>
-<p class="muted small-note">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
+<section class="band pagehead"><div class="wrap"><p class="muted small"><a href="../../work.html">← All work</a> · Self-initiated demonstration on public data</p>
+<p class="eyebrow gold">Case study · DuckDB · dbt · Python</p><h1>Florida Market-Analysis Pipeline</h1><p class="lead">US Census ACS data for Florida's 67 counties → DuckDB → tested dbt models → governed market metrics with margins of error, ready for market-analysis maps and reports.</p><p class="cta"><a class="btn" href="https://github.com/knightchrism/census-pipeline" rel="noopener noreferrer">Repository</a></p></div></section>
+<section class="band"><div class="wrap prose"><h2>Problem</h2><p>Market analysis for real estate and insurance needs trustworthy county-level demographics and income figures, with the statistical caveats intact. Raw Census API pulls are easy to get wrong: sentinel codes counted as values, margins of error dropped, and county totals that don't add up to the state.</p><figure class="diagram"><img src="../../assets/diagrams/census-pipeline.svg" alt="Architecture diagram: ingest → DuckDB → dbt → governed metrics, rendered from the Mermaid diagram in the census-pipeline README" loading="lazy"><figcaption>ingest → DuckDB → dbt → governed metrics, rendered from the Mermaid diagram in the census-pipeline README</figcaption></figure><h2>Key decisions</h2><ul><li><b>Quality gates before load.</b> Row counts, columns, duplicate GEOIDs and parse rate are checked before anything is written.</li><li><b>Idempotent loads.</b> Each (year, state) is replaced atomically in DuckDB, so re-running is safe.</li><li><b>Sentinels → NULL + flag.</b> Census “no value” codes become <code>NULL</code> with the code kept in a flag column.</li><li><b>Respect the statistics.</b> 90% margins of error kept, CV &gt; 0.30 flagged as unreliable, growth only across non-overlapping windows.</li><li><b>Reconciliation test.</b> A custom dbt test proves the 67 counties sum to the official state total.</li><li><b>Governed metrics.</b> <code>semantic/metrics.yml</code> defines formula, grain and caveats, compiled to parameterized SQL, and exposed through a read-only query layer that AI assistants can use safely.</li><li><b>Scales by config.</b> All 50 states is a change to <code>config.yaml</code>.</li></ul><h2>Verified results</h2><div class="stats"><div class="stat"><b>67</b><span>Florida counties + state total, with margins of error</span><small>Source: census-pipeline README</small></div><div class="stat"><b>Σ 67 = state</b><span>county sums reconciled to the official state total by a dbt test</span><small>Source: census-pipeline README</small></div><div class="stat"><b>CV &gt; 0.30</b><span>threshold that flags unreliable income estimates</span><small>Source: census-pipeline README</small></div></div></div></section><section class="band navy" id="contact"><div class="wrap contact">
+<div><p class="eyebrow gold">Contact</p><h2>Tell me about your data.</h2>
+<p>Send a short note about your area, your data and what you need. I reply by email, usually within one business day, or you can book a call directly.</p></div>
+<div class="cta-stack"><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a>
+<a class="btn btn-ghost" href="mailto:geoknight0015@gmail.com">geoknight0015@gmail.com</a></div>
+</div></section>
 </main>
-<footer><p>© 2026 GeoKnight GIS · Jacksonville, Florida · <a href="../../about.html">About</a> · <a href="../../markets.html">Markets</a> · <a href="../../capability.html">Capability statement</a> · <a href="../../security.html">Data security</a> · <a href="../../privacy.html">Privacy</a> · <a href="../../terms.html">Terms</a></p></footer>
-<script src="../../assets/js/year.js"></script>
+<footer class="foot"><div class="wrap footin">
+<div><a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<p class="muted">Geospatial data services · Jacksonville, Florida</p></div>
+<nav aria-label="Footer"><a href="../../services.html">Services</a><a href="../../work.html">Work</a><a href="../../about.html">About</a><a href="../../resume.html">Resume</a><a href="../../contact.html">Contact</a></nav>
+<nav aria-label="Legal"><a href="../../privacy.html">Privacy</a><a href="../../security.html">Data security</a><a href="../../terms.html">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="../../assets/js/year.js" defer></script>
 </body>
 </html>

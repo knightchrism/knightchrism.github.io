@@ -1,45 +1,27 @@
-# GeoKnight Geospatial Information Services (GeoKnight GIS)
+# GeoKnight GIS
 
-<p><a href="https://scorecard.dev/viewer/?uri=github.com/knightchrism/knightchrism.github.io"><img alt="OpenSSF Scorecard" src="https://api.scorecard.dev/projects/github.com/knightchrism/knightchrism.github.io/badge"></a></p>
+**Accurate, trustworthy geospatial data — for less.**
 
-**GIS · Spatial Data · AI Integration Engineering**
+GeoKnight GIS builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones for insurers, inspectors and investors. Fixed-price packages from $350. Founded by Christopher Knight, GIS & Data Engineer, Jacksonville, Florida.
 
-GIS, spatial data and AI integration services from Jacksonville, Florida. Founded by Christopher Knight, GIS & data engineer ([About](https://knightchrism.github.io/about.html)).
-
-[![Website](https://img.shields.io/badge/website-knightchrism.github.io-0b7285?style=flat-square)](https://knightchrism.github.io)
-[![X](https://img.shields.io/badge/X-@geoknight0015-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/geoknight0015)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![PostGIS](https://img.shields.io/badge/PostGIS-336791?style=flat-square&logo=postgresql&logoColor=white) ![dbt](https://img.shields.io/badge/dbt-FF694B?style=flat-square&logo=dbt&logoColor=white) ![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=flat-square&logo=duckdb&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-000000?style=flat-square&logo=anthropic&logoColor=white) ![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=flat-square&logo=leaflet&logoColor=white) ![QGIS](https://img.shields.io/badge/QGIS-589632?style=flat-square&logo=qgis&logoColor=white)
+Website: https://knightchrism.github.io · [Book a call](https://cal.com/christopher-uzhh5z) · geoknight0015@gmail.com · [LinkedIn](https://www.linkedin.com/in/christopher-knight-3225a2232/) · [X @geoknight0015](https://x.com/geoknight0015)
 
 ## Services
-- **Florida county-wide address QC**: auditing address points and parcel-linked address data for completeness, consistency and geometry issues, with reviewable findings.
-- **GIS & spatial data services**: PostGIS databases, spatial SQL, data pipelines (dbt, DuckDB, Python), web maps, and AI agent integrations over spatial data via MCP.
+| Package | Price |
+|---|---|
+| Data QC Audit | $350 |
+| Interactive Map | $750–1,500 |
+| Parcel Dashboard | $2,000–4,000 |
+| Florida roof-permit + flood-zone enrichment | Quote |
+| QC subcontracting | Project rate |
+| Address QC | Add-on only |
 
-## Featured projects
+## Work samples
 | Project | Description | Demo |
 |---|---|---|
-| [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records and addresses, loaded into PostGIS and explorable on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
-| [jax-property-mcp](https://github.com/knightchrism/jax-property-mcp) | Plain-English questions about Jacksonville property, flood risk and sales, answered by a local AI agent through tested MCP tools over PostGIS. | |
-| [census-pipeline](https://github.com/knightchrism/census-pipeline) | US Census ACS data → DuckDB → tested dbt models → governed metrics → a read-only MCP server AI agents can query safely. | |
-| [sjrwmd-open-data](https://github.com/knightchrism/sjrwmd-open-data) | 15 Florida water-management GIS layers harvested from ArcGIS REST into PostGIS, served as PMTiles on a static map. | |
+| [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records, addresses and FEMA flood zones in PostGIS, on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
 | [sjrwmd-geodata-qc](https://github.com/knightchrism/sjrwmd-geodata-qc) | Rule-driven QA/QC for public groundwater-station GIS data, with findings you can filter, inspect and export. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
-| [georescue](https://github.com/knightchrism/georescue) | Find, explain and propose fixes for broken parcel data, with every change logged and nothing applied silently. | [Live demo](https://knightchrism.github.io/georescue/) |
-| [jax-utility-network](https://github.com/knightchrism/jax-utility-network) | Water, sewer and electric network topology, QC, outage traces and hydrant coverage for Jacksonville, FL. Real public data plus clearly labeled synthetic networks. | [Live demo](https://knightchrism.github.io/jax-utility-network/) |
+| [census-pipeline](https://github.com/knightchrism/census-pipeline) | Florida market-analysis pipeline: Census ACS → DuckDB → tested dbt models → governed metrics. | |
 
-## Skills
-PostGIS & spatial SQL · Python (GeoPandas, Shapely) · dbt · DuckDB · QGIS · ArcGIS REST · Leaflet & MapLibre · MCP servers & AI agents · data QA/QC
-
-## Contact
-- Website: https://knightchrism.github.io
-- X: https://x.com/geoknight0015
-- GitHub: https://github.com/knightchrism
-- Email: geoknight0015@gmail.com
-- LinkedIn: https://www.linkedin.com/in/christopher-knight-3225a2232/
-- Book a call: https://cal.com/christopher-uzhh5z
-- Resume: https://knightchrism.github.io/resume.html
-- YouTube: https://www.youtube.com/channel/UC-wT8_8Y-vrqF0BFr9dOtYw
-
-## About this site
-Static HTML/CSS/JS, no build step (`index.html`, `styles.css`, `main.js`, `florida.geojson`). Preview with `python3 -m http.server 8000`. Deployed via GitHub Pages from `main`.
-
----
-<sub>Projects built with Grok Bot as an AI teammate.</sub>
+## Site
+Plain static HTML/CSS served by GitHub Pages from `main` (root).

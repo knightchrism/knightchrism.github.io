@@ -2,143 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jacksonville Property &amp; Flood Risk · Case study · GeoKnight GIS</title>
-<meta name="description" content="Duval County parcels, assessor records, FEMA flood zones and state sales data in PostGIS, with dbt-tested models and an MCP server that lets a local AI agent answer property and flood-risk questions.">
-<meta property="og:title" content="Jacksonville Property &amp; Flood Risk · Case study · GeoKnight GIS">
-<meta property="og:description" content="Duval County parcels, assessor records, FEMA flood zones and state sales data in PostGIS, with dbt-tested models and an MCP server that lets a local AI agent answer property and flood-risk questions.">
-<meta property="og:type" content="article">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<title>Jacksonville Property &amp;amp; Flood Risk · Case study | GeoKnight GIS</title>
+<meta name="description" content="Duval County parcels, assessor records, FEMA flood zones and Florida sales data joined in one tested PostGIS database, explorable on an interactive map.">
+<link rel="canonical" href="https://knightchrism.github.io/projects/jax-property/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="Jacksonville Property &amp;amp; Flood Risk · Case study | GeoKnight GIS">
+<meta property="og:description" content="Duval County parcels, assessor records, FEMA flood zones and Florida sales data joined in one tested PostGIS database, explorable on an interactive map.">
 <meta property="og:url" content="https://knightchrism.github.io/projects/jax-property/">
-<meta name="theme-color" content="#0b1220">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../../styles.css?v=20261029h">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@geoknight0015">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="../../styles.css?v=20261030">
 </head>
-<body class="case">
-<div class="wip-banner" role="status">🚧 Work in progress — this site is still being built. Check back soon!</div>
+<body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="nav">
-  <a class="brand" href="../../">GeoKnight GIS</a>
-  <nav aria-label="Main"><a href="../../#services">Services</a><a href="../../#projects">Work</a><a href="../../markets.html">Markets</a><a href="../../about.html">About</a><a href="../../#contact">Contact</a></nav>
-</header>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="../../services.html">Services</a><a href="../../work.html" aria-current="page">Work</a><a href="../../about.html">About</a><a href="../../contact.html">Contact</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
 <main id="main">
-<div class="case-hero">
-  <p class="demo-label">Self-initiated demonstration on public data</p>
-  <p class="crumbs"><a href="../../#projects">← All projects</a></p>
-  <p class="eyebrow">Case study · PostGIS · dbt · MCP</p>
-  <h1>Jacksonville Property &amp; Flood Risk</h1>
-  <p class="tagline">GIS · Spatial Data · AI Integration Engineering</p>
-  <p class="lead">Duval County parcels, assessor records, FEMA flood zones and state sales data in PostGIS, with dbt-tested models and an MCP server that lets a local AI agent answer property and flood-risk questions.</p>
-  <div class="ctas"><a class="btn primary" href="https://knightchrism.github.io/jax-property-intelligence/">Live demo →</a><a class="btn" href="https://github.com/knightchrism/jax-property-intelligence">jax-property-intelligence repo</a><a class="btn" href="https://github.com/knightchrism/jax-property-mcp">jax-property-mcp repo</a></div>
-</div>
-<section><h2>Problem</h2>
-<p>Jacksonville property questions (what is this parcel worth, is it in a flood zone, what sold nearby) need county parcels, the assessor tax roll, FEMA flood zones and state sales records joined together. Those sources arrive as shapefiles, pipe-delimited text and REST services, with invalid geometries, duplicate addresses and inconsistent ZIPs. The goal: load them into one trustworthy PostGIS database without silently losing a row, then let an AI agent answer plain-English questions over it safely.</p>
-</section>
-<section><h2>Data sources</h2>
-<ul><li><strong>Duval County parcel GIS</strong> (<code>Parcels.shp</code>), City of Jacksonville / Duval County public records</li><li><strong>Duval County Property Appraiser</strong> real estate tax roll, pipe-delimited</li><li><strong>FEMA National Flood Hazard Layer</strong> (public domain), downloaded by <code>load_flood.py</code> from FEMA's ArcGIS REST service</li><li><strong>Florida Department of Revenue</strong> sales data file and land-use codes</li></ul>
-</section>
-<section><h2>Architecture</h2>
-<figure class="diagram-box"><img class="mw-1106" src="../../assets/diagrams/jax-property-intelligence.svg" alt="Architecture diagram for jax-property-intelligence, rendered from the Mermaid source in its README" loading="lazy"><figcaption>Data layer: jax-property-intelligence · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/jax-property-intelligence#architecture">jax-property-intelligence README</a>. Scroll sideways on small screens.</figcaption></figure><figure class="diagram-box"><img class="mw-1110" src="../../assets/diagrams/jax-property-mcp.svg" alt="Architecture diagram for jax-property-mcp, rendered from the Mermaid source in its README" loading="lazy"><figcaption>Agent layer: jax-property-mcp · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/jax-property-mcp#architecture">jax-property-mcp README</a>. Scroll sideways on small screens.</figcaption></figure><img class="shot" src="../../assets/projects/jax-property-intelligence.webp" alt="Screenshot of the live Riverside property explorer showing parcels over Jacksonville" width="960" height="540" loading="lazy">
-</section>
-<section><h2>Key decisions</h2>
-<ul class="decisions"><li><strong>Repair geometry with <code>make_valid</code>, never edit the source.</strong> Parcels are repaired at load time and invalid/missing geometry counts are printed before load; the source shapefile is never modified.</li><li><strong>One projected CRS: EPSG:2236</strong> (Florida East, US feet). Parcels and FEMA zones share it, so <code>ST_Area</code> returns square feet and overlay percentages are meaningful.</li><li><strong>Raw → clean → QC tables for flood zones.</strong> Every repaired shape is compared to its raw original by area, and the load prints row loss and area lost.</li><li><strong>Parameterized SQL in every MCP tool.</strong> Tools pass user input as <code>%s</code> parameters to psycopg, never string-formatted SQL, and cap result sizes.</li><li><strong>Tool design over model choice.</strong> Adding a <code>zip_stats</code> tool let the agent compare ZIPs by median instead of sampling listings (README lesson learned).</li><li><strong>Local model, no API cost.</strong> <code>agent.py</code> runs a tool-calling loop on Ollama; the same server also works in VS Code Copilot.</li><li><strong>dbt-tested models.</strong> <code>stg_addresses</code>, <code>stg_sales</code> and <code>property_summary</code> with 13 data tests on every <code>dbt build</code>.</li><li><strong>No owner names published.</strong> The public explorer shows address, market and assessed value only.</li></ul>
-</section>
-<section><h2>Verified results</h2>
-<div class="stats"><div class="stat"><b>12,288 / 12,288</b><span>FEMA flood zones loaded, 0 lost</span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>48</b><span>invalid flood shapes repaired, 0 sq ft area lost</span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>75,878 / 75,878</b><span>FL DOR sales loaded; 99.8% matched to a parcel</span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>28,800</b><span>qualified market sales</span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>10,552</b><span>exact duplicate addresses removed, each traced in <code>addresses_qc</code></span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>413 → 37</b><span>ZIP values normalized</span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>405,722</b><span>parcels in <code>property_summary</code> (one row per parcel)</span><small>Source: jax-property-mcp README</small></div><div class="stat"><b>13</b><span>dbt data tests on every build</span><small>Source: jax-property-mcp README</small></div></div>
-</section>
-<section><h2>Show the work</h2>
-<details class="work"><summary>flood_risk MCP tool: parameterized PostGIS overlay (SQL)</summary><pre><code class="language-python">@mcp.tool()
-def flood_risk(strap: str) -&gt; list[dict]:
-    &quot;&quot;&quot;FEMA flood zones touching a parcel, given its strap (property ID).
-    Returns each zone, whether it&#x27;s a high-risk Special Flood Hazard Area (sfha = &#x27;True&#x27;),
-    and what percent of the parcel it covers. No rows means the parcel is outside the mapped zones.&quot;&quot;&quot;
-    sql = &quot;&quot;&quot;
-        SELECT f.fld_zone, f.zone_subty, f.sfha, f.static_bfe,
-               ROUND((100 * SUM(ST_Area(ST_Intersection(p.geometry, f.geom)))
-                     / NULLIF(ST_Area(ST_Union(p.geometry)), 0))::numeric, 1) AS pct_of_parcel
-        FROM parcels p
-        JOIN flood_zones f ON ST_Intersects(p.geometry, f.geom)
-        WHERE p.strap = %s
-        GROUP BY f.fld_zone, f.zone_subty, f.sfha, f.static_bfe
-        ORDER BY pct_of_parcel DESC
-    &quot;&quot;&quot;
-    return run(sql, (strap,))</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/jax-property-mcp/blob/main/server.py#L108-L123"><code>jax-property-mcp/server.py</code> lines 108–123</a></p></details><details class="work"><summary>FEMA load quality check: compare every repaired shape to its raw original (SQL)</summary><pre><code class="language-python">    # 3. CLEAN table: repaired copy, linked back to RAW by raw_id
-    c.execute(&quot;&quot;&quot;
-        DROP TABLE IF EXISTS flood_zones;
-        CREATE TABLE flood_zones AS
-        SELECT raw_id, fld_zone, zone_subty, (sfha_tf = &#x27;T&#x27;) AS sfha, static_bfe,
-               ST_IsValid(geom) AS was_valid,
-               ST_Multi(ST_CollectionExtract(ST_MakeValid(geom), 3))::geometry(MultiPolygon, 2236) AS geom
-        FROM flood_zones_raw;
-        CREATE INDEX flood_zones_geom_idx ON flood_zones USING gist (geom);
-        CREATE INDEX IF NOT EXISTS parcels_geom_idx ON parcels USING gist (geometry);&quot;&quot;&quot;)
-
-    # 4. QUALITY CHECKS: compare every clean shape to its raw original
-    c.execute(&quot;&quot;&quot;
-        DROP TABLE IF EXISTS flood_zones_qc;
-        CREATE TABLE flood_zones_qc AS
-        SELECT r.raw_id, r.fld_zone, ST_GeometryType(r.geom) AS raw_type, z.was_valid,
-               ST_Area(ST_MakeValid(r.geom)) AS raw_area_sqft, ST_Area(z.geom) AS clean_area_sqft,
-               ST_IsEmpty(z.geom) AS became_empty
-        FROM flood_zones_raw r JOIN flood_zones z USING (raw_id)
-        WHERE NOT z.was_valid OR ST_IsEmpty(z.geom)
-           OR abs(ST_Area(ST_MakeValid(r.geom)) - ST_Area(z.geom)) &gt; 1;&quot;&quot;&quot;)
-    q = c.execute(&quot;&quot;&quot;
-        SELECT (SELECT count(*) FROM flood_zones_raw),
-               (SELECT count(*) FROM flood_zones),
-               (SELECT count(*) FROM flood_zones WHERE NOT was_valid),
-               (SELECT count(*) FROM flood_zones WHERE ST_IsEmpty(geom)),
-               (SELECT coalesce(sum(raw_area_sqft - clean_area_sqft), 0) FROM flood_zones_qc),
-               (SELECT sum(ST_Area(geom)) FROM flood_zones)&quot;&quot;&quot;).fetchone()
-    print(&quot;\n=== QUALITY REPORT ===&quot;)
-    print(f&quot;features from FEMA:      {total}  (missing geometry: {no_geom})&quot;)
-    print(f&quot;raw rows loaded:         {q[0]}&quot;)
-    print(f&quot;clean rows:              {q[1]}  (row loss: {q[0] - q[1]})&quot;)
-    print(f&quot;shapes needing repair:   {q[2]}&quot;)
-    print(f&quot;shapes that became empty:{q[3]}&quot;)
-    print(f&quot;area lost in repair:     {q[4]:,.0f} sq ft of {q[5]:,.0f} total ({100 * q[4] / q[5]:.5f}%)&quot;)</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/jax-property-mcp/blob/main/load_flood.py#L80-L114"><code>jax-property-mcp/load_flood.py</code> lines 80–114</a></p></details><details class="work"><summary>Parcel geometry repair with make_valid (Python)</summary><pre><code class="language-python">def repair_geometry(geometry):
-    if geometry is None:
-        return None
-
-    if not geometry.is_valid:
-        geometry = make_valid(geometry)
-
-    if isinstance(geometry, Polygon):
-        return MultiPolygon([geometry])
-
-    if isinstance(geometry, MultiPolygon):
-        return geometry
-
-    if geometry.geom_type == &quot;GeometryCollection&quot;:
-        polygons = []
-
-        for geom in geometry.geoms:
-
-            if isinstance(geom, Polygon):
-                polygons.append(geom)
-
-            elif isinstance(geom, MultiPolygon):
-                polygons.extend(list(geom.geoms))
-
-        if polygons:
-            return MultiPolygon(polygons)
-
-    return None</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/jax-property-intelligence/blob/main/load_parcels.py#L28-L55"><code>jax-property-intelligence/load_parcels.py</code> lines 28–55</a></p></details>
-</section>
-<section><h2>Next steps</h2>
-<ul><li>Surface the <code>flood_risk</code> results on the public Riverside explorer as a flood-zone overlay.</li><li>Run the tool-choice evals (<code>eval.py</code>, <code>hard_eval.py</code>) automatically on each change.</li><li>Extend the explorer beyond Riverside using the same PostGIS tables.</li></ul>
-</section>
-
-<section><h2>Links</h2><div class="ctas"><a class="btn primary" href="https://knightchrism.github.io/jax-property-intelligence/">Live demo →</a><a class="btn" href="https://github.com/knightchrism/jax-property-intelligence">jax-property-intelligence repo</a><a class="btn" href="https://github.com/knightchrism/jax-property-mcp">jax-property-mcp repo</a></div>
-<p class="muted small-note">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
+<section class="band pagehead"><div class="wrap"><p class="muted small"><a href="../../work.html">← All work</a> · Self-initiated demonstration on public data</p>
+<p class="eyebrow gold">Case study · PostGIS · dbt · Leaflet</p><h1>Jacksonville Property &amp; Flood Risk</h1><p class="lead">Duval County parcels, assessor records, FEMA flood zones and Florida sales data joined in one tested PostGIS database, explorable on an interactive map.</p><p class="cta"><a class="btn" href="https://knightchrism.github.io/jax-property-intelligence/" rel="noopener noreferrer">Live demo</a> <a class="btn btn-ghost" href="https://github.com/knightchrism/jax-property-intelligence" rel="noopener noreferrer">Repository</a></p></div></section>
+<section class="band"><div class="wrap prose"><h2>Problem</h2><p>Property questions (what is this parcel worth, is it in a flood zone, what sold nearby) need county parcels, the assessor tax roll, FEMA flood zones and state sales records joined together. Those sources arrive as shapefiles, pipe-delimited text and REST services, with invalid geometries, duplicate addresses and inconsistent ZIPs. The goal: one trustworthy PostGIS database, without silently losing a row.</p><h2>Data sources</h2><ul><li>Duval County parcel GIS (<code>Parcels.shp</code>), City of Jacksonville / Duval County public records</li><li>Duval County Property Appraiser real estate tax roll</li><li>FEMA National Flood Hazard Layer (public domain), from FEMA's ArcGIS REST service</li><li>Florida Department of Revenue sales data file and land-use codes</li></ul><figure class="diagram"><img src="../../assets/diagrams/jax-property-intelligence.svg" alt="Architecture diagram: data layer, rendered from the Mermaid diagram in the jax-property-intelligence README" loading="lazy"><figcaption>data layer, rendered from the Mermaid diagram in the jax-property-intelligence README</figcaption></figure><h2>Key decisions</h2><ul><li><b>Repair geometry with <code>make_valid</code>, never edit the source.</b> Invalid/missing geometry counts are printed before load.</li><li><b>One projected CRS: EPSG:2236</b> (Florida East, US feet), so parcel and flood-zone areas and overlay percentages are meaningful.</li><li><b>Raw → clean → QC tables for flood zones.</b> Every repaired shape is compared to its raw original by area.</li><li><b>Flood overlay per parcel.</b> Each parcel gets the FEMA zones it touches, whether each is a Special Flood Hazard Area, and the percent of the parcel covered.</li><li><b>dbt-tested models</b> with 13 data tests on every build.</li><li><b>No owner names published.</b> The public explorer shows address, market and assessed value only.</li></ul><h2>Verified results</h2><div class="stats"><div class="stat"><b>12,288 / 12,288</b><span>FEMA flood zones loaded, 0 lost</span><small>Source: project README</small></div><div class="stat"><b>48</b><span>invalid flood shapes repaired, 0 sq ft area lost</span><small>Source: project README</small></div><div class="stat"><b>75,878</b><span>FL DOR sales loaded; 99.8% matched to a parcel</span><small>Source: project README</small></div><div class="stat"><b>28,800</b><span>qualified market sales</span><small>Source: project README</small></div><div class="stat"><b>10,552</b><span>exact duplicate addresses removed, each traced</span><small>Source: project README</small></div><div class="stat"><b>413 → 37</b><span>ZIP values normalized</span><small>Source: project README</small></div><div class="stat"><b>405,722</b><span>parcels in one tested summary table</span><small>Source: project README</small></div><div class="stat"><b>13</b><span>dbt data tests on every build</span><small>Source: project README</small></div></div></div></section><section class="band navy" id="contact"><div class="wrap contact">
+<div><p class="eyebrow gold">Contact</p><h2>Tell me about your data.</h2>
+<p>Send a short note about your area, your data and what you need. I reply by email, usually within one business day, or you can book a call directly.</p></div>
+<div class="cta-stack"><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a>
+<a class="btn btn-ghost" href="mailto:geoknight0015@gmail.com">geoknight0015@gmail.com</a></div>
+</div></section>
 </main>
-<footer><p>© 2026 GeoKnight GIS · Jacksonville, Florida · <a href="../../about.html">About</a> · <a href="../../markets.html">Markets</a> · <a href="../../capability.html">Capability statement</a> · <a href="../../security.html">Data security</a> · <a href="../../privacy.html">Privacy</a> · <a href="../../terms.html">Terms</a></p></footer>
-<script src="../../assets/js/year.js"></script>
+<footer class="foot"><div class="wrap footin">
+<div><a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<p class="muted">Geospatial data services · Jacksonville, Florida</p></div>
+<nav aria-label="Footer"><a href="../../services.html">Services</a><a href="../../work.html">Work</a><a href="../../about.html">About</a><a href="../../resume.html">Resume</a><a href="../../contact.html">Contact</a></nav>
+<nav aria-label="Legal"><a href="../../privacy.html">Privacy</a><a href="../../security.html">Data security</a><a href="../../terms.html">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="../../assets/js/year.js" defer></script>
 </body>
 </html>

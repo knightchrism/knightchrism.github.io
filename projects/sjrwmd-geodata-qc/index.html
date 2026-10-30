@@ -2,115 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SJRWMD GeoData Quality Inspector · Case study · GeoKnight GIS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<title>SJRWMD GeoData Quality Inspector · Case study | GeoKnight GIS</title>
 <meta name="description" content="Rule-driven QA/QC for public groundwater-station GIS data: findings you can filter, inspect and export, with the source data left untouched.">
-<meta property="og:title" content="SJRWMD GeoData Quality Inspector · Case study · GeoKnight GIS">
+<link rel="canonical" href="https://knightchrism.github.io/projects/sjrwmd-geodata-qc/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="SJRWMD GeoData Quality Inspector · Case study | GeoKnight GIS">
 <meta property="og:description" content="Rule-driven QA/QC for public groundwater-station GIS data: findings you can filter, inspect and export, with the source data left untouched.">
-<meta property="og:type" content="article">
 <meta property="og:url" content="https://knightchrism.github.io/projects/sjrwmd-geodata-qc/">
-<meta name="theme-color" content="#0b1220">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../../styles.css?v=20261029h">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@geoknight0015">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="../../styles.css?v=20261030">
 </head>
-<body class="case">
-<div class="wip-banner" role="status">🚧 Work in progress — this site is still being built. Check back soon!</div>
+<body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="nav">
-  <a class="brand" href="../../">GeoKnight GIS</a>
-  <nav aria-label="Main"><a href="../../#services">Services</a><a href="../../#projects">Work</a><a href="../../markets.html">Markets</a><a href="../../about.html">About</a><a href="../../#contact">Contact</a></nav>
-</header>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="../../services.html">Services</a><a href="../../work.html" aria-current="page">Work</a><a href="../../about.html">About</a><a href="../../contact.html">Contact</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
 <main id="main">
-<div class="case-hero">
-  <p class="demo-label">Self-initiated demonstration on public data</p>
-  <p class="crumbs"><a href="../../#projects">← All projects</a></p>
-  <p class="eyebrow">Case study · GeoPandas · ArcGIS REST · Leaflet</p>
-  <h1>SJRWMD GeoData Quality Inspector</h1>
-  <p class="tagline">GIS · Spatial Data · AI Integration Engineering</p>
-  <p class="lead">Rule-driven QA/QC for public groundwater-station GIS data: findings you can filter, inspect and export, with the source data left untouched.</p>
-  <div class="ctas"><a class="btn primary" href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Live dashboard →</a><a class="btn" href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a></div>
-</div>
-<section><h2>Problem</h2>
-<p>Public GIS services are published as-is: records can be missing identifiers, geometry, or attributes that downstream users rely on. Fixing data you do not own is not an option, but documenting issues is. The goal: an automated, repeatable QA/QC workflow that pulls the public groundwater-station layer, applies configurable rules, writes every finding to an audit trail, and lets a reviewer explore them on a map, without changing the source data.</p>
-</section>
-<section><h2>Data sources</h2>
-<ul><li><strong>St. Johns River Water Management District</strong> public ArcGIS REST Feature Service: <a href="https://services.arcgis.com/s8wtJX9suxFen6TA/ArcGIS/rest/services/Active_Groundwater_Monitoring_Network_Water_Level_Event_Type/FeatureServer/0">Active Groundwater Monitoring Network, Water Level Event Type</a></li><li>OpenStreetMap basemap for the dashboard</li></ul>
-</section>
-<section><h2>Architecture</h2>
-<figure class="diagram-box"><img class="mw-1258" src="../../assets/diagrams/sjrwmd-geodata-qc.svg" alt="Architecture diagram for sjrwmd-geodata-qc, rendered from the Mermaid source in its README" loading="lazy"><figcaption>ArcGIS REST → raw copy → rules engine → findings → Leaflet dashboard · Rendered from the Mermaid diagram in the <a href="https://github.com/knightchrism/sjrwmd-geodata-qc#architecture">sjrwmd-geodata-qc README</a>. Scroll sideways on small screens.</figcaption></figure><img class="shot" src="../../assets/projects/sjrwmd-geodata-qc.webp" alt="Screenshot of the live QA/QC dashboard showing station findings on a Florida map" width="960" height="540" loading="lazy">
-</section>
-<section><h2>Key decisions</h2>
-<ul class="decisions"><li><strong>Rules as config, not code.</strong> All 8 rules live in <code>config/qc_rules.json</code> with id, field, check type, severity and an interpretation, so they can be reviewed and changed without touching Python.</li><li><strong>Raw download preserved.</strong> The original data is saved as-is and never modified by the QA/QC process.</li><li><strong>Findings, not verdicts.</strong> Results are project-defined review findings, not confirmed errors: a record missing UTM attributes can still have valid lat/long and point geometry.</li><li><strong>Severity tiers.</strong> Critical (identity, geometry), warning (county) and info (optional attributes) keep reviewers focused.</li><li><strong>Auditable outputs.</strong> Every finding is written to CSV/JSON; the dashboard filters by rule and severity, shows original values and exports filtered CSV.</li><li><strong>Static hosting.</strong> The dashboard is plain HTML + Leaflet on GitHub Pages, with no server to maintain.</li></ul>
-</section>
-<section><h2>Verified results</h2>
-<div class="stats"><div class="stat"><b>850</b><span>monitoring stations inspected</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>8</b><span>configurable QA/QC rules</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>940</b><span>review findings</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>652</b><span>stations flagged</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>0 / 0 / 0</b><span>duplicate IDs / missing geometries / invalid geometries</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>497 · 348 · 94 · 1</b><span>missing UTM · drilling depth · completion date · county</span><small>Source: sjrwmd-geodata-qc README</small></div></div>
-</section>
-<section><h2>Show the work</h2>
-<details class="work"><summary>Rule definitions: config/qc_rules.json (JSON)</summary><pre><code class="language-json">
-{
-  &quot;dataset&quot;: &quot;SJRWMD Active Groundwater Monitoring Network&quot;,
-  &quot;version&quot;: &quot;2.0&quot;,
-  &quot;description&quot;: &quot;Independent demonstration QA/QC rules, not official SJRWMD acceptance standards.&quot;,
-  &quot;rules&quot;: [
-    {
-      &quot;id&quot;: &quot;QC001&quot;,
-      &quot;name&quot;: &quot;Missing station identifier&quot;,
-      &quot;field&quot;: &quot;STN_ID&quot;,
-      &quot;check&quot;: &quot;required&quot;,
-      &quot;severity&quot;: &quot;critical&quot;,
-      &quot;interpretation&quot;: &quot;A station record lacks its identifier.&quot;,
-      &quot;basis&quot;: &quot;project_integrity_rule&quot;
-    },
-    {
-      &quot;id&quot;: &quot;QC002&quot;,
-      &quot;name&quot;: &quot;Repeated station identifier&quot;,
-      &quot;field&quot;: &quot;STN_ID&quot;,
-      &quot;check&quot;: &quot;unique&quot;,
-      &quot;severity&quot;: &quot;critical&quot;,
-      &quot;interpretation&quot;: &quot;Multiple records share one station identifier. Investigate whether the service represents unique stations or multiple events.&quot;,
-      &quot;basis&quot;: &quot;project_integrity_rule&quot;
-    },</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/sjrwmd-geodata-qc/blob/main/config/qc_rules.json#L1-L24"><code>sjrwmd-geodata-qc/config/qc_rules.json</code> lines 1–24</a></p></details><details class="work"><summary>Rules engine: evaluate_rule (Python / GeoPandas)</summary><pre><code class="language-python">def evaluate_rule(rule):
-    check = rule[&quot;check&quot;]
-    fields = fields_for_rule(rule)
-
-    if check in (&quot;required&quot;, &quot;missing&quot;):
-        return missing(gdf[fields[0]])
-
-    if check == &quot;unique&quot;:
-        series = gdf[fields[0]]
-        return ~missing(series) &amp; series.duplicated(keep=False)
-
-    if check == &quot;geometry_present&quot;:
-        return gdf.geometry.isna() | gdf.geometry.is_empty
-
-    if check == &quot;geometry_valid&quot;:
-        return gdf.geometry.notna() &amp; ~gdf.geometry.is_empty &amp; ~gdf.geometry.is_valid
-
-    if check == &quot;missing_any&quot;:
-        result = pd.Series(False, index=gdf.index)
-
-        for field in fields:
-            result = result | missing(gdf[field])
-
-        return result
-
-    raise ValueError(f&quot;Unsupported check: {check}&quot;)</code></pre><p class="src">Source: <a href="https://github.com/knightchrism/sjrwmd-geodata-qc/blob/main/run_qc.py#L104-L129"><code>sjrwmd-geodata-qc/run_qc.py</code> lines 104–129</a></p></details>
-</section>
-<section><h2>Next steps</h2>
-<ul><li>Configurable spatial boundary checks.</li><li>Coordinate-system consistency validation.</li><li>Field-level data-quality scoring and historical comparisons.</li><li>Analyst review-status management.</li><li>Automated processing and deployment through GitHub Actions.</li></ul>
-</section>
-
-<section><h2>Links</h2><div class="ctas"><a class="btn primary" href="https://knightchrism.github.io/sjrwmd-geodata-qc/">Live dashboard →</a><a class="btn" href="https://github.com/knightchrism/sjrwmd-geodata-qc">Repository →</a></div>
-<p class="muted small-note">Demo / testing only, not authoritative. Figures on this page are copied from the linked repositories' READMEs.</p></section>
+<section class="band pagehead"><div class="wrap"><p class="muted small"><a href="../../work.html">← All work</a> · Self-initiated demonstration on public data</p>
+<p class="eyebrow gold">Case study · GeoPandas · ArcGIS REST · Leaflet</p><h1>SJRWMD GeoData Quality Inspector</h1><p class="lead">Rule-driven QA/QC for public groundwater-station GIS data: findings you can filter, inspect and export, with the source data left untouched.</p><p class="cta"><a class="btn" href="https://knightchrism.github.io/sjrwmd-geodata-qc/" rel="noopener noreferrer">Live dashboard</a> <a class="btn btn-ghost" href="https://github.com/knightchrism/sjrwmd-geodata-qc" rel="noopener noreferrer">Repository</a></p></div></section>
+<section class="band"><div class="wrap prose"><h2>Problem</h2><p>Public GIS services are published as-is: records can be missing identifiers, geometry, or attributes that downstream users rely on. Fixing data you do not own is not an option, but documenting issues is. The goal: an automated, repeatable QA/QC workflow that pulls the public groundwater-station layer, applies configurable rules, writes every finding to an audit trail, and lets a reviewer explore them on a map.</p><h2>Data sources</h2><ul><li>St. Johns River Water Management District public ArcGIS REST Feature Service: Active Groundwater Monitoring Network, Water Level Event Type</li><li>OpenStreetMap basemap for the dashboard</li></ul><figure class="diagram"><img src="../../assets/diagrams/sjrwmd-geodata-qc.svg" alt="Architecture diagram: ArcGIS REST → raw copy → rules engine → findings → Leaflet dashboard, rendered from the Mermaid diagram in the sjrwmd-geodata-qc README" loading="lazy"><figcaption>ArcGIS REST → raw copy → rules engine → findings → Leaflet dashboard, rendered from the Mermaid diagram in the sjrwmd-geodata-qc README</figcaption></figure><h2>Key decisions</h2><ul><li><b>Rules as config, not code.</b> All 8 rules live in <code>config/qc_rules.json</code> with id, field, check type, severity and an interpretation.</li><li><b>Raw download preserved.</b> The original data is never modified.</li><li><b>Findings, not verdicts.</b> Results are review findings, not confirmed errors.</li><li><b>Severity tiers:</b> critical (identity, geometry), warning (county) and info (optional attributes).</li><li><b>Auditable outputs.</b> Every finding is written to CSV/JSON; the dashboard filters by rule and severity and exports filtered CSV.</li><li><b>Static hosting</b> on GitHub Pages, with no server to maintain.</li></ul><h2>Verified results</h2><div class="stats"><div class="stat"><b>850</b><span>monitoring stations inspected</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>8</b><span>configurable QA/QC rules</span><small>Source: sjrwmd-geodata-qc README</small></div><div class="stat"><b>940</b><span>auditable findings</span><small>Source: sjrwmd-geodata-qc README</small></div></div></div></section><section class="band navy" id="contact"><div class="wrap contact">
+<div><p class="eyebrow gold">Contact</p><h2>Tell me about your data.</h2>
+<p>Send a short note about your area, your data and what you need. I reply by email, usually within one business day, or you can book a call directly.</p></div>
+<div class="cta-stack"><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a>
+<a class="btn btn-ghost" href="mailto:geoknight0015@gmail.com">geoknight0015@gmail.com</a></div>
+</div></section>
 </main>
-<footer><p>© 2026 GeoKnight GIS · Jacksonville, Florida · <a href="../../about.html">About</a> · <a href="../../markets.html">Markets</a> · <a href="../../capability.html">Capability statement</a> · <a href="../../security.html">Data security</a> · <a href="../../privacy.html">Privacy</a> · <a href="../../terms.html">Terms</a></p></footer>
-<script src="../../assets/js/year.js"></script>
+<footer class="foot"><div class="wrap footin">
+<div><a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<p class="muted">Geospatial data services · Jacksonville, Florida</p></div>
+<nav aria-label="Footer"><a href="../../services.html">Services</a><a href="../../work.html">Work</a><a href="../../about.html">About</a><a href="../../resume.html">Resume</a><a href="../../contact.html">Contact</a></nav>
+<nav aria-label="Legal"><a href="../../privacy.html">Privacy</a><a href="../../security.html">Data security</a><a href="../../terms.html">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="../../assets/js/year.js" defer></script>
 </body>
 </html>
