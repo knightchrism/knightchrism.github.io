@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov; connect-src 'self' https://basemap.nationalmap.gov https://gibs.earthdata.nasa.gov https://earthquake.usgs.gov https://api.waterdata.usgs.gov; worker-src 'self' blob:; child-src blob:; base-uri 'self'; form-action 'self'">
 <title>GeoKnight GIS | Parcel dashboards, maps &amp; Florida parcel data</title>
 <meta name="description" content="GeoKnight GIS builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones. Fixed-price packages from $350.">
 <link rel="canonical" href="https://knightchrism.github.io/">
@@ -18,7 +18,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="styles.css?v=20261030f">
+<link rel="stylesheet" href="styles.css?v=20261030g">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["ProfessionalService", "Organization"], "name": "GeoKnight GIS", "url": "https://knightchrism.github.io/", "email": "mailto:geoknight0015@gmail.com", "description": "GeoKnight GIS builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones. Fixed-price packages from $350.", "slogan": "Accurate, trustworthy geospatial data \u2014 for less.", "address": {"@type": "PostalAddress", "addressLocality": "Jacksonville", "addressRegion": "FL", "addressCountry": "US"}, "areaServed": {"@type": "State", "name": "Florida"}, "founder": {"@type": "Person", "name": "Christopher Knight", "jobTitle": "GIS & Data Engineer", "sameAs": ["https://www.linkedin.com/in/christopher-knight-3225a2232/", "https://x.com/geoknight0015", "https://github.com/knightchrism"]}, "sameAs": ["https://www.linkedin.com/in/christopher-knight-3225a2232/", "https://x.com/geoknight0015", "https://github.com/knightchrism"], "knowsAbout": ["GIS", "Parcel data", "Flood zones", "PostGIS", "Data pipelines", "Data quality control", "Market analysis"], "makesOffer": [{"@type": "Offer", "name": "Data QC Audit", "price": "350", "priceCurrency": "USD"}, {"@type": "Offer", "name": "Interactive Map", "priceSpecification": {"@type": "PriceSpecification", "minPrice": "750", "maxPrice": "1500", "priceCurrency": "USD"}}, {"@type": "Offer", "name": "Parcel Dashboard", "priceSpecification": {"@type": "PriceSpecification", "minPrice": "2000", "maxPrice": "4000", "priceCurrency": "USD"}}, {"@type": "Offer", "name": "Custom Solutions", "description": "Need something that doesn't fit a package? GeoKnight GIS builds custom tools around your data, from automated data pipelines to live dashboards and map apps, with built-in checks so you can trust the results. We scope it with you, quote a fixed price for each milestone, and hand over everything you need to run it.", "url": "https://knightchrism.github.io/services.html"}]}</script>
 </head>
 <body>
@@ -28,8 +28,8 @@
 <nav aria-label="Main"><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
 </div></header>
 <main id="main">
-<section class="hero fl" id="hero">
-<div id="stage" aria-hidden="true"><img class="lay" src="assets/hero/florida.svg?v=3" alt="" width="1600" height="900" decoding="async" fetchpriority="high"><canvas id="night"></canvas><canvas id="trail"></canvas><canvas id="wx"></canvas><canvas id="fx"></canvas></div>
+<section class="hero fl gl" id="hero">
+<div id="globe" class="globe" aria-hidden="true"></div>
 <div class="hero-shade" aria-hidden="true"></div>
 <div class="wrap heroin">
 <div class="herotext"><p class="eyebrow gold">GeoKnight GIS · Jacksonville, Florida</p>
@@ -37,8 +37,8 @@
 <p class="lead">GeoKnight GIS builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones for insurers, inspectors and investors. Fixed-price packages from $350.</p>
 <div class="cta"><a class="btn" href="services.html">See packages</a><a class="btn btn-ghost" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></div></div>
 </div>
-<p id="credit">Bathymetry: NOAA NCEI ETOPO1 · Boundaries &amp; roads: US Census TIGER 2023 · Natural Earth (coast, rivers, lakes) · Currents, traffic, weather, launches, parcel/flood scan illustrative, not live</p>
-<script src="assets/hero/hero.js?v=3" defer></script>
+<p id="credit">Imagery: NASA Blue Marble &amp; Black Marble via NASA GIBS · USGS The National Map · Clouds: NASA VIIRS · Live: USGS earthquakes &amp; stream gauges · Day/night line from the real sun position · Ships, flights, launches, Gulf Stream and scan overlay illustrative, not live</p>
+<script src="assets/globe/boot.js?v=1" defer></script>
 </section>
 <section class="band"><div class="wrap"><p class="eyebrow">Services</p><h2>Fixed-price packages</h2>
 <div class="grid3"><article class="card svc"><h3>Data QC Audit</h3><p class="price">$350</p><p class="muted small">Fixed price</p><p>A rule-driven check of one parcel, address or asset layer: duplicates, gaps, invalid geometry and attribute problems, without touching your source data.</p><ul class="ticks"><li>Findings report (CSV/JSON)</li><li>Map of every finding</li><li>Prioritized fix list</li></ul></article><article class="card svc"><h3>Interactive Map</h3><p class="price">$750–1,500</p><p class="muted small">Fixed price, by scope</p><p>A fast, shareable web map of your data: parcels, listings, sites or service areas, with filters, popups and a clean, mobile-friendly layout.</p><ul class="ticks"><li>Hosted static web map</li><li>Search, filter and popups</li><li>Data and source handed over</li></ul></article><article class="card svc"><h3>Parcel Dashboard</h3><p class="price">$2,000–4,000</p><p class="muted small">Fixed price, by scope</p><p>Parcels, assessor records, sales and flood zones joined in a tested database and explored on a dashboard built for your market.</p><ul class="ticks"><li>PostGIS database with tests</li><li>Interactive dashboard</li><li>Repeatable load pipeline</li></ul></article></div>

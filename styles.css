@@ -62,3 +62,12 @@ code{font:.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:#eef1f6;pa
 .custom{margin-top:24px;border:2px solid var(--gold);background:linear-gradient(135deg,#fffaf0,#fff);display:flex;gap:24px;align-items:center;justify-content:space-between}
 .custom p{max-width:75ch}.custom .btn{flex:none}.custom.full{padding:32px}.custom.compact .price{font-size:1.2rem}
 @media (max-width:640px){.custom{flex-direction:column;align-items:flex-start}}
+/* globe hero (restored from live site) with Florida overlay */
+.hero.gl{background:#02050b;overflow:hidden}
+.gl .globe{position:absolute;inset:0;z-index:0}.gl .globe canvas{outline:none}
+.gl .ovl{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.5s}.gl.live .ovl{opacity:1}
+.gl .hero-shade{background:linear-gradient(90deg,rgba(2,6,14,.9) 0,rgba(2,6,14,.7) 34%,rgba(2,6,14,.2) 62%,transparent 100%),linear-gradient(0deg,rgba(8,20,40,.75) 0,transparent 26%)}
+.gl .heroin{position:relative;z-index:2;pointer-events:none}.gl .heroin a{pointer-events:auto}
+.gl .maplibregl-ctrl-attrib,.gl .maplibregl-ctrl-logo{display:none}
+.gl.poster .globe{background:#02050b url(assets/globe/poster-390.webp) center top/cover no-repeat}
+@media (max-width:640px){.gl .hero-shade{background:linear-gradient(180deg,rgba(2,6,14,.55) 0,rgba(2,6,14,.75) 55%,rgba(2,6,14,.9) 100%)}}
