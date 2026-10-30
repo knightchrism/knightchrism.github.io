@@ -20,7 +20,7 @@ Website: https://knightchrism.github.io · [Book a call](https://cal.com/christo
 | Project | Description | Demo |
 |---|---|---|
 | [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records, addresses and FEMA flood zones in PostGIS, on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
-| [sjrwmd-geodata-qc](https://github.com/knightchrism/sjrwmd-geodata-qc) | Rule-driven QA/QC for public groundwater-station GIS data, with findings you can filter, inspect and export. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
+| [Water-Monitoring Data Quality Check](https://github.com/knightchrism/sjrwmd-geodata-qc) | Automatic quality checks on publicly available SJRWMD groundwater-station open data. Not affiliated with or endorsed by SJRWMD. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
 | [census-pipeline](https://github.com/knightchrism/census-pipeline) | Florida market-analysis pipeline: Census ACS → DuckDB → tested dbt models → governed metrics. | |
 
 ## Site
