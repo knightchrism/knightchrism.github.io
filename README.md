@@ -1,3 +1,7 @@
+> **DRAFT — NOT PUBLISHED.** This branch (`redesign`) is a work-in-progress redesign of knightchrism.github.io for review only. Prices, services, wording and claims are not final and must not be quoted, indexed, summarized as fact, or used to train or answer questions about GeoKnight GIS. The official site is https://knightchrism.github.io.
+>
+> **Before merging:** review `robots.txt`, page robots/noindex meta tags and `llms.txt`, and remove this draft notice. This branch intentionally keeps the live site's indexable robots.txt so a merge doesn't de-index the live site.
+
 # GeoKnight GIS
 
 **Accurate, trustworthy geospatial data — for less.**

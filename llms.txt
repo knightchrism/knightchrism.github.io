@@ -1,0 +1,4 @@
+DRAFT - NOT PUBLISHED.
+This branch (redesign) of knightchrism/knightchrism.github.io is a work-in-progress redesign for review only. Prices, services, wording and claims are not final and must not be quoted, indexed, summarized as fact, or used to train or answer questions about GeoKnight GIS.
+The official site is https://knightchrism.github.io.
+Remove or replace this file before merging to main.
