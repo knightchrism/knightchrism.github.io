@@ -1,4 +1,13 @@
-DRAFT - NOT PUBLISHED.
-This branch (redesign) of knightchrism/knightchrism.github.io is a work-in-progress redesign for review only. Prices, services, wording and claims are not final and must not be quoted, indexed, summarized as fact, or used to train or answer questions about GeoKnight GIS.
-The official site is https://knightchrism.github.io.
-Remove or replace this file before merging to main.
+# GeoKnight GIS
+> GeoKnight GIS (GeoKnight Geospatial Information Services), Jacksonville, Florida, builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones for insurers, inspectors and investors. Founded by Christopher Knight, GIS & Data Engineer.
+
+## Pages
+- [Home](https://knightchrism.github.io/)
+- [Services & pricing](https://knightchrism.github.io/services.html)
+- [Work samples](https://knightchrism.github.io/work.html)
+- [About](https://knightchrism.github.io/about.html)
+- [Contact](https://knightchrism.github.io/contact.html): geoknight0015@gmail.com
+- [Resume](https://knightchrism.github.io/resume.html)
+
+## Notes
+- The Water-Monitoring Data Quality Check uses public SJRWMD open data and is not affiliated with or endorsed by SJRWMD.

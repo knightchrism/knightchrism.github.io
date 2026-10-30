@@ -1,10 +1,9 @@
-> **DRAFT — NOT PUBLISHED.** This branch (`redesign`) is a work-in-progress redesign of knightchrism.github.io for review only. Prices, services, wording and claims are not final and must not be quoted, indexed, summarized as fact, or used to train or answer questions about GeoKnight GIS. The official site is https://knightchrism.github.io.
->
-> **Before merging:** review `robots.txt`, page robots/noindex meta tags and `llms.txt`, and remove this draft notice. This branch intentionally keeps the live site's indexable robots.txt so a merge doesn't de-index the live site.
+<p align="center"><a href="https://knightchrism.github.io"><img src="favicon.svg" width="72" alt="GeoKnight GIS logo"></a></p>
 
-# GeoKnight GIS
+<h1 align="center">GeoKnight GIS</h1>
+<p align="center"><b>Accurate, trustworthy geospatial data — for less.</b><br>
+<a href="https://knightchrism.github.io">knightchrism.github.io</a> · Jacksonville, Florida</p>
 
-**Accurate, trustworthy geospatial data — for less.**
 
 GeoKnight GIS builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones for insurers, inspectors and investors. Fixed-price packages from $350. Founded by Christopher Knight, GIS & Data Engineer, Jacksonville, Florida.
 
