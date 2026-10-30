@@ -6,7 +6,7 @@ const cT=document.getElementById('trail'),cF=document.getElementById('fx'),xT=cT
 let W,H,k,ox,oy,dpr,mob;
 function size(){const r=stage.getBoundingClientRect();W=r.width;H=r.height;mob=innerWidth<820;dpr=Math.min(devicePixelRatio||1,mob?1.5:2);
  for(const c of[cT,cF,cW,cN]){c.width=W*dpr;c.height=H*dpr}
- k=Math.max(W/1600,H/900);ox=(W-1600*k)/2;oy=(H-900*k)/2; init();wxInit();prep();nightUpdate()}
+ const sm=innerWidth<640;k=sm?Math.max(H/900,W/1600):Math.min(H/900,.55*W/925);ox=sm?W/2-900*k:.62*W-662*k;oy=(H-900*k)/2; init();wxInit();prep();nightUpdate()}
 // polyline helper
 function Poly(p){const L=[0];for(let i=1;i<p.length;i++)L.push(L[i-1]+Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]));
  return{p,L,len:L[L.length-1],at(d){d=Math.max(0,Math.min(this.len,d));let lo=0,hi=L.length-1;while(hi-lo>1){const m=(lo+hi)>>1;L[m]<=d?lo=m:hi=m}
