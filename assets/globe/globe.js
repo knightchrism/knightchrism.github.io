@@ -1,10 +1,22 @@
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile = innerWidth < 700, SP = reduce ? 0.4 : 1;
-// Fit Florida (~8.5 deg wide, ~7 deg tall) into the hero, right of centre, at any width.
-const GR = document.getElementById('globe').getBoundingClientRect();
-const PPD = Math.min(0.62 * GR.height / 8.2, 0.42 * GR.width / 8.5); // px per degree of longitude
-const Z = mobile ? 4.6 : Math.log2(PPD * 360 / 512);
-const FL = mobile ? [-83.4, 23.6] : [-83.4 - (0.68 - 0.5) * GR.width / PPD, 27.6];
+// Fit Florida (~8.5 deg wide, ~7 deg tall, plus +/-1.5 deg of sway) into the part of the hero the text
+// does not cover: to the right of the text on landscape screens, below it on portrait/tall ones.
+const fitFL = () => {
+  const G = document.getElementById('globe').getBoundingClientRect(), W = G.width, H = Math.max(200, Math.min(G.height, innerHeight - Math.max(0, G.top)));
+  const t = document.querySelector('.herotext'), T = t ? t.getBoundingClientRect() : { right: G.left + W * 0.5, bottom: G.top + H * 0.5 };
+  const SW = reduce ? 0 : 2, cosL = Math.cos(27.6 * Math.PI / 180);
+  const fit = (x0, x1, y0, y1) => ({ x0, x1, y0, y1, ppd: Math.min(0.92 * (x1 - x0) / (8.5 + SW), 0.9 * (y1 - y0) / (7 * 1.13)) });
+  const right = fit(T.right - G.left + 16, W - 16, 24, H - 36);
+  const below = fit(16, W - 16, T.bottom - G.top + 12, H - 36);
+  let b = W / H > 1.15 ? right : below;
+  if (b.ppd < 24) b = right.ppd >= below.ppd ? right : below;
+  if (b.ppd < 24) b = fit(W * 0.35, W, 0, H); // nothing fits: sit behind the shaded text
+  const ppd = Math.min(b.ppd, 0.62 * H / 8.2);
+  const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+  return { Z: Math.log2(ppd * 360 / 512), FL: [-83.4 - (cx - W / 2) / ppd, 27.6 + (cy - G.height / 2) * cosL / ppd] };
+};
+let { Z, FL } = mobile && innerWidth / innerHeight < 1 ? { Z: 4.6, FL: [-83.4, 23.6] } : fitFL();
 const GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/';
 const DAY = GIBS + 'BlueMarble_NextGeneration/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpeg';
 const NIGHT = GIBS + 'VIIRS_Black_Marble/default/2016-01-01/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png';
@@ -247,6 +259,7 @@ map.on('load', () => {
     anchor = map.getCenter().toArray();
     requestAnimationFrame(tick);
   };
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!settled) return; ({ Z, FL } = fitFL()); map.jumpTo({ center: FL, zoom: Z }); anchor = FL; }, 250); });
   if (reduce) map.once('idle', settle);
   else { map.flyTo({ center: FL, zoom: Z, duration: 4500, essential: false }); map.once('moveend', () => { map.once('idle', settle); setTimeout(settle, 3000); }); }
 });

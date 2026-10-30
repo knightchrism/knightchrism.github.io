@@ -1,0 +1,10 @@
+(()=>{const h=document.querySelector('.nav'),n=h&&h.querySelector('nav[aria-label="Main"]');if(!n)return;
+n.id=n.id||'mainnav';const b=document.createElement('button');b.type='button';b.className='navtoggle';
+b.setAttribute('aria-controls',n.id);b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Menu');
+b.innerHTML='<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>';
+n.parentNode.insertBefore(b,n);h.classList.add('has-toggle');
+const set=o=>{h.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))};
+b.addEventListener('click',()=>set(!h.classList.contains('open')));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&h.classList.contains('open')){set(false);b.focus()}});
+n.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});
+matchMedia('(min-width:760px)').addEventListener('change',e=>{if(e.matches)set(false)});})();
