@@ -2,13 +2,13 @@
 > GeoKnight GIS (GeoKnight Geospatial Information Services), based in Jacksonville, Florida and serving clients anywhere, builds custom GIS web applications: interactive web maps, dashboards and map-based tools for businesses and government. Pricing: $95–$125/hr; Starter map $350; custom dashboard or tool $1,500–$5,000; data pipelines from $5,000; custom quotes by call, including integrations that connect maps to existing systems (CRM, permitting, asset or work-order systems, databases, APIs and data syncs). Optional monthly hosting add-on: Starter map $50/mo, dashboard or tool from $150/mo, pipelines from $400/mo; setup included when we build it; includes monitoring, backups, security updates and cloud costs up to a set limit, usage above billed at cost plus a small margin; 10% off annual hosting. Founded by Christopher Knight, GIS & Data Engineer.
 
 ## Pages
-- [Home](https://knightchrism.github.io/)
-- [Services & pricing](https://knightchrism.github.io/services.html)
-- [Work samples](https://knightchrism.github.io/work.html)
-- [About](https://knightchrism.github.io/about.html)
-- [Contact](https://knightchrism.github.io/contact.html): geoknight0015@gmail.com
-- [Careers](https://knightchrism.github.io/careers.html): hiring cloud & DevOps / IT talent (email a resume) and seeking partners in drone/UAV imagery, 3D and reality capture, digital twins, LiDAR, 3D visualization, field apps, IoT and AI imagery analysis
-- [Resume](https://knightchrism.github.io/resume.html)
+- [Home](https://geoknightgis.com/)
+- [Services & pricing](https://geoknightgis.com/services.html)
+- [Work samples](https://geoknightgis.com/work.html)
+- [About](https://geoknightgis.com/about.html)
+- [Contact](https://geoknightgis.com/contact.html): geoknight0015@gmail.com
+- [Careers](https://geoknightgis.com/careers.html): hiring cloud & DevOps / IT talent (email a resume) and seeking partners in drone/UAV imagery, 3D and reality capture, digital twins, LiDAR, 3D visualization, field apps, IoT and AI imagery analysis
+- [Resume](https://geoknightgis.com/resume.html)
 
 ## Notes
 - The Water-Monitoring Data Quality Check uses public SJRWMD open data and is not affiliated with or endorsed by SJRWMD.
