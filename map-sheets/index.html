@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org http://127.0.0.1:8095 http://localhost:8095; connect-src 'self' http://127.0.0.1:8095 http://localhost:8095; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org http://127.0.0.1:8095 http://localhost:8095; connect-src 'self' http://127.0.0.1:8095 http://localhost:8095; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <title>Instant topographic map sheets | GeoKnight GIS</title>
 <meta name="description" content="TLM 50-style 1:50,000 topographic map sheets for any 15-minute quad in the contiguous US: fully vector, automatic label placement, built from official public data.">
 <link rel="canonical" href="https://knightchrism.github.io/map-sheets/">
@@ -19,20 +19,21 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="stylesheet" href="../styles.css?v=20261101feat">
 <link rel="stylesheet" href="../assets/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="sheets.css?v=1">
+<link rel="stylesheet" href="sheets.css?v=2">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav"><div class="wrap navin">
 <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
-<nav aria-label="Main"><a href="../services.html">Services</a><a href="../work.html">Work</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../careers.html">Careers</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+<nav aria-label="Main"><a href="./" aria-current="page" class="navnew">Map Sheets <span class="newbadge">New</span></a><a href="../services.html">Services</a><a href="../work.html">Work</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../careers.html">Careers</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
 </div></header>
 <main id="main">
 <section class="hero ms-hero"><div class="wrap ms-heroin">
 <div class="herotext"><p class="eyebrow gold">Featured service · GeoKnight GIS</p>
 <h1>Instant topographic map sheets for anywhere in the US.</h1>
 <p class="lead">Pick a point. Get a TLM 50-style 1:50,000 map sheet of that 15′ quad: contours, water, roads, railways, power lines, woodland and hundreds of names, placed automatically and delivered as a print-ready vector PDF.</p>
-<div class="cta"><a class="btn" href="#live">Try it live</a><a class="btn btn-ghost" href="#gallery">See sample sheets</a></div></div>
+<div class="cta"><a class="btn" href="#live">Try it live</a><a class="btn btn-ghost" href="#gallery">See sample sheets</a></div>
+<div class="vslot vslot-hero" data-video="hero" data-poster="img/idaho-springs-detail.webp" data-label="Map sheet service overview"></div></div>
 <a class="ms-herosheet" href="img/idaho-springs.webp"><img src="img/idaho-springs.webp" alt="GeoKnight GIS 1:50,000 sheet GK50-39105-C3, Idaho Springs, Colorado" width="900" height="1184"></a>
 </div></section>
 
@@ -58,13 +59,20 @@
 <figcaption><b>Adair, IA</b> · GK50-41094-B3<br><span class="muted small">Rolling farmland: section roads, streams and small towns.</span></figcaption></figure>
 </div></div></section>
 
+<section class="band alt" id="watch"><div class="wrap"><p class="eyebrow">Watch how it works</p><h2>See a sheet come together</h2>
+<div class="ms-watch">
+<figure><div class="vslot" data-video="watch1" data-poster="img/jacksonville-detail.webp" data-label="Pick a point on the map"></div><figcaption><b>1 · Pick a point</b><span class="muted small">Click the map or search a place.</span></figcaption></figure>
+<figure><div class="vslot" data-video="watch2" data-poster="img/adair-detail.webp" data-label="The sheet builds"></div><figcaption><b>2 · It builds</b><span class="muted small">Data, contours, labels and margin, automatically.</span></figcaption></figure>
+<figure><div class="vslot" data-video="watch3" data-poster="img/idaho-springs-detail.webp" data-label="Zooming into the finished PDF"></div><figcaption><b>3 · Zoom the PDF</b><span class="muted small">Crisp vector detail at any size.</span></figcaption></figure>
+</div></div></section>
+
 <section class="band" id="how"><div class="wrap"><p class="eyebrow">How it works</p><h2>From a click to a finished sheet</h2>
 <ol class="ms-steps">
-<li><b>Locate.</b> Your point is matched to its 15′ quad and given a sheet number (GK50-LLOOO-RC), UTM zone and adjoining sheets.</li>
-<li><b>Fetch.</b> Official public data for the quad is downloaded politely and cached: roads, water, elevation, names, land cover.</li>
-<li><b>Generalise.</b> Roads are simplified for 1:50,000, contours traced at an interval chosen from the relief, declination computed for today.</li>
-<li><b>Label.</b> The Rust engine places every name at once, avoiding overlaps, then runs quality checks.</li>
-<li><b>Render.</b> A vector PDF and SVG plus a PNG preview, with full margin information.</li>
+<li><div class="vslot vslot-step" data-video="step1" data-poster="img/jacksonville-thumb.webp" data-label="Step 1: Locate"></div><b>Locate.</b> Your point is matched to its 15′ quad and given a sheet number (GK50-LLOOO-RC), UTM zone and adjoining sheets.</li>
+<li><div class="vslot vslot-step" data-video="step2" data-poster="img/adair-thumb.webp" data-label="Step 2: Fetch"></div><b>Fetch.</b> Official public data for the quad is downloaded politely and cached: roads, water, elevation, names, land cover.</li>
+<li><div class="vslot vslot-step" data-video="step3" data-poster="img/idaho-springs-thumb.webp" data-label="Step 3: Generalise"></div><b>Generalise.</b> Roads are simplified for 1:50,000, contours traced at an interval chosen from the relief, declination computed for today.</li>
+<li><div class="vslot vslot-step" data-video="step4" data-poster="img/jacksonville-thumb.webp" data-label="Step 4: Label"></div><b>Label.</b> The Rust engine places every name at once, avoiding overlaps, then runs quality checks.</li>
+<li><div class="vslot vslot-step" data-video="step5" data-poster="img/adair-thumb.webp" data-label="Step 5: Render"></div><b>Render.</b> A vector PDF and SVG plus a PNG preview, with full margin information.</li>
 </ol></div></section>
 
 <section class="band navy" id="live"><div class="wrap"><p class="eyebrow gold">Live demo</p><h2>Get your own sheet</h2>
@@ -107,6 +115,8 @@
 <script src="../assets/js/year.js" defer></script>
 <script src="../assets/js/nav.js" defer></script>
 <script src="../assets/vendor/leaflet/leaflet.js"></script>
+<script src="videos.js?v=1"></script>
+<script src="video-slots.js?v=1"></script>
 <script src="config.js?v=1"></script>
 <script src="app.js?v=1"></script>
 </body>
