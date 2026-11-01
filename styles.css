@@ -182,3 +182,10 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 
 /* More work row: four cards on desktop */
 @media (min-width:901px){.grid3.more-row{grid-template-columns:repeat(4,1fr)}}
+.featbar{background:linear-gradient(90deg,#132d52,#0b1f3a);color:#e8eef8;border-bottom:1px solid rgba(201,162,39,.5);font-size:.95rem}
+.featbar[hidden]{display:none}
+.featbar-in{display:flex;align-items:center;gap:12px;min-height:44px;padding-top:6px;padding-bottom:6px}
+.featbar-tag{flex:none;background:var(--gold);color:var(--navy);font-weight:800;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.featbar a.featbar-link{color:#fff;text-decoration:none;flex:1;min-width:0}.featbar a.featbar-link:hover{color:var(--gold2)}
+.featbar a.featbar-link b{color:var(--gold2);white-space:nowrap}
+.featbar-x{flex:none;background:none;border:0;color:#cdd7e6;font-size:1.4rem;line-height:1;cursor:pointer;padding:4px 8px;border-radius:6px}.featbar-x:hover{color:#fff;background:rgba(255,255,255,.08)}
