@@ -42,3 +42,14 @@
 .ms-watch figure{margin:0}.ms-watch figcaption{display:flex;flex-direction:column;margin-top:10px}.ms-watch figcaption b{color:var(--navy)}
 .vslot-step{margin-bottom:10px;border-radius:8px}.vslot-step .vslot-soon{font-size:.7rem;padding:4px 10px}
 @media (max-width:900px){.ms-watch{grid-template-columns:1fr}}
+/* access lock */
+.ms-lock{display:grid;gap:.5rem;padding:.75rem;border:1px solid #e3c766;border-radius:8px;background:#fff8e1}
+.ms-lock [hidden],.ms-row[hidden]{display:none!important}
+.ms-lockstate{margin:0;color:#5c4a00}
+.ms-lockstate.ok{color:#1d5e2c}
+.ms-lockstate.err .ms-lockmsg{color:#a3261b;font-weight:600}
+.ms-lock:has(.ms-lockstate.ok){border-color:#9cc9a6;background:#eef8f0}
+.ms-lockicon{font-size:1.05em}
+.ms-lock input[type=password]{flex:1;min-width:0}
+#ms-relock{justify-self:start}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

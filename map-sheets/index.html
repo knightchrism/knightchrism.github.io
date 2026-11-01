@@ -81,6 +81,10 @@
 <div class="ms-live">
 <div class="ms-mapwrap"><div id="ms-map" class="ms-map" role="application" aria-label="Map: click to pick a point"></div></div>
 <div class="ms-panel card">
+<form id="ms-lock" class="ms-lock" autocomplete="on"><p id="ms-lockstate" class="ms-lockstate small" aria-live="polite"><span class="ms-lockicon" aria-hidden="true">&#128274;</span> <b>Locked — password required</b> to build new sheets. Sheets already built still open.</p>
+<input type="text" name="username" value="map-sheets" autocomplete="username" hidden>
+<div class="ms-row" id="ms-lockrow"><label for="ms-pw" class="visually-hidden">Password</label><input id="ms-pw" name="password" type="password" autocomplete="current-password" placeholder="Password" required><button id="ms-unlock" class="btn btn-sm" type="submit">Unlock</button></div>
+<button id="ms-relock" class="btn btn-sm btn-ghost" type="button" hidden>Lock</button></form>
 <form id="ms-search" class="ms-search"><label for="ms-place" class="small">Place (US city, town or landmark)</label>
 <div class="ms-row"><input id="ms-place" name="place" type="text" placeholder="e.g. Idaho Springs, CO" autocomplete="off"><button class="btn btn-sm" type="submit">Build</button></div></form>
 <p id="ms-pick" class="small ms-pick">No point picked yet. Click the map.</p>

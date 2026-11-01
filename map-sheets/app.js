@@ -16,11 +16,42 @@
       var d = b && b.detail; throw new Error(typeof d === "string" ? d : "service error " + r.status);
     });
   }
+  // access token for building new sheets (sessionStorage only; cleared on 401 or expiry)
+  var TK = "gkSheetsToken";
+  function token() {
+    try {
+      var t = JSON.parse(sessionStorage.getItem(TK) || "null");
+      if (t && t.exp * 1000 > Date.now() + 5000) return t.token;
+      sessionStorage.removeItem(TK);
+    } catch (e) {}
+    return null;
+  }
+  function lockUI(msg, err) {
+    var ok = !!token(), st = $("ms-lockstate");
+    st.className = "ms-lockstate small" + (ok ? " ok" : "") + (err ? " err" : "");
+    st.innerHTML = ok ? '<span class="ms-lockicon" aria-hidden="true">&#128275;</span> <b>Unlocked</b> — you can build new sheets.'
+                      : '<span class="ms-lockicon" aria-hidden="true">&#128274;</span> <b>Locked — password required</b> to build new sheets. Sheets already built still open.';
+    if (msg) { var m = document.createElement("span"); m.className = "ms-lockmsg"; m.textContent = " " + msg; st.appendChild(m); }
+    $("ms-lockrow").hidden = ok; $("ms-relock").hidden = !ok;
+  }
+  function relock(msg) { try { sessionStorage.removeItem(TK); } catch (e) {} lockUI(msg, !!msg); }
+  $("ms-lock").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var pw = $("ms-pw"), b = $("ms-unlock"); if (!pw.value) return;
+    b.disabled = true;
+    fetchT(API + "/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw.value }) })
+      .then(function (r) { return r.ok ? r.json() : apiErr(r); })
+      .then(function (j) { sessionStorage.setItem(TK, JSON.stringify({ token: j.token, exp: j.expires })); pw.value = ""; lockUI(); })
+      .catch(function (err) { pw.value = ""; lockUI(err.message === "wrong password" ? "Wrong password." : err.message, true); })
+      .finally(function () { b.disabled = false; });
+  });
+  $("ms-relock").addEventListener("click", function () { relock(); });
+
   function offline() {
     $("ms-offline").hidden = false;
     document.querySelector(".ms-live").classList.add("off");
     $("ms-go").disabled = true;
-    document.querySelectorAll("#ms-search input, #ms-search button").forEach(function (e) { e.disabled = true; });
+    document.querySelectorAll("#ms-search input, #ms-search button, #ms-lock input, #ms-lock button").forEach(function (e) { e.disabled = true; });
   }
 
   // map
@@ -44,8 +75,14 @@
   function start(body) {
     busy = true; $("ms-go").disabled = true; $("ms-result").hidden = true; $("ms-log").hidden = true;
     status("Sending request…");
-    fetchT(API + "/api/sheets", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-      .then(function (r) { return r.ok ? r.json() : apiErr(r); })
+    var h = { "Content-Type": "application/json" }, t = token();
+    if (t) h.Authorization = "Bearer " + t;
+    fetchT(API + "/api/sheets", { method: "POST", headers: h, body: JSON.stringify(body) })
+      .then(function (r) {
+        if (r.status === 401) { relock(t ? "Session expired — unlock again." : "This sheet isn't built yet — unlock to build it."); $("ms-pw").focus(); }
+        if (r.status === 403) lockUI("Building new sheets is turned off on this server.", true);
+        return r.ok ? r.json() : apiErr(r);
+      })
       .then(poll).catch(fail);
   }
   function poll(j) {
@@ -74,6 +111,6 @@
   });
 
   fetchT(API + "/api/health", {}, C.HEALTH_TIMEOUT_MS || 3000)
-    .then(function (r) { if (!r.ok) throw new Error(); status("Service online. Pick a point or search."); })
+    .then(function (r) { if (!r.ok) throw new Error(); status("Service online. Pick a point or search."); lockUI(); })
     .catch(offline);
 })();
