@@ -169,3 +169,13 @@ h3{font-size:1.125rem;line-height:1.3;font-weight:700;margin:0 0 var(--s1)}
 @media (max-width:640px){.band{padding:var(--s6) 0}.hero,.hero.fl{padding:var(--s6) 0 var(--s5)}.wrap{padding:0 var(--s3)}
 h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work .pad{padding:var(--s3)}.rate{padding:var(--s3)}
 .cta{margin-top:var(--s3)}.btn{padding:16px 20px}}
+/* careers */
+.careers{align-items:start}.careers h2{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);margin-bottom:var(--s2)}.careers .tags{margin:var(--s3) 0 var(--s2)}
+.careers .apply{border-top:4px solid var(--navy)}.careers .apply .btn{margin:var(--s1) 0}
+.careers .note{background:#fff7e0;border-left:4px solid var(--gold);padding:var(--s1) var(--s2);border-radius:6px;color:var(--ink)}
+@media (max-width:640px){.careers .apply .btn{display:block;text-align:center}}
+.partner-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s2) var(--s3)}
+.partner-list li{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:var(--s2) var(--s3)}
+.partner-list b{display:block;color:var(--navy);font-family:var(--display)}.partner-list span{color:var(--mu);font-size:.9375rem}
+.pagehead .cta{margin-top:var(--s3)}
+@media (max-width:640px){.partner-list{grid-template-columns:1fr}}

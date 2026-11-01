@@ -7,6 +7,7 @@
 - [Work samples](https://knightchrism.github.io/work.html)
 - [About](https://knightchrism.github.io/about.html)
 - [Contact](https://knightchrism.github.io/contact.html): geoknight0015@gmail.com
+- [Careers](https://knightchrism.github.io/careers.html): hiring cloud & DevOps / IT talent (email a resume) and seeking partners in drone/UAV imagery, 3D and reality capture, digital twins, LiDAR, 3D visualization, field apps, IoT and AI imagery analysis
 - [Resume](https://knightchrism.github.io/resume.html)
 
 ## Notes
