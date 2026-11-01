@@ -1,7 +1,7 @@
 <p align="center"><a href="https://knightchrism.github.io"><img src="favicon.svg" width="72" alt="GeoKnight GIS logo"></a></p>
 
 <h1 align="center">GeoKnight GIS</h1>
-<p align="center"><b>Accurate, trustworthy geospatial data — for less.</b><br>
+<p align="center"><b>Checked, documented geospatial data at small-business rates.</b><br>
 <a href="https://knightchrism.github.io">knightchrism.github.io</a> · Jacksonville, Florida</p>
 
 
