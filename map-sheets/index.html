@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https://tile.openstreetmap.org http://127.0.0.1:8095 http://localhost:8095; connect-src 'self' http://127.0.0.1:8095 http://localhost:8095; frame-src https://www.youtube-nocookie.com; media-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<title>Instant topographic map sheets | GeoKnight GIS</title>
+<meta name="description" content="TLM 50-style 1:50,000 topographic map sheets for any 15-minute quad in the contiguous US: fully vector, automatic label placement, built from official public data.">
+<link rel="canonical" href="https://knightchrism.github.io/map-sheets/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="Instant topographic map sheets | GeoKnight GIS">
+<meta property="og:description" content="TLM 50-style 1:50,000 map sheets for anywhere in the contiguous US, built automatically from official public data.">
+<meta property="og:url" content="https://knightchrism.github.io/map-sheets/">
+<meta property="og:image" content="https://knightchrism.github.io/map-sheets/img/idaho-springs.webp">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../styles.css?v=20261101merge">
+<link rel="stylesheet" href="../assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="sheets.css?v=2">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="./" aria-current="page" class="navnew">Map Sheets <span class="newbadge">New</span></a><a href="../services.html">Services</a><a href="../work.html">Work</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../careers.html">Careers</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
+<main id="main">
+<section class="hero ms-hero"><div class="wrap ms-heroin">
+<div class="herotext"><p class="eyebrow gold">Featured service · GeoKnight GIS</p>
+<h1>Instant topographic map sheets for anywhere in the US.</h1>
+<p class="lead">Pick a point. Get a TLM 50-style 1:50,000 map sheet of that 15′ quad: contours, water, roads, railways, power lines, woodland and hundreds of names, placed automatically and delivered as a print-ready vector PDF.</p>
+<div class="cta"><a class="btn" href="#live">Try it live</a><a class="btn btn-ghost" href="#gallery">See sample sheets</a></div>
+<div class="vslot vslot-hero" data-video="hero" data-poster="img/idaho-springs-detail.webp" data-label="Map sheet service overview"></div></div>
+<a class="ms-herosheet" href="img/idaho-springs.webp"><img src="img/idaho-springs.webp" alt="GeoKnight GIS 1:50,000 sheet GK50-39105-C3, Idaho Springs, Colorado" width="900" height="1184"></a>
+</div></section>
+
+<section class="band" id="what"><div class="wrap"><p class="eyebrow">What it is</p><h2>A full map sheet, not a screenshot</h2>
+<div class="grid4 build">
+<article class="card bx"><h3>TLM 50-style 1:50,000</h3><p>Classic topographic sheet layout: UTM grid, graticule ticks, adjoining-sheet diagram, magnetic declination for the date, elevation guide and full legend.</p></article>
+<article class="card bx"><h3>Fully vector</h3><p>Every line and letter is vector in the PDF and SVG, so it prints sharp at any size. A PNG preview comes with it.</p></article>
+<article class="card bx"><h3>Automatic label placement</h3><p>Hundreds of names placed at once with no overlaps: curved along rivers and roads, checked by built-in quality control.</p></article>
+<article class="card bx"><h3>Official public data</h3><p>U.S. Census TIGER/Line, USGS 3DEP elevation, NHD and GNIS, MRLC land cover, NOAA magnetic model, plus OpenStreetMap power lines.</p></article>
+</div></div></section>
+
+<section class="band alt" id="gallery"><div class="wrap"><p class="eyebrow">Sample sheets</p><h2>Three very different places, one process</h2>
+<p class="muted">Click a sheet for the full page, or a detail panel to see the map at print scale.</p>
+<div class="ms-gallery">
+<figure class="card ms-sheet"><a href="img/jacksonville.webp"><img src="img/jacksonville-thumb.webp" alt="Sheet GK50-30081-B3, Jacksonville, Florida" width="420" height="553" loading="lazy"></a>
+<a class="ms-detail" href="img/jacksonville-detail.webp"><img src="img/jacksonville-detail.webp" alt="Detail: St. Johns and Trout rivers, Jacksonville, at print scale" width="700" height="460" loading="lazy"></a>
+<figcaption><b>Jacksonville, FL</b> · GK50-30081-B3<br><span class="muted small">Flat coastal city: dense roads, rivers and marsh, 5 m contours.</span></figcaption></figure>
+<figure class="card ms-sheet"><a href="img/idaho-springs.webp"><img src="img/idaho-springs-thumb.webp" alt="Sheet GK50-39105-C3, Idaho Springs, Colorado" width="420" height="553" loading="lazy"></a>
+<a class="ms-detail" href="img/idaho-springs-detail.webp"><img src="img/idaho-springs-detail.webp" alt="Detail: peaks and lakes near Idaho Springs at print scale" width="700" height="460" loading="lazy"></a>
+<figcaption><b>Idaho Springs, CO</b> · GK50-39105-C3<br><span class="muted small">Rocky Mountains: 2,277–4,340 m of relief, 20 m contours.</span></figcaption></figure>
+<figure class="card ms-sheet"><a href="img/adair.webp"><img src="img/adair-thumb.webp" alt="Sheet GK50-41094-B3, Adair, Iowa" width="420" height="553" loading="lazy"></a>
+<a class="ms-detail" href="img/adair-detail.webp"><img src="img/adair-detail.webp" alt="Detail: farmland and streams near Adair at print scale" width="700" height="460" loading="lazy"></a>
+<figcaption><b>Adair, IA</b> · GK50-41094-B3<br><span class="muted small">Rolling farmland: section roads, streams and small towns.</span></figcaption></figure>
+</div></div></section>
+
+<section class="band alt" id="watch"><div class="wrap"><p class="eyebrow">Watch how it works</p><h2>See a sheet come together</h2>
+<div class="ms-watch">
+<figure><div class="vslot" data-video="watch1" data-poster="img/jacksonville-detail.webp" data-label="Pick a point on the map"></div><figcaption><b>1 · Pick a point</b><span class="muted small">Click the map or search a place.</span></figcaption></figure>
+<figure><div class="vslot" data-video="watch2" data-poster="img/adair-detail.webp" data-label="The sheet builds"></div><figcaption><b>2 · It builds</b><span class="muted small">Data, contours, labels and margin, automatically.</span></figcaption></figure>
+<figure><div class="vslot" data-video="watch3" data-poster="img/idaho-springs-detail.webp" data-label="Zooming into the finished PDF"></div><figcaption><b>3 · Zoom the PDF</b><span class="muted small">Crisp vector detail at any size.</span></figcaption></figure>
+</div></div></section>
+
+<section class="band" id="how"><div class="wrap"><p class="eyebrow">How it works</p><h2>From a click to a finished sheet</h2>
+<ol class="ms-steps">
+<li><div class="vslot vslot-step" data-video="step1" data-poster="img/jacksonville-thumb.webp" data-label="Step 1: Locate"></div><b>Locate.</b> Your point is matched to its 15′ quad and given a sheet number (GK50-LLOOO-RC), UTM zone and adjoining sheets.</li>
+<li><div class="vslot vslot-step" data-video="step2" data-poster="img/adair-thumb.webp" data-label="Step 2: Fetch"></div><b>Fetch.</b> Official public data for the quad is downloaded politely and cached: roads, water, elevation, names, land cover.</li>
+<li><div class="vslot vslot-step" data-video="step3" data-poster="img/idaho-springs-thumb.webp" data-label="Step 3: Generalise"></div><b>Generalise.</b> Roads are simplified for 1:50,000, contours traced at an interval chosen from the relief, declination computed for today.</li>
+<li><div class="vslot vslot-step" data-video="step4" data-poster="img/jacksonville-thumb.webp" data-label="Step 4: Label"></div><b>Label.</b> The Rust engine places every name at once, avoiding overlaps, then runs quality checks.</li>
+<li><div class="vslot vslot-step" data-video="step5" data-poster="img/adair-thumb.webp" data-label="Step 5: Render"></div><b>Render.</b> A vector PDF and SVG plus a PNG preview, with full margin information.</li>
+</ol></div></section>
+
+<section class="band navy" id="live"><div class="wrap"><p class="eyebrow gold">Live demo</p><h2>Get your own sheet</h2>
+<p>Click anywhere in the contiguous US, or search for a place. A new area takes a few minutes (data downloads); areas already built return instantly.</p>
+<div id="ms-offline" class="ms-offline" hidden><b>Live demo coming soon.</b> The sheet service isn't reachable right now. Meanwhile, browse the <a href="#gallery">sample sheets</a> or the <a href="https://github.com/knightchrism/rustgis-label" rel="noopener noreferrer">source code</a>.</div>
+<div class="ms-live">
+<div class="ms-mapwrap"><div id="ms-map" class="ms-map" role="application" aria-label="Map: click to pick a point"></div></div>
+<div class="ms-panel card">
+<form id="ms-lock" class="ms-lock" autocomplete="on"><p id="ms-lockstate" class="ms-lockstate small" aria-live="polite"><span class="ms-lockicon" aria-hidden="true">&#128274;</span> <b>Locked — password required</b> to build new sheets. Sheets already built still open.</p>
+<input type="text" name="username" value="map-sheets" autocomplete="username" hidden>
+<div class="ms-row" id="ms-lockrow"><label for="ms-pw" class="visually-hidden">Password</label><input id="ms-pw" name="password" type="password" autocomplete="current-password" placeholder="Password" required><button id="ms-unlock" class="btn btn-sm" type="submit">Unlock</button></div>
+<button id="ms-relock" class="btn btn-sm btn-ghost" type="button" hidden>Lock</button></form>
+<form id="ms-search" class="ms-search"><label for="ms-place" class="small">Place (US city, town or landmark)</label>
+<div class="ms-row"><input id="ms-place" name="place" type="text" placeholder="e.g. Idaho Springs, CO" autocomplete="off"><button class="btn btn-sm" type="submit">Build</button></div></form>
+<p id="ms-pick" class="small ms-pick">No point picked yet. Click the map.</p>
+<button id="ms-go" class="btn" type="button" disabled>Build this sheet</button>
+<div id="ms-status" class="ms-status small" aria-live="polite"></div>
+<pre id="ms-log" class="ms-log" hidden></pre>
+<div id="ms-result" class="ms-result" hidden><a id="ms-png" href="#"><img id="ms-img" alt="Preview of your map sheet"></a>
+<p><a id="ms-pdf" class="btn btn-sm" href="#">Download PDF</a> <a id="ms-pnglink" class="btn btn-sm btn-ghost" href="#">Full PNG</a></p></div>
+</div></div>
+<p class="small ms-tilecredit">Basemap © <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer">OpenStreetMap</a> contributors. Fair use: one sheet at a time; requests are rate-limited.</p>
+</div></section>
+
+<section class="band" id="about-tool"><div class="wrap ms-two">
+<div><p class="eyebrow">Open source</p><h2>Built in the open</h2>
+<p>The engine is <a href="https://github.com/knightchrism/rustgis-label" rel="noopener noreferrer">rustgis-label</a> (MIT OR Apache-2.0): Rust label placement and rendering with Python data preparation. Need sheets for your area, a different scale or your own data on the map? <a href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a>.</p>
+<p class="small muted">Built by GeoKnight GIS with AI coding assistance; designs, data choices and outputs are reviewed by a person.</p></div>
+<div><p class="eyebrow">Credits</p><ul class="small ms-credits">
+<li>U.S. Census Bureau TIGER/Line 2024 (roads, rail, water, places, counties)</li>
+<li>USGS 3D Elevation Program, National Hydrography Dataset and GNIS (The National Map)</li>
+<li>MRLC NLCD 2021 land cover · NOAA/NCEI World Magnetic Model WMM2025</li>
+<li>Power lines and basemap © OpenStreetMap contributors, ODbL 1.0 (power lines via Geofabrik extracts)</li>
+<li>Fonts: Barlow Semi Condensed and Noto Serif, SIL Open Font License 1.1</li>
+<li>Symbology adapted from DGIWG STD-252-3, CC BY 4.0 · Map library: Leaflet (BSD-2-Clause)</li>
+</ul></div></div>
+<div class="wrap"><p class="small muted ms-disclaimer"><b>Disclaimer:</b> sheets are generated automatically and are not field-checked. For reference only: not for navigation, survey or legal boundaries. No warranty of any kind. Not an official government map.</p></div></section>
+</main>
+<footer class="foot"><div class="wrap footin">
+<nav aria-label="Footer"><a href="../services.html">Services</a><a href="../work.html">Work</a><a href="../about.html">About</a><a href="../resume.html">Resume</a><a href="../contact.html">Contact</a><a href="../careers.html">Careers</a><a href="../careers.html#partner">Partner with us</a></nav>
+<nav aria-label="Legal"><a href="../privacy.html">Privacy</a><a href="../security.html">Data security</a><a href="../terms.html">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="../assets/js/year.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
+<script src="../assets/vendor/leaflet/leaflet.js"></script>
+<script src="videos.js?v=1"></script>
+<script src="video-slots.js?v=1"></script>
+<script src="config.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
