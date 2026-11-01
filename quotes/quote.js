@@ -26,6 +26,7 @@
     var list=function(el,arr){(arr||[]).forEach(function(s){var li=document.createElement("li");li.textContent=s;el.append(li)})};
     if(q.hosting){$("q-host").hidden=false;txt("q-host-l",q.hosting.label);txt("q-host-p",q.hosting.price);list($("q-host-n"),q.hosting.notes)}
     list($("q-terms"),q.terms);
+    if(q.policy&&q.policy.length){var pl=$("q-policy-l");q.policy.forEach(function(r){var dt=document.createElement("dt");dt.textContent=r[0];var dd=document.createElement("dd");dd.textContent=r[1];var w=document.createElement("div");w.append(dt,dd);pl.append(w)});$("q-policy").hidden=false}
     var cur=Math.max(1,Math.min(6,parseInt(q.status,10)||1)),ol=$("q-steps");
     STEPS.forEach(function(s,i){
       var n=i+1,li=document.createElement("li");

@@ -16,5 +16,6 @@ Edit `quotes/data/<id>.json`:
 - `status`: 1 Request · 2 Discovery call · 3 Fixed quote · 4 50% deposit · 5 Build & review · 6 Delivery (the current step pulses gold; earlier steps are filled gold)
 - `updated`: the date shown as "Last updated"
 - `note`: an optional short status message (`""` hides it)
+- `policy`: the "Satisfaction & revisions" list of [heading, text] pairs (copy it from the sample; omit to hide)
 
 Commit and push. Pages updates within a minute or two.
