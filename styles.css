@@ -199,3 +199,10 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 .pricing .svc>.btn+.req{margin-top:0;padding-top:var(--s1)}
 .pricing .quote .btn-req,.pricing .dark .btn-req{color:#fff!important}
 .pricing .quote .btn-req:hover,.pricing .dark .btn-req:hover{color:var(--navy)!important}
+/* solid request buttons (override outline) */
+.btn-req{background:var(--gold);color:var(--navy)!important;border:2px solid var(--gold)}
+.svc .req .btn-req{padding:.75em 1.3em}
+.btn-req:hover,.pricing .quote .btn-req:hover{background:#b98f1f;border-color:#b98f1f;color:var(--navy)!important}
+.pricing .quote .btn-req{color:var(--navy)!important}
+.pricing .quote .btn-call{margin-top:auto;color:#fff!important;border-color:rgba(255,255,255,.6)}
+.pricing .quote .btn-call:hover{background:rgba(255,255,255,.1)}
