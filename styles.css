@@ -125,3 +125,11 @@ table{max-width:100%}
 @media (max-width:1000px){.grid4{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.grid4,.rate{grid-template-columns:1fr}.psr{grid-template-columns:1fr}.psr dt{padding-top:.4em}}
 @media (prefers-reduced-motion:reduce){.works .work,.shot img,.build .bx{transition:none}.works .work:hover,.build .bx:hover{transform:none}.work:hover .shot img{transform:none}}
+/* featured + more work */
+.featured{gap:28px}.featured .work h3{font-size:1.3rem}
+.demo-pill.priv{background:var(--navy);color:var(--gold2);border:1px solid var(--gold)}
+div.shot{cursor:default}
+.morehead{margin:2.2em 0 .8em;font-size:1.1rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mu)}
+.more-row .mini h3{font-size:1rem}.more-row .mini .pad{padding:14px 16px}.more-row .mini p{margin:.3em 0}.more-row .mini .tags{margin:.5em 0}
+.more-row .mini .shot img{aspect-ratio:16/7}
+@media (max-width:900px){.featured{grid-template-columns:1fr}}
