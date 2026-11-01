@@ -21,6 +21,7 @@ Website: https://knightchrism.github.io · [Book a call](https://cal.com/christo
 ## Work samples
 | Project | Description | Demo |
 |---|---|---|
+| [Nearest Hospital by Real Roads](https://github.com/knightchrism/nearest-hospital-demo) | Straight-line vs. drive-time nearest hospital across the St. Johns River; drop a pin and an agent ranks 11 hospitals by real road travel time (OSM, OSRM, Leaflet). | [Live demo](https://knightchrism.github.io/nearest-hospital-demo/) |
 | [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records, addresses and FEMA flood zones in PostGIS, on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
 | [Water-Monitoring Data Quality Check](https://github.com/knightchrism/sjrwmd-geodata-qc) | Automatic quality checks on publicly available SJRWMD groundwater-station open data. Not affiliated with or endorsed by SJRWMD. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
 | [census-pipeline](https://github.com/knightchrism/census-pipeline) | Florida market-analysis pipeline: Census ACS → DuckDB → tested dbt models → governed metrics. | |
