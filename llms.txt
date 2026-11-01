@@ -1,5 +1,5 @@
 # GeoKnight GIS
-> GeoKnight GIS (GeoKnight Geospatial Information Services), based in Jacksonville, Florida and serving clients anywhere, builds custom maps, dashboards and spatial data solutions for businesses and government. Pricing: $95–$125/hr; Starter map $350; custom dashboard or tool $1,500–$5,000; data pipelines / integrations from $5,000; custom quotes by call. Founded by Christopher Knight, GIS & Data Engineer.
+> GeoKnight GIS (GeoKnight Geospatial Information Services), based in Jacksonville, Florida and serving clients anywhere, builds custom GIS web applications: interactive web maps, dashboards and map-based tools for businesses and government. Pricing: $95–$125/hr; Starter map $350; custom dashboard or tool $1,500–$5,000; data pipelines / integrations from $5,000; custom quotes by call. Founded by Christopher Knight, GIS & Data Engineer.
 
 ## Pages
 - [Home](https://knightchrism.github.io/)

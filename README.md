@@ -5,7 +5,7 @@
 <a href="https://knightchrism.github.io">knightchrism.github.io</a> · Jacksonville, Florida</p>
 
 
-GeoKnight GIS builds custom maps, dashboards and spatial data solutions for businesses and government, anywhere. $95–$125/hr or fixed-price projects from $350. Founded by Christopher Knight, GIS & Data Engineer. Based in Jacksonville, FL, serving clients anywhere.
+GeoKnight GIS builds custom GIS web applications: interactive web maps, dashboards and map-based tools for businesses and government, anywhere. $95–$125/hr or fixed-price projects from $350. Founded by Christopher Knight, GIS & Data Engineer. Based in Jacksonville, FL, serving clients anywhere.
 
 Website: https://knightchrism.github.io · [Book a call](https://cal.com/christopher-uzhh5z) · geoknight0015@gmail.com · [LinkedIn](https://www.linkedin.com/in/christopher-knight-3225a2232/) · [X @geoknight0015](https://x.com/geoknight0015)
 
