@@ -31,3 +31,6 @@ Plain static HTML/CSS served by GitHub Pages from `main` (root).
 
 ## Hero (Oct 30, 2026)
 The home hero is the 3D night globe restored from the live site (MapLibre GL 5.24.0, vendored in `assets/globe/vendor/`; NASA GIBS Blue/Black Marble with a sun-based day/night blend, USGS imagery and live USGS feeds). Selected layers from the animated Florida hero are blended on top, geo-registered to the globe (`assets/globe/overlay.js`): Gulf Stream particles, flights, Cape launches, city-light twinkle and a gold scan sweep (illustrative). On screens under 640px a static poster image is shown instead. The previous animated Florida hero is shelved, unreferenced, in `shelved/florida-hero/`.
+
+## Request form (request.html)
+`request.html` posts to [Web3Forms](https://web3forms.com) (plain HTML POST, no inline JS; the CSP on that page allows `https://api.web3forms.com` for form-action/connect-src only). **Before it can deliver, Christopher must create a free Web3Forms access key using geoknight0015@gmail.com** and replace `YOUR_WEB3FORMS_KEY` in `request.html`. Successful submissions redirect to `request-thanks.html`. Pricing buttons link to `request.html?plan=...`; `assets/js/request.js` preselects the plan.
