@@ -182,6 +182,53 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 
 /* More work row: four cards on desktop */
 @media (min-width:901px){.grid3.more-row{grid-template-columns:repeat(4,1fr)}}
+.hosting{margin-top:var(--s6)}.hosting h3{margin:0 0 var(--s1)}
+.host-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:var(--s3) 0 var(--s2)}
+.host-plans h4{margin:0;color:var(--navy);font-family:var(--display)}.host-plans .price span{font-size:.55em;font-weight:500;color:var(--mu)}
+@media (max-width:760px){.host-plans{grid-template-columns:1fr}}
+.host-plans .allow{margin-top:var(--s2);font-size:.875rem;font-weight:600;color:var(--navy);border-top:1px solid var(--line);padding-top:var(--s1)}
+.policy-note{margin-top:var(--s4);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:var(--r);background:var(--alt);padding:var(--s2) var(--s3)}
+.policy-note summary{cursor:pointer;font-family:var(--display);font-weight:800;color:var(--navy);font-size:1.1rem}
+.policy-note ul{margin:var(--s2) 0 0;padding-left:20px;display:grid;gap:6px}
+.policy-note b{color:var(--navy)}
+.pricing .svc,.host-plans .svc{display:flex;flex-direction:column}
+.svc .req{margin-top:auto;padding-top:var(--s2)}
+.btn-req{display:block;width:100%;text-align:center;background:transparent;color:var(--navy)!important;border:2px solid var(--gold);padding:.65em 1em}
+.btn-req:hover{background:var(--gold);color:var(--navy)!important}
+.req-note{margin:var(--s2) 0 0}
+.pricing .svc>.btn+.req{margin-top:0;padding-top:var(--s1)}
+.pricing .quote .btn-req,.pricing .dark .btn-req{color:#fff!important}
+.pricing .quote .btn-req:hover,.pricing .dark .btn-req:hover{color:var(--navy)!important}
+/* solid request buttons (override outline) */
+.btn-req{background:var(--gold);color:var(--navy)!important;border:2px solid var(--gold)}
+.svc .req .btn-req{padding:.75em 1.3em}
+.btn-req:hover,.pricing .quote .btn-req:hover{background:#b98f1f;border-color:#b98f1f;color:var(--navy)!important}
+.pricing .quote .btn-req{color:var(--navy)!important}
+.pricing .quote .btn-call{margin-top:auto;color:#fff!important;border-color:rgba(255,255,255,.6)}
+.pricing .quote .btn-call:hover{background:rgba(255,255,255,.1)}
+.pricing .addon{margin:var(--s1) 0 0;font-size:.875rem;font-weight:600;color:var(--navy)}
+.pricing .quote .addon{color:var(--gold2)}
+.host-line{margin:var(--s1) 0 0;max-width:72ch}
+/* pricing footnotes: override the .band>.wrap>.muted intro offset (negative top margin caused overlap) */
+.pricing{align-items:stretch}.pricing>.svc{min-width:0}
+.band>.wrap>.req-note,.band>.wrap>.host-line{max-width:72ch;margin:var(--s2) 0 0}
+.band>.wrap>.pricing+.req-note{margin-top:var(--s4)}
+.band>.wrap>.host-line+.more,.band>.wrap>.req-note+.more{margin:var(--s3) 0 0;max-width:72ch}
+/* request form */
+.reqform{max-width:760px;padding:var(--s4)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3) var(--s3);margin:var(--s2) 0 var(--s4)}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0;margin:0}.field.full{grid-column:1/-1}
+.field label,.field legend{font-weight:600;color:var(--navy)}
+.field input[type=text],.field input[type=email],.field input[type=url],.field select,.field textarea{font:inherit;color:var(--ink);background:#fff;border:1px solid #c9d1dd;border-radius:10px;padding:.7em .85em;width:100%;box-sizing:border-box}
+.field textarea{resize:vertical;min-height:140px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid rgba(212,167,44,.45);outline-offset:1px;border-color:var(--gold)}
+fieldset.field{border:0;padding:0}.radios{display:flex;gap:var(--s3);flex-wrap:wrap}.radios label,.consent label{font-weight:400;color:var(--ink);display:flex;gap:8px;align-items:flex-start}
+.radios input,.consent input{accent-color:var(--gold);width:18px;height:18px;margin-top:3px;flex:none}
+.hint{margin:0;font-size:.875rem;color:var(--mu)}.req-legend{margin:0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.reqform .btn{border:0;cursor:pointer;font:inherit;font-weight:700}.alt-email{margin:var(--s2) 0 0}
+@media (max-width:640px){.fgrid{grid-template-columns:1fr}.reqform{padding:var(--s3)}}
 .featbar{background:linear-gradient(90deg,#132d52,#0b1f3a);color:#e8eef8;border-bottom:1px solid rgba(201,162,39,.5);font-size:.95rem}
 .featbar[hidden]{display:none}
 .featbar-in{display:flex;align-items:center;gap:12px;min-height:44px;padding-top:6px;padding-bottom:6px}
