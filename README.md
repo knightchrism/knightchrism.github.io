@@ -5,19 +5,18 @@
 <a href="https://knightchrism.github.io">knightchrism.github.io</a> · Jacksonville, Florida</p>
 
 
-GeoKnight GIS builds parcel dashboards, market-analysis maps and data pipelines, and enriches Florida parcels with roof-permit dates and flood zones for insurers, inspectors and investors. Fixed-price packages from $350. Founded by Christopher Knight, GIS & Data Engineer, Jacksonville, Florida.
+GeoKnight GIS builds custom GIS solutions for Florida businesses and local government: tailored maps, dashboards, data pipelines and 3D views, from address QC to parcel, roof-permit and flood-zone enrichment. $95–$125/hr or fixed-price projects from $350. Founded by Christopher Knight, GIS & Data Engineer, Jacksonville, Florida.
 
 Website: https://knightchrism.github.io · [Book a call](https://cal.com/christopher-uzhh5z) · geoknight0015@gmail.com · [LinkedIn](https://www.linkedin.com/in/christopher-knight-3225a2232/) · [X @geoknight0015](https://x.com/geoknight0015)
 
 ## Services
-| Package | Price |
+| Offer | Price |
 |---|---|
-| Data QC Audit | $350 |
-| Interactive Map | $750–1,500 |
-| Parcel Dashboard | $2,000–4,000 |
-| Florida roof-permit + flood-zone enrichment | Quote |
-| QC subcontracting | Project rate |
-| Address QC | Add-on only |
+| Base rate | $95–$125/hr |
+| Starter map | $350 |
+| Custom dashboard or tool | $1,500–$5,000 |
+| Data pipelines / integrations | from $5,000 |
+| Anything else | Custom quote ([book a call](https://cal.com/christopher-uzhh5z)) |
 
 ## Work samples
 | Project | Description | Demo |
