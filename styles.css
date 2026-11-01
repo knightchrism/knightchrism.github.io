@@ -206,3 +206,6 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 .pricing .quote .btn-req{color:var(--navy)!important}
 .pricing .quote .btn-call{margin-top:auto;color:#fff!important;border-color:rgba(255,255,255,.6)}
 .pricing .quote .btn-call:hover{background:rgba(255,255,255,.1)}
+.pricing .addon{margin:var(--s1) 0 0;font-size:.875rem;font-weight:600;color:var(--navy)}
+.pricing .quote .addon{color:var(--gold2)}
+.host-line{margin:var(--s1) 0 0;max-width:72ch}
