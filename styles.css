@@ -209,3 +209,8 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 .pricing .addon{margin:var(--s1) 0 0;font-size:.875rem;font-weight:600;color:var(--navy)}
 .pricing .quote .addon{color:var(--gold2)}
 .host-line{margin:var(--s1) 0 0;max-width:72ch}
+/* pricing footnotes: override the .band>.wrap>.muted intro offset (negative top margin caused overlap) */
+.pricing{align-items:stretch}.pricing>.svc{min-width:0}
+.band>.wrap>.req-note,.band>.wrap>.host-line{max-width:72ch;margin:var(--s2) 0 0}
+.band>.wrap>.pricing+.req-note{margin-top:var(--s4)}
+.band>.wrap>.host-line+.more,.band>.wrap>.req-note+.more{margin:var(--s3) 0 0;max-width:72ch}
