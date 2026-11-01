@@ -186,3 +186,4 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 .host-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:var(--s3) 0 var(--s2)}
 .host-plans h4{margin:0;color:var(--navy);font-family:var(--display)}.host-plans .price span{font-size:.55em;font-weight:500;color:var(--mu)}
 @media (max-width:760px){.host-plans{grid-template-columns:1fr}}
+.host-plans .allow{margin-top:var(--s2);font-size:.875rem;font-weight:600;color:var(--navy);border-top:1px solid var(--line);padding-top:var(--s1)}
