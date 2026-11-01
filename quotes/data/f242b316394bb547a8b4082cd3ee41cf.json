@@ -1,0 +1,27 @@
+{
+  "sample": true,
+  "number": "GK-2026-D014",
+  "title": "Custom GIS Dashboard",
+  "tier": "Dashboard / Tool",
+  "client": "Example Client Co.",
+  "issued": "November 1, 2026",
+  "valid_until": "December 1, 2026",
+  "timeline": "3–4 weeks",
+  "intro": "An interactive web dashboard with maps, filters and charts so your team can explore data on its own.",
+  "items": [
+    {"title": "Discovery & requirements", "desc": "Kickoff call, user goals, data inventory, wireframe of the dashboard layout.", "when": "Week 1", "amount": 400},
+    {"title": "Data preparation", "desc": "Cleaning, joining and geocoding source data; set up optimized map-ready layers.", "when": "Week 1–2", "amount": 700},
+    {"title": "Dashboard build", "desc": "Interactive map, filters, search, summary charts and pop-ups, styled to your brand.", "when": "Week 2–3", "amount": 1500},
+    {"title": "Testing & QA", "desc": "Cross-browser and mobile checks, data accuracy review, performance tuning.", "when": "Week 3", "amount": 350},
+    {"title": "Handoff & training", "desc": "Deployment, user guide, admin notes and a 45-minute walkthrough session.", "when": "Week 4", "amount": 250}
+  ],
+  "total": 3200,
+  "deposit": 1600,
+  "balance": 1600,
+  "hosting": {"label": "Managed hosting (optional)", "price": "From $150/mo, or from $1,620/yr billed annually (save 10%)", "notes": ["Covers monitoring, backups, security updates & cloud costs up to a set limit.", "Usage above the limit is billed at cost plus a small margin.", "Setup is included when GeoKnight builds the project."]},
+  "terms": ["50% deposit to begin; balance due on delivery.", "Includes 2 rounds of revisions on the agreed scope.", "You own all final deliverables, code and data outputs.", "Extra work beyond scope: $95–125/hr, approved in advance.", "Quote valid 30 days, through December 1, 2026."],
+  "pdf": "files/f242b316394bb547a8b4082cd3ee41cf.pdf",
+  "status": 4,
+  "updated": "November 1, 2026",
+  "note": "Sample only: deposit invoice sent; build starts once the deposit clears."
+}

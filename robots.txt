@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /quotes/
 Sitemap: https://knightchrism.github.io/sitemap.xml
