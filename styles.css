@@ -182,3 +182,7 @@ h1,.hero h1,.gl h1{font-size:2.25rem}h2{font-size:1.75rem}.card,.build .bx,.work
 
 /* More work row: four cards on desktop */
 @media (min-width:901px){.grid3.more-row{grid-template-columns:repeat(4,1fr)}}
+.hosting{margin-top:var(--s6)}.hosting h3{margin:0 0 var(--s1)}
+.host-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:var(--s3) 0 var(--s2)}
+.host-plans h4{margin:0;color:var(--navy);font-family:var(--display)}.host-plans .price span{font-size:.55em;font-weight:500;color:var(--mu)}
+@media (max-width:760px){.host-plans{grid-template-columns:1fr}}
