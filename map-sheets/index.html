@@ -19,7 +19,7 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="stylesheet" href="../styles.css?v=20261101merge">
 <link rel="stylesheet" href="../assets/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="sheets.css?v=2">
+<link rel="stylesheet" href="sheets.css?v=3">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -75,6 +75,23 @@
 <li><div class="vslot vslot-step" data-video="step5" data-poster="img/adair-thumb.webp" data-label="Step 5: Render"></div><b>Render.</b> A vector PDF and SVG plus a PNG preview, with full margin information.</li>
 </ol></div></section>
 
+<section class="band alt" id="knightvision"><div class="wrap"><p class="eyebrow">Quality check</p><h2>Every sheet inspected by KnightVision</h2>
+<p class="lead kv-lead">KnightVision is our automatic sheet inspection. Each build is scored the moment it finishes: crowded areas, labels that run into the map edge, sit on symbols or read awkwardly are flagged, and the flagged labels are re-placed in a second pass. The better layout is kept.</p>
+<div class="kv-grid">
+<figure class="card kv-check"><a href="img/knightvision-d1.webp"><img src="img/knightvision-d1.webp" alt="KnightVision check of sheet GK50-38077-D1, Washington: label density heatmap with crowded areas and flagged labels boxed" width="900" height="1184" loading="lazy"></a>
+<figcaption><b>A real check</b> · GK50-38077-D1, Washington<br><span class="muted small">Shading shows label density per square kilometre; boxes mark crowded areas and flagged labels.</span></figcaption></figure>
+<div class="kv-side">
+<ul class="kv-points">
+<li><b>Scored automatically.</b> Every sheet gets a quality score from label density, clipped or edge-touching names, symbol overlaps and readability.</li>
+<li><b>Fixed, not just flagged.</b> Problem spots are fed back and the labels there are placed again.</li>
+<li><b>Global label optimisation.</b> The engine places every label together for the best overall layout, instead of one at a time.</li>
+</ul>
+<div class="kv-ba">
+<figure class="card"><img src="img/labels-before.webp" alt="Labels before global optimisation, Washington detail" width="700" height="583" loading="lazy"><figcaption class="small"><b>Before</b> · one label at a time</figcaption></figure>
+<figure class="card"><img src="img/labels-after.webp" alt="Labels after global optimisation, same Washington detail" width="700" height="583" loading="lazy"><figcaption class="small"><b>After</b> · optimised together, checked by KnightVision</figcaption></figure>
+</div>
+<p class="small muted">AI vision review coming soon.</p>
+</div></div></div></section>
 <section class="band navy" id="live"><div class="wrap"><p class="eyebrow gold">Live demo</p><h2>Get your own sheet</h2>
 <p>Click anywhere in the contiguous US, or search for a place. A new area takes a few minutes (data downloads); areas already built return instantly.</p>
 <div id="ms-offline" class="ms-offline" hidden><b>Live demo coming soon.</b> The sheet service isn't reachable right now. Meanwhile, browse the <a href="#gallery">sample sheets</a>.</div>

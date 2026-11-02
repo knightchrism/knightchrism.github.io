@@ -53,3 +53,9 @@
 .ms-lock input[type=password]{flex:1;min-width:0}
 #ms-relock{justify-self:start}
 .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kv-lead{max-width:860px}
+.kv-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:32px;margin-top:24px;align-items:start}
+.kv-check{margin:0;padding:16px}.kv-check img{width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}.kv-check figcaption{margin-top:10px}
+.kv-points{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:14px}.kv-points li{padding-left:16px;border-left:3px solid var(--gold)}.kv-points b{color:var(--navy)}
+.kv-ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}.kv-ba figure{margin:0;padding:10px}.kv-ba img{width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}.kv-ba figcaption{margin-top:8px}
+@media (max-width:900px){.kv-grid,.kv-ba{grid-template-columns:1fr}}
