@@ -21,6 +21,7 @@ Website: https://knightchrism.github.io · [Book a call](https://cal.com/christo
 ## Work samples
 | Project | Description | Demo |
 |---|---|---|
+| [Duval Roof Globe](https://globe.geoknightgis.com) | 3D globe of Jacksonville single-family homes showing year built, last permitted reroof, and 30+ year 4-point flag. | [Live demo](https://globe.geoknightgis.com) |
 | [Nearest Hospital by Real Roads](https://github.com/knightchrism/nearest-hospital-demo) | Straight-line vs. drive-time nearest hospital across the St. Johns River; drop a pin and an agent ranks 11 hospitals by real road travel time (OSM, OSRM, Leaflet). | [Live demo](https://knightchrism.github.io/nearest-hospital-demo/) |
 | [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records, addresses and FEMA flood zones in PostGIS, on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
 | [Water-Monitoring Data Quality Check](https://github.com/knightchrism/sjrwmd-geodata-qc) | Automatic quality checks on publicly available SJRWMD groundwater-station open data. Not affiliated with or endorsed by SJRWMD. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
@@ -34,3 +35,7 @@ The home hero is the 3D night globe restored from the live site (MapLibre GL 5.2
 
 ## Request form (request.html)
 `request.html` posts to [Web3Forms](https://web3forms.com) (plain HTML POST, no inline JS; the CSP on that page allows `https://api.web3forms.com` for form-action/connect-src only). The Web3Forms public access key (tied to geoknight0015@gmail.com, where submissions are emailed) is set in `request.html`; it is designed to be public in HTML. To change it, create a new key at web3forms.com and replace the `access_key` value. Successful submissions redirect to `request-thanks.html`. Pricing buttons link to `request.html?plan=...`; `assets/js/request.js` preselects the plan.
+
+## Change log
+
+- 2026-11-01: Added Duval Roof Globe card (globe.geoknightgis.com) to homepage and work page, plus README row. AI-assisted; no secrets.
