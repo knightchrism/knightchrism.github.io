@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<title>Duval Roof Globe · Case study | GeoKnight GIS</title>
+<meta name="description" content="A 3D globe of Jacksonville single-family homes colored by years since the last permitted reroof, built from public city permits and the county property roll.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="Duval Roof Globe · Case study | GeoKnight GIS">
+<meta property="og:description" content="A 3D globe of Jacksonville single-family homes colored by years since the last permitted reroof, built from public city permits and the county property roll.">
+<meta property="og:url" content="https://geoknightgis.com/projects/roof-globe/">
+<meta property="og:image" content="https://geoknightgis.com/assets/img/og-geoknight.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GeoKnight GIS logo over a night-lights map of Florida. Custom GIS solutions: maps, dashboards, data pipelines.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@geoknight0015">
+<meta name="twitter:title" content="Duval Roof Globe · Case study | GeoKnight GIS">
+<meta name="twitter:description" content="A 3D globe of Jacksonville single-family homes colored by years since the last permitted reroof, built from public city permits and the county property roll.">
+<meta name="twitter:image" content="https://geoknightgis.com/assets/img/og-geoknight.png">
+<meta name="twitter:image:alt" content="GeoKnight GIS logo over a night-lights map of Florida. Custom GIS solutions: maps, dashboards, data pipelines.">
+<link rel="canonical" href="https://geoknightgis.com/projects/roof-globe/">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="../../styles.css?v=20261101req3">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="../../services.html">Services</a><a href="../../work.html" aria-current="page">Work</a><a href="../../about.html">About</a><a href="../../contact.html">Contact</a><a href="../../careers.html">Careers</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
+<main id="main">
+<section class="band pagehead"><div class="wrap"><p class="muted small"><a href="../../work.html">← All work</a> · Built in-house on public records</p><p class="eyebrow gold">Case study · Roof permits</p><h1>Duval Roof Globe</h1><p class="lead">A 3D globe of Jacksonville single-family homes, colored by how long ago each roof was last permitted for replacement, with a 30+ year 4-point flag.</p><p class="cta"><a class="btn" href="https://globe.geoknightgis.com" rel="noopener noreferrer">Live demo</a></p></div></section><section class="band"><div class="wrap prose"><h2>The problem</h2><p>Roofers, inspectors and insurers want to know which homes are due for a new roof. The answer is spread across two public systems that don&rsquo;t talk to each other: city building permits and the county property roll.</p><h2>How the data is built</h2><ul class="ticks"><li>Loads every City of Jacksonville roof permit since 2007 and the Duval County Property Appraiser certified roll and parcel maps.</li><li>Matches each permit to its parcel, keeps single-family homes in the city permit jurisdiction and finds the most recent permitted reroof.</li><li>Groups homes by years since that permit (0&ndash;5, 5&ndash;10, 10&ndash;15, 15+, or none on record) and flags homes 30+ years old.</li><li>Runs automatic checks on every rebuild, so problems are caught before anything is published.</li><li>Removes owner names, mailing addresses and records exempt from public disclosure before anything reaches the map.</li></ul><h2>What you get</h2><ul class="ticks"><li>A hosted globe your team can search, filter and print area or single-home reports from.</li><li>Route-ready lists sorted by roof age for a ZIP code or neighborhood.</li><li>The same build for another county, scoped as a data pipeline and hosting service.</li></ul><h2>By the numbers</h2><div class="stats"><div class="stat"><b>150,509</b><span>roof permits matched</span><small>City of Jacksonville permits, 2007 onward</small></div><div class="stat"><b>409,160</b><span>Duval parcels checked</span><small>2026 certified roll</small></div><div class="stat"><b>Weekly</b><span>refresh paused</span><small>Rebuilt on request</small></div></div><p class="built">Built with: PostgreSQL/PostGIS, Python, MapLibre 3D globe</p><p class="small muted disc">Unpermitted roof work is not captured. Screening estimate only: not an inspection or insurance advice. Sources and as-of dates: <a href="../../methods.html#roof-globe">Sources &amp; methods</a>.</p></div></section><section class="band navy" id="contact"><div class="wrap contact">
+<div><p class="eyebrow gold">Contact</p><h2>Tell me about your data.</h2>
+<p>Send a short note about your area, your data and what you need. I reply by email, usually within one business day, or you can book a call directly.</p></div>
+<div class="cta-stack"><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a>
+<a class="btn btn-ghost" href="mailto:info@geoknightgis.com">info@geoknightgis.com</a></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap footin">
+<div><a class="brand" href="../../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<p class="muted">Custom GIS solutions · Jacksonville, FL · Serving clients anywhere</p></div>
+<nav aria-label="Footer"><a href="../../services.html">Services</a><a href="../../work.html">Work</a><a href="../../about.html">About</a><a href="../../resume.html">Resume</a><a href="../../contact.html">Contact</a><a href="../../careers.html">Careers</a><a href="../../careers.html#partner">Partner with us</a></nav>
+<nav aria-label="Legal"><a href="../../privacy.html">Privacy</a><a href="../../security.html">Data security</a><a href="/methods.html">Sources &amp; methods</a><a href="/terms/">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="../../assets/js/year.js" defer></script>
+<script src="../../assets/js/nav.js" defer></script>
+</body>
+</html>

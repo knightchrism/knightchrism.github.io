@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'self'">
+<title>Sources &amp; methods | GeoKnight GIS</title>
+<meta name="description" content="Where the data on GeoKnight GIS maps comes from, how current it is, how it is checked, and what is never published.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GeoKnight GIS">
+<meta property="og:title" content="Sources &amp; methods | GeoKnight GIS">
+<meta property="og:description" content="Where the data on GeoKnight GIS maps comes from, how current it is, how it is checked, and what is never published.">
+<meta property="og:url" content="https://geoknightgis.com/methods.html">
+<meta property="og:image" content="https://geoknightgis.com/assets/img/og-geoknight.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GeoKnight GIS logo over a night-lights map of Florida. Custom GIS solutions: maps, dashboards, data pipelines.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@geoknight0015">
+<meta name="twitter:title" content="Sources &amp; methods | GeoKnight GIS">
+<meta name="twitter:description" content="Where the data on GeoKnight GIS maps comes from, how current it is, how it is checked, and what is never published.">
+<meta name="twitter:image" content="https://geoknightgis.com/assets/img/og-geoknight.png">
+<meta name="twitter:image:alt" content="GeoKnight GIS logo over a night-lights map of Florida. Custom GIS solutions: maps, dashboards, data pipelines.">
+<link rel="canonical" href="https://geoknightgis.com/methods.html">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=20261101req3">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="careers.html">Careers</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
+<main id="main">
+<section class="band pagehead"><div class="wrap"><p class="eyebrow gold">Sources &amp; methods</p><h1>How the data is built</h1><p class="lead">Every map and number on this site traces to a named public source and an as-of date. Records exempt from public disclosure under Florida law and owner contact details are removed before anything is published.</p></div></section><section class="band"><div class="wrap prose"><h2 id="roof-globe">Duval Roof Globe</h2><ul class="ticks"><li><b>Sources:</b> City of Jacksonville building permits (roof work, 2007 onward); Duval County Property Appraiser certified roll and parcel maps.</li><li><b>As of:</b> Permits loaded November 2026; parcels from the 2026 certified roll.</li><li><b>Refresh:</b> On request. Automated weekly updates are currently paused.</li><li><b>Method:</b> Permits are matched to parcels by parcel number, filtered to single-family homes in the city permit jurisdiction and bucketed by years since the last permitted reroof. Unpermitted work is not captured.</li></ul><p class="small"><a href="projects/roof-globe/">Case study</a></p><h2 id="jax-property">Jacksonville Property &amp; Flood Risk</h2><ul class="ticks"><li><b>Sources:</b> Duval County Property Appraiser tax roll, parcel maps and sales; FEMA National Flood Hazard Layer (Duval County).</li><li><b>As of:</b> Tax roll, parcels and sales certified 10-13-26.</li><li><b>Refresh:</b> Rebuilt when a new certified roll is published</li><li><b>Method:</b> Broken parcel shapes are repaired on a copy, addresses and ZIP codes are standardized, and each property is matched to the flood zones it touches. Automated checks run on every rebuild, so no record is lost quietly. The public map shows address and values only.</li></ul><p class="small"><a href="projects/jax-property/">Case study</a></p><h2 id="openatlas">OpenAtlas</h2><ul class="ticks"><li><b>Sources:</b> U.S. Census TIGER/Line 2024 boundaries; American Community Survey 5-year 2020&ndash;2024 estimates (seven Northeast Florida counties).</li><li><b>As of:</b> ACS 2020&ndash;2024 release.</li><li><b>Refresh:</b> Logged pipeline, rerun when the Census Bureau publishes a new release</li><li><b>Method:</b> Uploaded layers are checked, reprojected and labeled on arrival; synthetic sample layers are always marked as such.</li></ul><p class="small">Private prototype, demo on request</p><h2 id="sjrwmd">Water-management open data and QC</h2><ul class="ticks"><li><b>Sources:</b> St. Johns River Water Management District public map services (15 layers, including groundwater monitoring stations).</li><li><b>As of:</b> Harvested November 2026.</li><li><b>Refresh:</b> Rerun on request</li><li><b>Method:</b> Layers are copied untouched, then checked against adjustable quality rules; every finding is logged for review rather than silently fixed.</li></ul><p class="small"><a href="projects/sjrwmd-geodata-qc/">Case study</a></p><h2 id="census">Florida Market-Analysis Pipeline</h2><ul class="ticks"><li><b>Sources:</b> Census Bureau ACS 5-year estimates for all 67 Florida counties.</li><li><b>As of:</b> ACS 2020&ndash;2024 release.</li><li><b>Refresh:</b> Rerun per release</li><li><b>Method:</b> Margins of error are kept, and county totals are checked against the state.</li></ul><p class="small"><a href="projects/census-pipeline/">Case study</a></p><h2 id="map-sheets">1:50,000 map sheets</h2><ul class="ticks"><li><b>Sources:</b> OpenStreetMap contributors (ODbL) and public federal and county layers.</li><li><b>As of:</b> Stated on each sheet.</li><li><b>Refresh:</b> Per sheet</li><li><b>Method:</b> Labels are placed automatically and every sheet passes a built-in overlap and legibility check before export.</li></ul><p class="small"><a href="map-sheets/">Map sheets</a></p><h2 id="what-we-publish">What we publish and what we don't</h2><ul class="ticks"><li>We publish maps, summaries and screening estimates, not bulk copies of the underlying records.</li><li>Owner names, phone numbers and records exempt from public disclosure are excluded.</li><li>Estimates are for screening only: not a survey, inspection, appraisal or legal determination.</li><li>Pipelines and code are proprietary to GeoKnight GIS. We build and host them for clients as a service.</li></ul><p class="small muted disc">Public data is provided by its publishers &ldquo;as is&rdquo;. GeoKnight GIS is not affiliated with or endorsed by any agency named here. See the <a href="/terms/">Terms</a>.</p></div></section><section class="band navy" id="contact"><div class="wrap contact">
+<div><p class="eyebrow gold">Contact</p><h2>Tell me about your data.</h2>
+<p>Send a short note about your area, your data and what you need. I reply by email, usually within one business day, or you can book a call directly.</p></div>
+<div class="cta-stack"><a class="btn" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a>
+<a class="btn btn-ghost" href="mailto:info@geoknightgis.com">info@geoknightgis.com</a></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap footin">
+<div><a class="brand" href="index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<p class="muted">Custom GIS solutions · Jacksonville, FL · Serving clients anywhere</p></div>
+<nav aria-label="Footer"><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a><a href="careers.html">Careers</a><a href="careers.html#partner">Partner with us</a></nav>
+<nav aria-label="Legal"><a href="privacy.html">Privacy</a><a href="security.html">Data security</a><a href="/methods.html">Sources &amp; methods</a><a href="/terms/">Terms</a></nav>
+<p class="muted small">© <span id="yr">2026</span> GeoKnight GIS</p>
+</div></footer>
+<script src="assets/js/year.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+</body>
+</html>
