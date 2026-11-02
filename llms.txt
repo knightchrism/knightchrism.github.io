@@ -6,7 +6,7 @@
 - [Services & pricing](https://geoknightgis.com/services.html)
 - [Work samples](https://geoknightgis.com/work.html)
 - [About](https://geoknightgis.com/about.html)
-- [Contact](https://geoknightgis.com/contact.html): geoknight0015@gmail.com
+- [Contact](https://geoknightgis.com/contact.html): info@geoknightgis.com
 - [Careers](https://geoknightgis.com/careers.html): hiring cloud & DevOps / IT talent (email a resume) and seeking partners in drone/UAV imagery, 3D and reality capture, digital twins, LiDAR, 3D visualization, field apps, IoT and AI imagery analysis
 - [Resume](https://geoknightgis.com/resume.html)
 

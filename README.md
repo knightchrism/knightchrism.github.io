@@ -1,13 +1,13 @@
-<p align="center"><a href="https://knightchrism.github.io"><img src="favicon.svg" width="72" alt="GeoKnight GIS logo"></a></p>
+<p align="center"><a href="https://geoknightgis.com"><img src="favicon.svg" width="72" alt="GeoKnight GIS logo"></a></p>
 
 <h1 align="center">GeoKnight GIS</h1>
 <p align="center"><b>Checked, documented geospatial data at small-business rates.</b><br>
-<a href="https://knightchrism.github.io">knightchrism.github.io</a> · Jacksonville, Florida</p>
+<a href="https://geoknightgis.com">geoknightgis.com</a> · Jacksonville, Florida</p>
 
 
 GeoKnight GIS builds custom GIS web applications: interactive web maps, dashboards and map-based tools for businesses and government, anywhere. $95–$125/hr or fixed-price projects from $350. Founded by Christopher Knight, GIS & Data Engineer. Based in Jacksonville, FL, serving clients anywhere.
 
-Website: https://knightchrism.github.io · [Book a call](https://cal.com/christopher-uzhh5z) · geoknight0015@gmail.com · [LinkedIn](https://www.linkedin.com/in/christopher-knight-3225a2232/) · [X @geoknight0015](https://x.com/geoknight0015)
+Website: https://knightchrism.github.io · [Book a call](https://cal.com/christopher-uzhh5z) · info@geoknightgis.com · [LinkedIn](https://www.linkedin.com/in/christopher-knight-3225a2232/) · [X @geoknight0015](https://x.com/geoknight0015)
 
 ## Services
 | Offer | Price |
@@ -34,7 +34,7 @@ Plain static HTML/CSS served by GitHub Pages from `main` (root).
 The home hero is the 3D night globe restored from the live site (MapLibre GL 5.24.0, vendored in `assets/globe/vendor/`; NASA GIBS Blue/Black Marble with a sun-based day/night blend, USGS imagery and live USGS feeds). Selected layers from the animated Florida hero are blended on top, geo-registered to the globe (`assets/globe/overlay.js`): Gulf Stream particles, flights, Cape launches, city-light twinkle and a gold scan sweep (illustrative). On screens under 640px a static poster image is shown instead. The previous animated Florida hero is shelved, unreferenced, in `shelved/florida-hero/`.
 
 ## Request form (request.html)
-`request.html` posts to [Web3Forms](https://web3forms.com) (plain HTML POST, no inline JS; the CSP on that page allows `https://api.web3forms.com` for form-action/connect-src only). The Web3Forms public access key (tied to geoknight0015@gmail.com, where submissions are emailed) is set in `request.html`; it is designed to be public in HTML. To change it, create a new key at web3forms.com and replace the `access_key` value. Successful submissions redirect to `request-thanks.html`. Pricing buttons link to `request.html?plan=...`; `assets/js/request.js` preselects the plan.
+`request.html` posts to [Web3Forms](https://web3forms.com) (plain HTML POST, no inline JS; the CSP on that page allows `https://api.web3forms.com` for form-action/connect-src only). The Web3Forms public access key (tied to info@geoknightgis.com, where submissions are emailed) is set in `request.html`; it is designed to be public in HTML. To change it, create a new key at web3forms.com and replace the `access_key` value. Successful submissions redirect to `request-thanks.html`. Pricing buttons link to `request.html?plan=...`; `assets/js/request.js` preselects the plan.
 
 ## Change log
 
