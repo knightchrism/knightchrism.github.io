@@ -35,3 +35,4 @@ body.dark-globes{background:var(--g-bg);background-image:var(--g-bg-img);backgro
 .ghero{text-align:center;padding-top:96px}.ghero h1,.ghero p{margin-left:auto;margin-right:auto}
 @media (max-width:640px){.ghero{padding-top:40px}.gstyle{justify-content:center}}
 .ghero .geyebrow,.ghero h1{text-transform:none}
+.ghero{text-align:left}.ghero h1,.ghero p{margin-left:0}
