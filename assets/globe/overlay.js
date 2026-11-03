@@ -39,7 +39,7 @@ let L=null,nextL=5;
 // ---- Sonar ping: every ~20-45 s one random on-screen NDBC buoy emits 1-2 thin rings that fade over ~2.6 s.
 // Clipped to water with the CoastWatch ocean mask (M), so rings vanish over land. Off for reduced motion. ----
 const wet=(lo,la)=>{if(!M)return false;const i=Math.round((lo-LON0)/ST),j=Math.round((LAT0-la)/ST);return i>=0&&j>=0&&i<CW&&j<CH&&M[j*CW+i]===1};
-let PG=null,nextP=12+R()*15;const PD=2.6,PR=innerWidth<700?.9:1.1,NS=72;
+let PG=null,nextP=12+R()*15;const PD=3.5,PR=innerWidth<700?1.5:1.8,NS=72;
 window.__ping=b=>{PG={b:b||null,t0:T,n:1+(R()<.5)}};
 window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
  const pr=ll=>{const q=map.project(ll);return[q.x,q.y]};
@@ -83,8 +83,8 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
   if(PG&&!PG.b){const bs=(window.__BUOYS||[]).filter(b=>{const ll=[b.lon??b[1],b.lat??b[2]];if(!wet(ll[0],ll[1]))return false;const q=map.project(ll);return q.x>0&&q.y>0&&q.x<W&&q.y<H});
    if(bs.length){const b=bs[(R()*bs.length)|0];PG.b=[b.lon??b[1],b.lat??b[2]]}else{PG=null;nextP=T+20+R()*25}}
   if(PG&&PG.b){let alive=false;for(let r=0;r<PG.n;r++){const t=(T-PG.t0-r*.7)/PD;if(t<0){alive=true;continue}if(t>1)continue;alive=true;
-    const rad=PR*Math.sqrt(t),a=.55*(1-t)*(1-t),cl=Math.cos(PG.b[1]*.01745);x.lineWidth=1;x.strokeStyle=r?`rgba(190,220,255,${a})`:`rgba(230,195,92,${a})`;x.beginPath();let pen=false;
-    for(let i=0;i<=NS;i++){const g=i/NS*6.283,lo=PG.b[0]+rad*Math.cos(g)/cl,la=PG.b[1]+rad*Math.sin(g);if(!wet(lo,la)){pen=false;continue}const q=pr([lo,la]);pen?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]);pen=true}x.stroke()}
+    const rad=PR*Math.sqrt(t),a=.9*(1-t*t),cl=Math.cos(PG.b[1]*.01745);x.lineWidth=2;x.shadowBlur=r?0:8;x.shadowColor='rgba(230,195,92,.8)';x.strokeStyle=r?`rgba(190,220,255,${a})`:`rgba(230,195,92,${a})`;x.beginPath();let pen=false;
+    for(let i=0;i<=NS;i++){const g=i/NS*6.283,lo=PG.b[0]+rad*Math.cos(g)/cl,la=PG.b[1]+rad*Math.sin(g);if(!wet(lo,la)){pen=false;continue}const q=pr([lo,la]);pen?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]);pen=true}x.stroke();x.shadowBlur=0}
    if(!alive){PG=null;nextP=T+20+R()*25}}}
  // launches from the Cape every ~25 s (vertical rise, pitch over ENE)
  if(!L&&T>nextL){const pd=F.pads[(R()*2)|0];L={t0:T,p:pd,e:[pd[0]+3.2+R(),pd[1]+1.4+R()*.5]}}
