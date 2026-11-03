@@ -69,6 +69,7 @@ code{font:.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:#eef1f6;pa
 .gl .hero-shade{background:linear-gradient(90deg,rgba(2,6,14,.9) 0,rgba(2,6,14,.7) 34%,rgba(2,6,14,.2) 62%,transparent 100%),linear-gradient(0deg,rgba(8,20,40,.75) 0,transparent 26%)}
 .gl .heroin{position:relative;z-index:2;pointer-events:none}.gl .heroin a{pointer-events:auto}
 .gl .maplibregl-ctrl-attrib,.gl .maplibregl-ctrl-logo{display:none}
+@media (max-width:640px){.hero.gl.fl{padding-bottom:104px}}
 .gl.poster .globe{background:#02050b url(assets/globe/poster-390.webp) center top/cover no-repeat}
 @media (max-width:640px){.gl .hero-shade{background:linear-gradient(180deg,rgba(2,6,14,.55) 0,rgba(2,6,14,.75) 55%,rgba(2,6,14,.9) 100%)}}
 /* fit: fluid layout, mobile menu, aspect-aware hero */

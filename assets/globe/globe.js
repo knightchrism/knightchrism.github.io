@@ -86,6 +86,13 @@ maplibregl.addProtocol('daynight', async (params) => {
       const k = (j * S + i) * 4;
       const lit = 0.06 + 0.94 * day;
       let r = d[k], g = d[k + 1], bl = d[k + 2];
+      // Open water (Blue Marble ocean/shallows are blue-dominant): replace with brand navy, no blue fill.
+      // The moving current particles in overlay.js become the "water".
+      if ((bl > r + 18 && bl > g + 4) || (g > r + 30 && bl > r + 30)) { // deep ocean + turquoise shallows
+        const w = 0.35 + 0.65 * day, gl = glow * 0.18;
+        d[k] = 6 * w + 255 * gl; d[k + 1] = 14 * w + 140 * gl; d[k + 2] = 30 * w + 60 * gl; d[k + 3] = 255;
+        continue;
+      }
       if (C && ck > 0 && day > 0.02) {
         // keep only bright, neutral (cloud) pixels; faint so the Blue Marble stays clean
         const mn = Math.min(C[k], C[k + 1], C[k + 2]);
