@@ -181,10 +181,12 @@ const map = window.__map = new maplibregl.Map({
       { id: 'fl-line', type: 'line', source: 'fl', paint: { 'line-color': '#f0c87a', 'line-width': 1.3, 'line-opacity': 0.95 } },
       { id: 'quake-ring', type: 'circle', source: 'quakes', paint: { 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#f0c87a', 'circle-stroke-width': 1.2, 'circle-radius': 6, 'circle-stroke-opacity': 0.6 } },
       { id: 'quake-dot', type: 'circle', source: 'quakes', paint: { 'circle-color': '#f0c87a', 'circle-radius': ['interpolate', ['linear'], ['get', 'mag'], 0, 1.5, 6, 5], 'circle-opacity': 0.9 } },
-            { id: 'ship', type: 'circle', source: 'ships', paint: { 'circle-color': '#ffffff', 'circle-radius': 1, 'circle-opacity': 0.2 } },
+      // illustrative ships (as on main, smaller/subtler), riding the faint shipping lanes both ways
+      { id: 'ship-glow', type: 'circle', source: 'ships', paint: { 'circle-color': '#e8b65a', 'circle-radius': 3.2, 'circle-blur': 1, 'circle-opacity': 0.3 } },
+      { id: 'ship', type: 'circle', source: 'ships', paint: { 'circle-color': '#f6d58e', 'circle-radius': 1.2, 'circle-opacity': 0.85 } },
       // NOAA NDBC buoys: navy marker with a gold ring (red is reserved for cities); larger invisible hit area for taps
-      { id: 'buoy', type: 'circle', source: 'buoys', paint: { 'circle-color': '#0b1f3a', 'circle-radius': mobile ? 4.5 : 3.6,
-        'circle-stroke-color': '#e6c35c', 'circle-stroke-width': mobile ? 1.6 : 1.3, 'circle-stroke-opacity': 0.9 } },
+      { id: 'buoy', type: 'circle', source: 'buoys', paint: { 'circle-color': '#0b1f3a', 'circle-radius': mobile ? 2.6 : 2.0,
+        'circle-stroke-color': '#e6c35c', 'circle-stroke-width': mobile ? 1 : 0.9, 'circle-stroke-opacity': 0.9 } },
       { id: 'buoy-hit', type: 'circle', source: 'buoys', paint: { 'circle-color': '#000', 'circle-opacity': 0, 'circle-radius': mobile ? 14 : 9 } }
     ]
   }
@@ -238,7 +240,7 @@ const LANES = [
   [[-80.2, 25.7], [-79.6, 24.9], [-78.5, 24.0], [-76.5, 23.4]]                                               // Miami → Old Bahama Channel
 ];
 const laneLen = LANES.map(l => { const c = [0]; for (let i = 1; i < l.length; i++) c.push(c[i - 1] + Math.hypot(l[i][0] - l[i - 1][0], l[i][1] - l[i - 1][1])); return c; });
-const SHIPS = []; LANES.forEach((l, i) => { const n = mobile ? 2 : 4; for (let k = 0; k < n; k++) SHIPS.push({ lane: i, t: (k + Math.random() * 0.5) / n, v: (0.006 + Math.random() * 0.006) * (k % 2 ? 1 : -1) }); });
+const SHIPS = []; LANES.forEach((l, i) => { const n = mobile ? 2 : 4; for (let k = 0; k < n; k++) SHIPS.push({ lane: i, t: (k + Math.random() * 0.5) / n, v: (0.004 + Math.random() * 0.004) * (k % 2 ? 1 : -1) }); });
 function shipsFC(dt) {
   return { type: 'FeatureCollection', features: SHIPS.map(s => {
     const l = LANES[s.lane], c = laneLen[s.lane], L = c[c.length - 1];

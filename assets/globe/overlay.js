@@ -36,6 +36,11 @@ const RD=(window.__ROADS||[]).map(r=>poly(r[1])),TR=[];
 RD.forEach(r=>{const n=Math.max(1,Math.min(8,Math.round(r.len/(innerWidth<700?1.1:.7))*(RM?.5:1)));for(let i=0;i<n;i++)TR.push({r,d:R()*r.len,dir:i%2?1:-1,v:(RM?.04:.09)*(.7+R()*.6)})});
 const C=F.cities.map((c,i)=>({c,ph:(i*.618)%1}));
 let L=null,nextL=5;
+// ---- Sonar ping: every ~20-45 s one random on-screen NDBC buoy emits 1-2 thin rings that fade over ~2.6 s.
+// Clipped to water with the CoastWatch ocean mask (M), so rings vanish over land. Off for reduced motion. ----
+const wet=(lo,la)=>{if(!M)return false;const i=Math.round((lo-LON0)/ST),j=Math.round((LAT0-la)/ST);return i>=0&&j>=0&&i<CW&&j<CH&&M[j*CW+i]===1};
+let PG=null,nextP=12+R()*15;const PD=2.6,PR=innerWidth<700?.9:1.1,NS=72;
+window.__ping=b=>{PG={b:b||null,t0:T,n:1+(R()<.5)}};
 window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
  const pr=ll=>{const q=map.project(ll);return[q.x,q.y]};
  x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);x.globalCompositeOperation='lighter';x.lineCap='round';
@@ -74,6 +79,13 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
   x.strokeStyle=`rgba(255,236,190,${.75*(1-ph)})`;x.lineWidth=1.2;x.beginPath();x.arc(cx,cy,r0+(5+6*s)*ph,0,6.283);x.stroke();
   x.fillStyle='rgba(255,246,222,.98)';x.beginPath();x.arc(cx,cy,r0,0,6.283);x.fill()}
  x.globalCompositeOperation='lighter';
+ if(!RM&&M){if(!PG&&T>nextP){PG={b:null,t0:T,n:1+(R()<.5)}}
+  if(PG&&!PG.b){const bs=(window.__BUOYS||[]).filter(b=>{const ll=[b.lon??b[1],b.lat??b[2]];if(!wet(ll[0],ll[1]))return false;const q=map.project(ll);return q.x>0&&q.y>0&&q.x<W&&q.y<H});
+   if(bs.length){const b=bs[(R()*bs.length)|0];PG.b=[b.lon??b[1],b.lat??b[2]]}else{PG=null;nextP=T+20+R()*25}}
+  if(PG&&PG.b){let alive=false;for(let r=0;r<PG.n;r++){const t=(T-PG.t0-r*.7)/PD;if(t<0){alive=true;continue}if(t>1)continue;alive=true;
+    const rad=PR*Math.sqrt(t),a=.55*(1-t)*(1-t),cl=Math.cos(PG.b[1]*.01745);x.lineWidth=1;x.strokeStyle=r?`rgba(190,220,255,${a})`:`rgba(230,195,92,${a})`;x.beginPath();let pen=false;
+    for(let i=0;i<=NS;i++){const g=i/NS*6.283,lo=PG.b[0]+rad*Math.cos(g)/cl,la=PG.b[1]+rad*Math.sin(g);if(!wet(lo,la)){pen=false;continue}const q=pr([lo,la]);pen?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]);pen=true}x.stroke()}
+   if(!alive){PG=null;nextP=T+20+R()*25}}}
  // launches from the Cape every ~25 s (vertical rise, pitch over ENE)
  if(!L&&T>nextL){const pd=F.pads[(R()*2)|0];L={t0:T,p:pd,e:[pd[0]+3.2+R(),pd[1]+1.4+R()*.5]}}
  if(L){const t=(T-L.t0)/9;if(t>1.2){L=null;nextL=T+20+R()*10}else{const e=Math.min(1,t),u=1-e,c=[L.p[0]+.1,L.p[1]+1.2];
