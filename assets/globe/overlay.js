@@ -40,7 +40,7 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
  if(moved){tx.clearRect(0,0,W,H);for(const q of P)q.px=null}
  else{tx.globalCompositeOperation='destination-out';tx.fillStyle='rgba(0,0,0,.12)';tx.fillRect(0,0,W,H)}
  tx.globalCompositeOperation='lighter';tx.lineWidth=innerWidth<700?1:1.1;tx.lineCap='round';
- if(U&&dt>0){const K=.32*dt*10;
+ if(U&&dt>0){const K=.21*dt*10; // ~35% slower trails
   for(const q of P){if(q.lo===null||q.age>q.life){spawn(q);if(q.lo===null)continue}
    const vv=vel(q.lo,q.la);if(!vv){q.lo=null;continue}q.age+=dt;
    q.lo+=vv[0]*K/Math.cos(q.la*.01745);q.la+=vv[1]*K;
@@ -57,7 +57,7 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
   x.fillStyle='rgba(255,248,230,.9)';x.beginPath();x.arc(h[0],h[1],1.2,0,6.283);x.fill()}
  // major cities: pulsing red dots, no labels
  x.globalCompositeOperation='source-over';
- for(const o of C){const [cx,cy]=pr(o.c),s=o.c[2],ph=RM?.35:((T/2.4+o.ph)%1),r0=1.6+1.4*s;
+ for(const o of C){const [cx,cy]=pr(o.c),s=o.c[2],ph=RM?.35:((T/3.6+o.ph)%1),r0=1.6+1.4*s;
   x.strokeStyle=`rgba(255,59,48,${.75*(1-ph)})`;x.lineWidth=1.2;x.beginPath();x.arc(cx,cy,r0+(5+6*s)*ph,0,6.283);x.stroke();
   x.fillStyle='rgba(255,59,48,.95)';x.beginPath();x.arc(cx,cy,r0,0,6.283);x.fill()}
  x.globalCompositeOperation='lighter';
