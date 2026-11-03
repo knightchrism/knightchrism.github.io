@@ -68,3 +68,4 @@ html{--g-blue:#4a8fe0}html[data-theme="light"],html[data-theme="white"]{--g-blue
 @media (prefers-reduced-motion:reduce){.gmap,.bins circle,.ring,.scan,.sl,.bar{animation:none!important}.sl{stroke-dashoffset:0}.ring{opacity:0}}
 @media (min-width:861px){.gviz{width:85%;justify-self:end;min-height:290px}.gviz .gw{font-size:.62rem}.gk b{font-size:.95rem}.gspark{width:130px}.gbars{width:112px}}
 @media (min-width:861px){.gviz{width:76.5%;min-height:260px}.gviz .gw{font-size:.58rem;padding:7px 9px}.gk b{font-size:.88rem}.gkpis{gap:12px}.gspark{width:118px}.gbars{width:100px}}
+@media (min-width:861px){.gherogrid{align-items:center}.ghtext{justify-self:center;text-align:left}}
