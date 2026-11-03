@@ -250,3 +250,5 @@ fieldset.field{border:0;padding:0}.radios{display:flex;gap:var(--s3);flex-wrap:w
 .spot-stats li{background:rgba(255,255,255,.06);border:1px solid rgba(201,162,39,.35);border-radius:12px;padding:12px}
 .spot-stats b{display:block;color:var(--gold2);font-size:1.05rem}.spot-stats span{font-size:.8rem;color:#aab8cc;line-height:1.35;display:block}
 @media (max-width:900px){.spotin{grid-template-columns:1fr}.spot-stats{grid-template-columns:1fr}}
+.foot p.insured{grid-column:1/-1;margin:0;font-size:.8rem;color:#8fa0b8;letter-spacing:.01em}.foot p.insured::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#c9a227;margin-right:8px;vertical-align:middle}
+.insured{font-size:.8rem;opacity:.85}
