@@ -6,7 +6,7 @@
  * and set GKTheme.onChange = function(theme){ ... save to the account settings API ... }
  * so the user's choice follows them across devices. */
 (function(){
-  var KEY='gk-theme', THEMES=['black','navy','gradient','light'], DEF='black';
+  var KEY='gk-theme', THEMES=['black','navy','gradient','light','white','grey'], DEF='black';
   function valid(t){return THEMES.indexOf(t)>=0;}
   function stored(){try{return localStorage.getItem(KEY);}catch(e){return null;}}
   function getTheme(){var t=document.documentElement.getAttribute('data-theme');return valid(t)?t:(valid(stored())?stored():DEF);}
