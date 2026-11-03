@@ -45,7 +45,7 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
  if(moved){tx.clearRect(0,0,W,H);for(const q of P)q.px=null}
  else{tx.globalCompositeOperation='destination-out';tx.fillStyle='rgba(0,0,0,.055)';tx.fillRect(0,0,W,H)}
  tx.globalCompositeOperation='lighter';tx.lineWidth=innerWidth<700?1:1.1;tx.lineCap='round';
- if(U&&dt>0){const K=.075*dt*10; // slowed a lot (~35% of v2 speed)
+ if(U&&dt>0){const K=.0375*dt*10; // slowed again (half of v3)
   for(const q of P){if(q.lo===null||q.age>q.life){spawn(q);if(q.lo===null)continue}
    const vv=vel(q.lo,q.la);if(!vv){q.lo=null;continue}q.age+=dt;
    q.lo+=vv[0]*K/Math.cos(q.la*.01745);q.la+=vv[1]*K;
@@ -65,9 +65,9 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
  // Interstates: pulsing red line + glow, then traffic dots moving both directions
  x.globalCompositeOperation='source-over';const rp=RM?.5:.5+.5*Math.sin(T*1.4);
  for(const r of RD){x.beginPath();r.p.forEach((c,i)=>{const q=pr(c);i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1])});
-  x.strokeStyle=`rgba(255,59,48,${.12+.1*rp})`;x.lineWidth=5;x.stroke();x.strokeStyle=`rgba(255,80,64,${.55+.3*rp})`;x.lineWidth=1.3;x.stroke()}
- for(const t of TR){t.d+=t.dir*t.v*dt;if(t.d<0)t.d+=t.r.len;if(t.d>t.r.len)t.d-=t.r.len;const a=pr(t.r.at(t.d)),b=pr(t.r.at(t.d-t.dir*.12));
-  x.strokeStyle='rgba(255,190,170,.9)';x.lineWidth=2;x.beginPath();x.moveTo(b[0],b[1]);x.lineTo(a[0],a[1]);x.stroke()}
+  x.strokeStyle=`rgba(255,59,48,${.05+.05*rp})`;x.lineWidth=2.2;x.stroke();x.strokeStyle=`rgba(255,80,64,${.5+.2*rp})`;x.lineWidth=.6;x.stroke()}
+ for(const t of TR){t.d+=t.dir*t.v*dt;if(t.d<0)t.d+=t.r.len;if(t.d>t.r.len)t.d-=t.r.len;const a=pr(t.r.at(t.d)),b=pr(t.r.at(t.d-t.dir*.07)),ef=Math.min(1,t.d/.2,(t.r.len-t.d)/.2); // fade at segment ends / state line
+  x.strokeStyle=`rgba(255,190,170,${.55*ef})`;x.lineWidth=1;x.beginPath();x.moveTo(b[0],b[1]);x.lineTo(a[0],a[1]);x.stroke()}
  // major cities: warm white-gold pulsing dots, no labels
  x.globalCompositeOperation='source-over';
  for(const o of C){const [cx,cy]=pr(o.c),s=o.c[2],ph=RM?.35:((T/3.6+o.ph)%1),r0=1.6+1.4*s;
