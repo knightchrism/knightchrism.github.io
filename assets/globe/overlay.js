@@ -23,12 +23,17 @@ function vel(lon,lat){if(!U)return null;const fx=(lon-LON0)/ST,fy=(LAT0-lat)/ST,
  if(x0<0||y0<0||x0>=CW-1||y0>=CH-1)return null;const tx=fx-x0,ty=fy-y0;let u=0,v=0,w=0;
  for(let j=0;j<2;j++)for(let i=0;i<2;i++){const k=(y0+j)*CW+x0+i;if(!M[k])continue;const q=(i?tx:1-tx)*(j?ty:1-ty);u+=U[k]*q;v+=V[k]*q;w+=q}
  return w>.3?[u/w,v/w]:null}
+// water palette: pale sky blue through mid/ocean blue (no gold on the water)
+const BL=['207,232,255','164,210,245','120,182,235','78,150,220','52,118,196'];
 const NP=Math.round((innerWidth<700?450:1300)*m),P=[];
 let tcv=document.createElement('canvas'),tx=tcv.getContext('2d'),lastC=null;
 function spawn(q){const map=window.__map,b=map.getBounds();const w=Math.max(LON0,b.getWest()),e=Math.min(LON0+(CW-1)*ST,b.getEast()),s=Math.max(LAT0-(CH-1)*ST,b.getSouth()),n=Math.min(LAT0,b.getNorth());
- for(let t=0;t<8;t++){const lo=w+R()*(e-w),la=s+R()*(n-s);if(vel(lo,la)){q.lo=lo;q.la=la;q.age=0;q.life=2+R()*4;q.px=null;return}}q.lo=null}
+ for(let t=0;t<8;t++){const lo=w+R()*(e-w),la=s+R()*(n-s);if(vel(lo,la)){q.lo=lo;q.la=la;q.age=0;q.life=4+R()*6;q.px=null;q.c=(R()*BL.length)|0;return}}q.lo=null}
 for(let i=0;i<NP;i++)P.push({lo:null,age:0,life:0,px:null});size();
 const A=Array.from({length:Math.round(7*m)},()=>{const r=routes[(R()*routes.length)|0];return{r,d:R()*r.len,v:.15+R()*.12}});
+// ---- Interstates (Census TIGER primary roads, roads.js): red pulsing lines with traffic dots both ways. Illustrative. ----
+const RD=(window.__ROADS||[]).map(r=>poly(r[1])),TR=[];
+RD.forEach(r=>{const n=Math.max(1,Math.min(8,Math.round(r.len/(innerWidth<700?1.1:.7))*(RM?.5:1)));for(let i=0;i<n;i++)TR.push({r,d:R()*r.len,dir:i%2?1:-1,v:(RM?.04:.09)*(.7+R()*.6)})});
 const C=F.cities.map((c,i)=>({c,ph:(i*.618)%1}));
 let L=null,nextL=5;
 window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
@@ -38,15 +43,17 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
  const cc=map.getCenter(),cz=map.getZoom(),moved=!lastC||Math.abs(cz-lastC[2])>.002||Math.hypot(cc.lng-lastC[0],cc.lat-lastC[1])>.02;lastC=[cc.lng,cc.lat,cz];
  tx.setTransform(dpr,0,0,dpr,0,0);
  if(moved){tx.clearRect(0,0,W,H);for(const q of P)q.px=null}
- else{tx.globalCompositeOperation='destination-out';tx.fillStyle='rgba(0,0,0,.12)';tx.fillRect(0,0,W,H)}
+ else{tx.globalCompositeOperation='destination-out';tx.fillStyle='rgba(0,0,0,.055)';tx.fillRect(0,0,W,H)}
  tx.globalCompositeOperation='lighter';tx.lineWidth=innerWidth<700?1:1.1;tx.lineCap='round';
- if(U&&dt>0){const K=.21*dt*10; // ~35% slower trails
+ if(U&&dt>0){const K=.075*dt*10; // slowed a lot (~35% of v2 speed)
   for(const q of P){if(q.lo===null||q.age>q.life){spawn(q);if(q.lo===null)continue}
    const vv=vel(q.lo,q.la);if(!vv){q.lo=null;continue}q.age+=dt;
    q.lo+=vv[0]*K/Math.cos(q.la*.01745);q.la+=vv[1]*K;
    const p=map.project([q.lo,q.la]);if(p.x<-20||p.y<-20||p.x>W+20||p.y>H+20){q.lo=null;continue}
    if(q.px){const sp=Math.hypot(vv[0],vv[1]),f=Math.min(1,q.age/.6,(q.life-q.age)/.8);
-    tx.strokeStyle=`rgba(${sp>.5?'240,215,140':'170,195,225'},${(.14+.46*Math.min(1,sp/1.2))*f})`;
+    // colour: faster water leans paler, each trail keeps a random offset so the blues mix
+    const ci=Math.max(0,Math.min(4,Math.round(4-Math.min(1,sp/1.1)*3-q.c*.5+1)));
+    tx.strokeStyle=`rgba(${BL[ci]},${(.2+.5*Math.min(1,sp/1.1))*f})`;
     tx.beginPath();tx.moveTo(q.px[0],q.px[1]);tx.lineTo(p.x,p.y);tx.stroke()}
    q.px=[p.x,p.y]}}
  x.setTransform(1,0,0,1,0,0);x.drawImage(tcv,0,0);x.setTransform(dpr,0,0,dpr,0,0);
@@ -55,11 +62,17 @@ window.__ovl=(now,dt)=>{const map=window.__map;if(!map)return;T+=dt;
   let prev=pr(p.r.at(p.d));const h=prev;for(let i=1;i<=8&&p.d-i*.12>0;i++){const q=pr(p.r.at(p.d-i*.12));
    x.strokeStyle=`rgba(240,232,210,${.3*(1-i/8)})`;x.lineWidth=.8;x.beginPath();x.moveTo(prev[0],prev[1]);x.lineTo(q[0],q[1]);x.stroke();prev=q}
   x.fillStyle='rgba(255,248,230,.9)';x.beginPath();x.arc(h[0],h[1],1.2,0,6.283);x.fill()}
- // major cities: pulsing red dots, no labels
+ // Interstates: pulsing red line + glow, then traffic dots moving both directions
+ x.globalCompositeOperation='source-over';const rp=RM?.5:.5+.5*Math.sin(T*1.4);
+ for(const r of RD){x.beginPath();r.p.forEach((c,i)=>{const q=pr(c);i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1])});
+  x.strokeStyle=`rgba(255,59,48,${.12+.1*rp})`;x.lineWidth=5;x.stroke();x.strokeStyle=`rgba(255,80,64,${.55+.3*rp})`;x.lineWidth=1.3;x.stroke()}
+ for(const t of TR){t.d+=t.dir*t.v*dt;if(t.d<0)t.d+=t.r.len;if(t.d>t.r.len)t.d-=t.r.len;const a=pr(t.r.at(t.d)),b=pr(t.r.at(t.d-t.dir*.12));
+  x.strokeStyle='rgba(255,190,170,.9)';x.lineWidth=2;x.beginPath();x.moveTo(b[0],b[1]);x.lineTo(a[0],a[1]);x.stroke()}
+ // major cities: warm white-gold pulsing dots, no labels
  x.globalCompositeOperation='source-over';
  for(const o of C){const [cx,cy]=pr(o.c),s=o.c[2],ph=RM?.35:((T/3.6+o.ph)%1),r0=1.6+1.4*s;
-  x.strokeStyle=`rgba(255,59,48,${.75*(1-ph)})`;x.lineWidth=1.2;x.beginPath();x.arc(cx,cy,r0+(5+6*s)*ph,0,6.283);x.stroke();
-  x.fillStyle='rgba(255,59,48,.95)';x.beginPath();x.arc(cx,cy,r0,0,6.283);x.fill()}
+  x.strokeStyle=`rgba(255,236,190,${.75*(1-ph)})`;x.lineWidth=1.2;x.beginPath();x.arc(cx,cy,r0+(5+6*s)*ph,0,6.283);x.stroke();
+  x.fillStyle='rgba(255,246,222,.98)';x.beginPath();x.arc(cx,cy,r0,0,6.283);x.fill()}
  x.globalCompositeOperation='lighter';
  // launches from the Cape every ~25 s (vertical rise, pitch over ENE)
  if(!L&&T>nextL){const pd=F.pads[(R()*2)|0];L={t0:T,p:pd,e:[pd[0]+3.2+R(),pd[1]+1.4+R()*.5]}}
