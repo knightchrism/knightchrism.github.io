@@ -24,7 +24,23 @@ const RAD = Math.PI / 180;
 // Today's clouds: VIIRS SNPP corrected-reflectance true color (NASA GIBS, public domain), yesterday UTC
 // (today's swaths are still filling in). Only bright cloud pixels are blended in, day side only.
 const CLOUD_DATE = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-const CLOUD = GIBS + `VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${CLOUD_DATE}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`;
+const CLOUD_DATE2 = new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10);
+const VIIRS = d => GIBS + `VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${d}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`;
+// Live clouds: NOAA GOES-East ABI GeoColor via NASA GIBS (10-min cadence, CORS-open, no key). The newest time step
+// comes from GIBS DescribeDomains; tiles that fail fall back to yesterday's / the day before's VIIRS (as on main).
+const GOES = t => GIBS + `GOES-East_ABI_GeoColor/default/${t}/GoogleMapsCompatible_Level7/{z}/{y}/{x}.png`;
+let goesT = null; window.__cloud = { src: 'VIIRS', time: CLOUD_DATE };
+async function latestGoes() {
+  const now = Date.now(), iso = ms => new Date(ms).toISOString().slice(0, 19) + 'Z';
+  const r = await fetch(GIBS + `1.0.0/GOES-East_ABI_GeoColor/default/GoogleMapsCompatible_Level7/all/${iso(now - 6 * 36e5)}--${iso(now + 6e5)}.xml`);
+  if (!r.ok) throw new Error(r.status);
+  const dom = (await r.text()).match(/<Domain>([^<]*)<\/Domain>/); if (!dom) throw new Error('domain');
+  const last = dom[1].split(',').pop().split('/'); return last[1] || last[0];
+}
+function cloudCredit() {
+  const el = document.getElementById('cloudtime'); if (!el) return;
+  el.textContent = goesT ? `NOAA GOES-East GeoColor via NASA GIBS, ${goesT.slice(0, 10)} ${goesT.slice(11, 16)} UTC` : `NASA VIIRS via NASA GIBS, ${CLOUD_DATE}`;
+}
 // Crispness: MapLibre picks tile zoom from CSS pixels, so on HiDPI screens we declare 128px tiles
 // (one zoom level deeper) so each 256px source tile maps ~1:1 onto device pixels. Capped by each
 // layer's native maxzoom (Blue/Black Marble z8, USGS z16) so nothing is blurrily overzoomed beyond that.
@@ -65,7 +81,8 @@ const ctx = cv.getContext('2d', { willReadFrequently: true });
 
 maplibregl.addProtocol('daynight', async (params) => {
   const [z, x, y] = params.url.replace('daynight://', '').split('?')[0].split('/').map(Number);
-  const [di, ni, ci] = await Promise.all([loadImg(fill(DAY, z, x, y)), loadImg(fill(NIGHT, z, x, y)), loadImg(fill(CLOUD, z, x, y))]);
+  const cloud = async () => (goesT && z <= 7 && await loadImg(fill(GOES(goesT), z, x, y))) || await loadImg(fill(VIIRS(CLOUD_DATE), z, x, y)) || await loadImg(fill(VIIRS(CLOUD_DATE2), z, x, y));
+  const [di, ni, ci] = await Promise.all([loadImg(fill(DAY, z, x, y)), loadImg(fill(NIGHT, z, x, y)), cloud()]);
   ctx.clearRect(0, 0, S, S);
   if (!di) throw new Error('tile');
   ctx.drawImage(di, 0, 0, S, S); const D = ctx.getImageData(0, 0, S, S);
@@ -90,7 +107,13 @@ maplibregl.addProtocol('daynight', async (params) => {
       // The moving current particles in overlay.js become the "water".
       if ((bl > r + 18 && bl > g + 4) || (g > r + 30 && bl > r + 30)) { // deep ocean + turquoise shallows
         const w = 0.35 + 0.65 * day, gl = glow * 0.18;
-        d[k] = 6 * w + 255 * gl; d[k + 1] = 14 * w + 140 * gl; d[k + 2] = 30 * w + 60 * gl; d[k + 3] = 255;
+        let wr = 6 * w + 255 * gl, wg = 14 * w + 140 * gl, wb = 30 * w + 60 * gl;
+        // clouds over water: same source, threshold, opacity and day-side blend as on land (main's formula)
+        if (C && ck > 0 && day > 0.02) {
+          const mn = Math.min(C[k], C[k + 1], C[k + 2]), c = smooth(150, 225, mn) * 0.42 * ck * day;
+          wr += (C[k] * lit - wr) * c; wg += (C[k + 1] * lit - wg) * c; wb += (C[k + 2] * lit - wb) * c;
+        }
+        d[k] = wr > 255 ? 255 : wr; d[k + 1] = wg > 255 ? 255 : wg; d[k + 2] = wb > 255 ? 255 : wb; d[k + 3] = 255;
         continue;
       }
       if (C && ck > 0 && day > 0.02) {
@@ -185,6 +208,13 @@ function setMode(m) {
 document.querySelectorAll('.sun-toggle button').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
 // Real-time terminator: recomputed from current UTC every 60 s (moves ~0.25°/min, tiles cross-fade).
 setInterval(() => { if (mode === 'live' && !document.hidden) setSun(subsolar(new Date())); }, 60e3);
+// Refresh live clouds every 15 min while the tab is visible (new GOES step -> re-render the composite tiles).
+async function refreshClouds() {
+  try { const t = await latestGoes(); if (t !== goesT) { goesT = t; window.__cloud = { src: 'GOES-East GeoColor', time: t }; imgCache.clear(); setSun(sun); } }
+  catch (e) { window.__cloud = { src: 'VIIRS (GOES unavailable)', time: CLOUD_DATE }; }
+  cloudCredit();
+}
+refreshClouds(); setInterval(() => { if (!document.hidden) refreshClouds(); }, 15 * 60e3);
 
 // ---- Shipping lanes: ILLUSTRATIVE, hand-drawn approximations of common routes off Florida.
 // Not AIS data; ship dots are decorative animation only. ----
