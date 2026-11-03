@@ -31,3 +31,4 @@ body.dark-globes{background:var(--g-bg);background-image:var(--g-bg-img);backgro
 .dark-globes .foot{background:transparent;border-top:1px solid var(--g-gold);color:var(--g-muted)}
 .dark-globes .foot a{color:var(--g-text)}.dark-globes .foot a:hover{color:var(--g-gold)}.dark-globes .foot .muted,.dark-globes .foot p.insured{color:var(--g-muted)}.dark-globes .foot p.insured::before{background:var(--g-gold)}
 .dark-globes .nav.has-toggle nav{background:var(--g-bg)}
+@media (max-width:640px){.ghero p br{display:none}}
