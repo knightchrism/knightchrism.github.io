@@ -21,7 +21,6 @@ Website: https://knightchrism.github.io · [Book a call](https://cal.com/christo
 ## Work samples
 | Project | Description | Demo |
 |---|---|---|
-| [Duval Roof Globe](https://globe.geoknightgis.com) | 3D globe of Jacksonville single-family homes showing year built, last permitted reroof, and 30+ year 4-point flag. | [Live demo](https://globe.geoknightgis.com) |
 | [Nearest Hospital by Real Roads](https://github.com/knightchrism/nearest-hospital-demo) | Straight-line vs. drive-time nearest hospital across the St. Johns River; drop a pin and an agent ranks 11 hospitals by real road travel time (OSM, OSRM, Leaflet). | [Live demo](https://knightchrism.github.io/nearest-hospital-demo/) |
 | [jax-property-intelligence](https://github.com/knightchrism/jax-property-intelligence) | Duval County parcels, assessor records, addresses and FEMA flood zones in PostGIS, on an interactive map. | [Live map](https://knightchrism.github.io/jax-property-intelligence/) |
 | [Water-Monitoring Data Quality Check](https://github.com/knightchrism/sjrwmd-geodata-qc) | Automatic quality checks on publicly available SJRWMD groundwater-station open data. Not affiliated with or endorsed by SJRWMD. | [Dashboard](https://knightchrism.github.io/sjrwmd-geodata-qc/) |
@@ -38,4 +37,5 @@ The home hero is the 3D night globe restored from the live site (MapLibre GL 5.2
 
 ## Change log
 
-- 2026-11-01: Added Duval Roof Globe card (globe.geoknightgis.com) to homepage and work page, plus README row. AI-assisted; no secrets.
+- 2026-11-01: Added roof-permit globe card to homepage and work page, plus README row. AI-assisted; no secrets.
+- 2026-11-02: Removed public links to the roof-permit globe (now behind login); More work grid set to 2 columns. AI-assisted; no secrets.
