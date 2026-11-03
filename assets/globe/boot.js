@@ -7,7 +7,7 @@ const lite=(navigator.connection&&navigator.connection.saveData)||(navigator.dev
 if(lite&&!force){hero.classList.add('poster');return}
 if('IntersectionObserver' in window)new IntersectionObserver(es=>{window.__heroInView=es[0].isIntersecting},{threshold:0}).observe(hero);
 const css=document.createElement('link');css.rel='stylesheet';css.href=base+'vendor/maplibre-gl.css?v=5.24.0';document.head.appendChild(css);
-const V='?v=7';
+const V='?v=8';
 const load=src=>new Promise((r,j)=>{const s=document.createElement('script');s.src=base+src;s.onload=r;s.onerror=j;document.body.appendChild(s)});
 const go=()=>load('vendor/maplibre-gl.js?v=5.24.0').then(()=>load('overlay-data.js'+V)).then(()=>load('roads.js'+V)).then(()=>load('overlay.js'+V)).then(()=>load('buoys.js'+V)).then(()=>load('globe.js'+V)).then(()=>hero.classList.add('live'));
 requestAnimationFrame(()=>setTimeout(go,0));

@@ -76,6 +76,14 @@ function loadImg(url) {
 }
 const fill = (t, z, x, y) => t.replace('{z}', z).replace('{x}', x).replace('{y}', y);
 const smooth = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); };
+// Night-side clouds: GOES GeoColor shows IR clouds at night as grey/white over a dark base with yellow
+// city lights baked in. Keep bright, low-saturation pixels only (rejects the yellow lights), and lay a soft
+// grey-white veil (max ~28%) under our own Black Marble lights so the cities still read through.
+function nightCloud(C, k, ck, day) {
+  const nd = 1 - day; if (nd < 0.02) return 0;
+  const r = C[k], g = C[k + 1], b = C[k + 2], mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+  return smooth(70, 170, (r + g + b) / 3) * (1 - smooth(28, 70, mx - mn)) * 0.28 * ck * nd;
+}
 const S = 256, cv = document.createElement('canvas'); cv.width = cv.height = S;
 const ctx = cv.getContext('2d', { willReadFrequently: true });
 
@@ -113,6 +121,7 @@ maplibregl.addProtocol('daynight', async (params) => {
           const mn = Math.min(C[k], C[k + 1], C[k + 2]), c = smooth(150, 225, mn) * 0.42 * ck * day;
           wr += (C[k] * lit - wr) * c; wg += (C[k + 1] * lit - wg) * c; wb += (C[k + 2] * lit - wb) * c;
         }
+        if (C && ck > 0) { const q = nightCloud(C, k, ck, day); wr += (200 - wr) * q; wg += (206 - wg) * q; wb += (216 - wb) * q; }
         d[k] = wr > 255 ? 255 : wr; d[k + 1] = wg > 255 ? 255 : wg; d[k + 2] = wb > 255 ? 255 : wb; d[k + 3] = 255;
         continue;
       }
@@ -123,6 +132,7 @@ maplibregl.addProtocol('daynight', async (params) => {
         r += (C[k] - r) * c; g += (C[k + 1] - g) * c; bl += (C[k + 2] - bl) * c;
       }
       r *= lit; g *= lit; bl *= lit;
+      if (C && ck > 0) { const q = nightCloud(C, k, ck, day); r += (200 - r) * q; g += (206 - g) * q; bl += (216 - bl) * q; }
       if (N) {
         const nf = Math.pow(1 - day, 0.8) * 1.35; // city lights fade in across twilight
         // warm the lights a touch toward sodium gold
