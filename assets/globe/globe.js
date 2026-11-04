@@ -24,7 +24,23 @@ const RAD = Math.PI / 180;
 // Today's clouds: VIIRS SNPP corrected-reflectance true color (NASA GIBS, public domain), yesterday UTC
 // (today's swaths are still filling in). Only bright cloud pixels are blended in, day side only.
 const CLOUD_DATE = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-const CLOUD = GIBS + `VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${CLOUD_DATE}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`;
+const CLOUD_DATE2 = new Date(Date.now() - 2 * 864e5).toISOString().slice(0, 10);
+const VIIRS = d => GIBS + `VIIRS_SNPP_CorrectedReflectance_TrueColor/default/${d}/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg`;
+// Live clouds: NOAA GOES-East ABI GeoColor via NASA GIBS (10-min cadence, CORS-open, no key). The newest time step
+// comes from GIBS DescribeDomains; tiles that fail fall back to yesterday's / the day before's VIIRS (as on main).
+const GOES = t => GIBS + `GOES-East_ABI_GeoColor/default/${t}/GoogleMapsCompatible_Level7/{z}/{y}/{x}.png`;
+let goesT = null; window.__cloud = { src: 'VIIRS', time: CLOUD_DATE };
+async function latestGoes() {
+  const now = Date.now(), iso = ms => new Date(ms).toISOString().slice(0, 19) + 'Z';
+  const r = await fetch(GIBS + `1.0.0/GOES-East_ABI_GeoColor/default/GoogleMapsCompatible_Level7/all/${iso(now - 6 * 36e5)}--${iso(now + 6e5)}.xml`);
+  if (!r.ok) throw new Error(r.status);
+  const dom = (await r.text()).match(/<Domain>([^<]*)<\/Domain>/); if (!dom) throw new Error('domain');
+  const last = dom[1].split(',').pop().split('/'); return last[1] || last[0];
+}
+function cloudCredit() {
+  const el = document.getElementById('cloudtime'); if (!el) return;
+  el.textContent = goesT ? `NOAA GOES-East GeoColor via NASA GIBS, ${goesT.slice(0, 10)} ${goesT.slice(11, 16)} UTC` : `NASA VIIRS via NASA GIBS, ${CLOUD_DATE}`;
+}
 // Crispness: MapLibre picks tile zoom from CSS pixels, so on HiDPI screens we declare 128px tiles
 // (one zoom level deeper) so each 256px source tile maps ~1:1 onto device pixels. Capped by each
 // layer's native maxzoom (Blue/Black Marble z8, USGS z16) so nothing is blurrily overzoomed beyond that.
@@ -60,12 +76,21 @@ function loadImg(url) {
 }
 const fill = (t, z, x, y) => t.replace('{z}', z).replace('{x}', x).replace('{y}', y);
 const smooth = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); };
+// Night-side clouds: GOES GeoColor shows IR clouds at night as grey/white over a dark base with yellow
+// city lights baked in. Keep bright, low-saturation pixels only (rejects the yellow lights), and lay a soft
+// grey-white veil (max ~28%) under our own Black Marble lights so the cities still read through.
+function nightCloud(C, k, ck, day) {
+  const nd = 1 - day; if (nd < 0.02) return 0;
+  const r = C[k], g = C[k + 1], b = C[k + 2], mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+  return smooth(70, 170, (r + g + b) / 3) * (1 - smooth(28, 70, mx - mn)) * 0.28 * ck * nd;
+}
 const S = 256, cv = document.createElement('canvas'); cv.width = cv.height = S;
 const ctx = cv.getContext('2d', { willReadFrequently: true });
 
 maplibregl.addProtocol('daynight', async (params) => {
   const [z, x, y] = params.url.replace('daynight://', '').split('?')[0].split('/').map(Number);
-  const [di, ni, ci] = await Promise.all([loadImg(fill(DAY, z, x, y)), loadImg(fill(NIGHT, z, x, y)), loadImg(fill(CLOUD, z, x, y))]);
+  const cloud = async () => (goesT && z <= 7 && await loadImg(fill(GOES(goesT), z, x, y))) || await loadImg(fill(VIIRS(CLOUD_DATE), z, x, y)) || await loadImg(fill(VIIRS(CLOUD_DATE2), z, x, y));
+  const [di, ni, ci] = await Promise.all([loadImg(fill(DAY, z, x, y)), loadImg(fill(NIGHT, z, x, y)), cloud()]);
   ctx.clearRect(0, 0, S, S);
   if (!di) throw new Error('tile');
   ctx.drawImage(di, 0, 0, S, S); const D = ctx.getImageData(0, 0, S, S);
@@ -86,6 +111,20 @@ maplibregl.addProtocol('daynight', async (params) => {
       const k = (j * S + i) * 4;
       const lit = 0.06 + 0.94 * day;
       let r = d[k], g = d[k + 1], bl = d[k + 2];
+      // Open water (Blue Marble ocean/shallows are blue-dominant): replace with brand navy, no blue fill.
+      // The moving current particles in overlay.js become the "water".
+      if ((bl > r + 18 && bl > g + 4) || (g > r + 30 && bl > r + 30)) { // deep ocean + turquoise shallows
+        const w = 0.35 + 0.65 * day, gl = glow * 0.18;
+        let wr = 6 * w + 255 * gl, wg = 14 * w + 140 * gl, wb = 30 * w + 60 * gl;
+        // clouds over water: same source, threshold, opacity and day-side blend as on land (main's formula)
+        if (C && ck > 0 && day > 0.02) {
+          const mn = Math.min(C[k], C[k + 1], C[k + 2]), c = smooth(150, 225, mn) * 0.42 * ck * day;
+          wr += (C[k] * lit - wr) * c; wg += (C[k + 1] * lit - wg) * c; wb += (C[k + 2] * lit - wb) * c;
+        }
+        if (C && ck > 0) { const q = nightCloud(C, k, ck, day); wr += (200 - wr) * q; wg += (206 - wg) * q; wb += (216 - wb) * q; }
+        d[k] = wr > 255 ? 255 : wr; d[k + 1] = wg > 255 ? 255 : wg; d[k + 2] = wb > 255 ? 255 : wb; d[k + 3] = 255;
+        continue;
+      }
       if (C && ck > 0 && day > 0.02) {
         // keep only bright, neutral (cloud) pixels; faint so the Blue Marble stays clean
         const mn = Math.min(C[k], C[k + 1], C[k + 2]);
@@ -93,8 +132,9 @@ maplibregl.addProtocol('daynight', async (params) => {
         r += (C[k] - r) * c; g += (C[k + 1] - g) * c; bl += (C[k + 2] - bl) * c;
       }
       r *= lit; g *= lit; bl *= lit;
+      if (C && ck > 0) { const q = nightCloud(C, k, ck, day); r += (200 - r) * q; g += (206 - g) * q; bl += (216 - bl) * q; }
       if (N) {
-        const nf = (1 - day) * 1.15;
+        const nf = Math.pow(1 - day, 0.8) * 1.35; // city lights fade in across twilight
         // warm the lights a touch toward sodium gold
         r += N[k] * nf * 1.05; g += N[k + 1] * nf * 0.92; bl += N[k + 2] * nf * 0.7;
       }
@@ -123,22 +163,31 @@ const map = window.__map = new maplibregl.Map({
       lanes: { type: 'geojson', data: { type: 'FeatureCollection', features: [] } },
       ships: { type: 'geojson', data: { type: 'FeatureCollection', features: [] } },
       quakes: { type: 'geojson', data: { type: 'FeatureCollection', features: [] } },
-      gauges: { type: 'geojson', data: { type: 'FeatureCollection', features: [] } }
+      // TODO(Christopher): add the rest of the served counties to served-counties.geojson; only Duval is listed for now.
+      served: { type: 'geojson', data: window.__GBASE + 'served-counties.geojson' },
+      buoys: { type: 'geojson', data: { type: 'FeatureCollection', features: (window.__BUOYS || []).map(b => ({ type: 'Feature',
+        geometry: { type: 'Point', coordinates: [b[1], b[2]] }, properties: { id: b[0], name: b[3], ws: b[4], wv: b[5], wt: b[6], t: b[7] } })) } }
     },
     layers: [
       { id: 'dn', type: 'raster', source: 'dn', paint: { 'raster-fade-duration': 300, 'raster-resampling': 'linear' } },
       { id: 'usgs', type: 'raster', source: 'usgs', minzoom: 7.5,
         paint: { 'raster-brightness-max': 0.8, 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 7.5, 0, 8, 1] } },
-      { id: 'term-glow', type: 'line', source: 'term', paint: { 'line-color': '#e8b65a', 'line-width': 18, 'line-blur': 16, 'line-opacity': 0.25 } },
-      { id: 'lanes', type: 'line', source: 'lanes', paint: { 'line-color': '#e8b65a', 'line-width': 0.6, 'line-opacity': 0.18, 'line-dasharray': [2, 4] } },
+      { id: 'term-glow', type: 'line', source: 'term', paint: { 'line-color': '#e8b65a', 'line-width': 30, 'line-blur': 26, 'line-opacity': 0.25 } },
+      { id: 'term-core', type: 'line', source: 'term', paint: { 'line-color': '#f0c87a', 'line-width': 1, 'line-blur': 1, 'line-opacity': 0.28 } },
+      { id: 'lanes', type: 'line', source: 'lanes', paint: { 'line-color': '#ffffff', 'line-width': 0.5, 'line-opacity': 0.12 } },
+      { id: 'served-glow', type: 'line', source: 'served', paint: { 'line-color': '#e8b65a', 'line-width': 7, 'line-blur': 6, 'line-opacity': 0.3 } },
+      { id: 'served-line', type: 'line', source: 'served', paint: { 'line-color': '#f6d58e', 'line-width': 1.1, 'line-opacity': 0.85 } },
       { id: 'fl-glow', type: 'line', source: 'fl', paint: { 'line-color': '#e8b65a', 'line-width': 6, 'line-blur': 5, 'line-opacity': 0.35 } },
       { id: 'fl-line', type: 'line', source: 'fl', paint: { 'line-color': '#f0c87a', 'line-width': 1.3, 'line-opacity': 0.95 } },
-      { id: 'gauge-ring', type: 'circle', source: 'gauges', paint: { 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#9fd3e6', 'circle-stroke-width': 1, 'circle-radius': 4, 'circle-stroke-opacity': 0.5 } },
-      { id: 'gauge-dot', type: 'circle', source: 'gauges', paint: { 'circle-color': '#9fd3e6', 'circle-radius': 1.2, 'circle-opacity': 0.55 } },
       { id: 'quake-ring', type: 'circle', source: 'quakes', paint: { 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#f0c87a', 'circle-stroke-width': 1.2, 'circle-radius': 6, 'circle-stroke-opacity': 0.6 } },
       { id: 'quake-dot', type: 'circle', source: 'quakes', paint: { 'circle-color': '#f0c87a', 'circle-radius': ['interpolate', ['linear'], ['get', 'mag'], 0, 1.5, 6, 5], 'circle-opacity': 0.9 } },
-      { id: 'ship-glow', type: 'circle', source: 'ships', paint: { 'circle-color': '#e8b65a', 'circle-radius': 5, 'circle-blur': 1, 'circle-opacity': 0.45 } },
-      { id: 'ship', type: 'circle', source: 'ships', paint: { 'circle-color': '#f6d58e', 'circle-radius': 1.8 } }
+      // illustrative ships (as on main, smaller/subtler), riding the faint shipping lanes both ways
+      { id: 'ship-glow', type: 'circle', source: 'ships', paint: { 'circle-color': '#e8b65a', 'circle-radius': 3.2, 'circle-blur': 1, 'circle-opacity': 0.3 } },
+      { id: 'ship', type: 'circle', source: 'ships', paint: { 'circle-color': '#f6d58e', 'circle-radius': 1.2, 'circle-opacity': 0.85 } },
+      // NOAA NDBC buoys: navy marker with a gold ring (red is reserved for cities); larger invisible hit area for taps
+      { id: 'buoy', type: 'circle', source: 'buoys', paint: { 'circle-color': '#0b1f3a', 'circle-radius': mobile ? 2.6 : 2.0,
+        'circle-stroke-color': '#e6c35c', 'circle-stroke-width': mobile ? 1 : 0.9, 'circle-stroke-opacity': 0.9 } },
+      { id: 'buoy-hit', type: 'circle', source: 'buoys', paint: { 'circle-color': '#000', 'circle-opacity': 0, 'circle-radius': mobile ? 14 : 9 } }
     ]
   }
 });
@@ -171,6 +220,13 @@ function setMode(m) {
 document.querySelectorAll('.sun-toggle button').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
 // Real-time terminator: recomputed from current UTC every 60 s (moves ~0.25°/min, tiles cross-fade).
 setInterval(() => { if (mode === 'live' && !document.hidden) setSun(subsolar(new Date())); }, 60e3);
+// Refresh live clouds every 15 min while the tab is visible (new GOES step -> re-render the composite tiles).
+async function refreshClouds() {
+  try { const t = await latestGoes(); if (t !== goesT) { goesT = t; window.__cloud = { src: 'GOES-East GeoColor', time: t }; imgCache.clear(); setSun(sun); } }
+  catch (e) { window.__cloud = { src: 'VIIRS (GOES unavailable)', time: CLOUD_DATE }; }
+  cloudCredit();
+}
+refreshClouds(); setInterval(() => { if (!document.hidden) refreshClouds(); }, 15 * 60e3);
 
 // ---- Shipping lanes: ILLUSTRATIVE, hand-drawn approximations of common routes off Florida.
 // Not AIS data; ship dots are decorative animation only. ----
@@ -184,7 +240,7 @@ const LANES = [
   [[-80.2, 25.7], [-79.6, 24.9], [-78.5, 24.0], [-76.5, 23.4]]                                               // Miami → Old Bahama Channel
 ];
 const laneLen = LANES.map(l => { const c = [0]; for (let i = 1; i < l.length; i++) c.push(c[i - 1] + Math.hypot(l[i][0] - l[i - 1][0], l[i][1] - l[i - 1][1])); return c; });
-const SHIPS = []; LANES.forEach((l, i) => { const n = mobile ? 2 : 4; for (let k = 0; k < n; k++) SHIPS.push({ lane: i, t: (k + Math.random() * 0.5) / n, v: (0.006 + Math.random() * 0.006) * (k % 2 ? 1 : -1) }); });
+const SHIPS = []; LANES.forEach((l, i) => { const n = mobile ? 2 : 4; for (let k = 0; k < n; k++) SHIPS.push({ lane: i, t: (k + Math.random() * 0.5) / n, v: (0.004 + Math.random() * 0.004) * (k % 2 ? 1 : -1) }); });
 function shipsFC(dt) {
   return { type: 'FeatureCollection', features: SHIPS.map(s => {
     const l = LANES[s.lane], c = laneLen[s.lane], L = c[c.length - 1];
@@ -204,16 +260,6 @@ async function loadQuakes() {
     map.getSource('quakes').setData(g); window.__feeds.quakes = g.features.length;
   } catch (e) { window.__feeds.quakes = 'error'; }
 }
-async function loadGauges() {
-  try {
-    // USGS Water Data OGC API: latest streamflow (00060) at gauges in a Florida bbox
-    const g = await getJSON('https://api.waterdata.usgs.gov/ogcapi/v0/collections/latest-continuous/items?f=json&bbox=-87.7,24.4,-79.9,31.1&parameter_code=00060&limit=500&properties=time');
-    const cutoff = Date.now() - 2 * 864e5;
-    const feats = g.features.filter(f => f.geometry && Date.parse(f.properties.time) > cutoff)
-      .map((f, i) => ({ type: 'Feature', geometry: f.geometry, properties: { o: (i * 0.61) % 1 } }));
-    map.getSource('gauges').setData({ type: 'FeatureCollection', features: feats }); window.__feeds.gauges = feats.length;
-  } catch (e) { window.__feeds.gauges = 'error'; }
-}
 window.__feeds = {};
 
 // ---- Animation loop: ripples, glow pulse, ships, idle sway. One rAF, throttled; off for reduced motion. ----
@@ -222,7 +268,13 @@ const fadeOut = (a, ph) => ['*', a, ['-', 1, ['%', ['+', ph, ['get', 'o']], 1]]]
 let paused = false, idleTimer = 0, swayT = 0, anchor = null, last = 0, lastPaint = 0;
 const FRAME = mobile ? 1000 / 24 : 1000 / 40;
 function pause() { paused = true; clearTimeout(idleTimer); }
-function resumeLater() { clearTimeout(idleTimer); idleTimer = setTimeout(() => { anchor = map.getCenter().toArray(); swayT = 0; paused = false; }, 8000); }
+let focused = false;
+function resumeLater(ms = 5000) { clearTimeout(idleTimer); idleTimer = setTimeout(() => { if (focused) return; anchor = map.getCenter().toArray(); swayT = 0; paused = false; }, ms); }
+// gentle auto-spin pauses while the pointer is over the globe (hover) or a finger is down, resumes ~4 s later
+const heroEl = document.getElementById('hero');
+heroEl.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { pause(); resumeLater(4000); } }, { passive: true });
+heroEl.addEventListener('pointerleave', () => resumeLater(1500));
+heroEl.addEventListener('touchstart', () => { pause(); resumeLater(4000); }, { passive: true });
 ['mousedown', 'touchstart', 'wheel', 'dragstart'].forEach(e => map.on(e, pause));
 ['mouseup', 'touchend', 'dragend'].forEach(e => map.on(e, resumeLater));
 
@@ -233,14 +285,12 @@ function tick(now) {
   const ph = (now * SP / 2600) % 1;
   map.setPaintProperty('quake-ring', 'circle-radius', ring(['interpolate', ['linear'], ['get', 'mag'], 0, 3, 6, 8], 18, ph));
   map.setPaintProperty('quake-ring', 'circle-stroke-opacity', fadeOut(0.7, ph));
-  map.setPaintProperty('gauge-ring', 'circle-radius', ring(1.5, 7, ph));
-  map.setPaintProperty('gauge-ring', 'circle-stroke-opacity', fadeOut(0.3, ph));
-  map.setPaintProperty('term-glow', 'line-opacity', 0.18 + 0.14 * (0.5 + 0.5 * Math.sin(now * SP / 1400)));
+  map.setPaintProperty('term-glow', 'line-opacity', 0.2 + 0.14 * (0.5 + 0.5 * Math.sin(now * SP / 2100)));
   map.getSource('ships').setData(shipsFC(dt));
   // slow "rotation": gentle eastward/westward drift of the globe around the anchor, pauses on interaction
   if (!paused && anchor && !map.isMoving()) {
     // incremental offset, so any programmatic/user move simply becomes the new anchor
-    const f = t => 1.5 * Math.sin(t * 2 * Math.PI / 120);
+    const f = t => 2 * Math.sin(t * 2 * Math.PI / 240); // ~35% slower than before
     const dl = (f(swayT + dt) - f(swayT)) * Math.min(1, 2 ** (Z - map.getZoom())); swayT += dt; // scale drift with zoom
     const c = map.getCenter(); map.jumpTo({ center: [c.lng + dl, c.lat] });
   }
@@ -250,8 +300,37 @@ map.on('load', () => {
   map.getSource('term').setData(terminatorLine(sun));
   map.getSource('lanes').setData({ type: 'FeatureCollection', features: LANES.map(c => ({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: c } })) });
   map.getSource('ships').setData(shipsFC(0));
-  loadQuakes(); loadGauges();
+  loadQuakes();
   setInterval(() => { if (!document.hidden) loadQuakes(); }, 5 * 60e3);
+  // ---- Buoy popup: latest NDBC values from the baked snapshot ----
+  const fmt = (v, f) => v == null ? '<span class="na">n/a</span>' : f(v);
+  const pop = new maplibregl.Popup({ closeButton: true, closeOnClick: true, className: 'gk-pop', maxWidth: '240px', offset: 8 });
+  map.on('click', 'buoy-hit', e => {
+    const p = e.features[0].properties, n = v => (v === 'null' || v === null || v === undefined) ? null : +v;
+    const ws = n(p.ws), wv = n(p.wv), wt = n(p.wt);
+    pop.setLngLat(e.features[0].geometry.coordinates).setHTML(
+      `<b>NDBC ${p.id}</b>${p.name ? `<span class="pn">${p.name}</span>` : ''}<dl>` +
+      `<dt>Wind</dt><dd>${fmt(ws, v => `${v.toFixed(1)} m/s (${(v * 1.944).toFixed(0)} kt)`)}</dd>` +
+      `<dt>Waves</dt><dd>${fmt(wv, v => `${v.toFixed(1)} m (${(v * 3.281).toFixed(1)} ft)`)}</dd>` +
+      `<dt>Water</dt><dd>${fmt(wt, v => `${v.toFixed(1)} °C (${(v * 1.8 + 32).toFixed(0)} °F)`)}</dd></dl>` +
+      `<small>${p.t} UTC · NOAA NDBC snapshot</small>`).addTo(map);
+    // lift the popup above the hero text/shade (same coordinate frame: #globe fills the hero)
+    const el = pop.getElement(); if (el && el.parentNode !== heroEl) heroEl.appendChild(el);
+    pause(); resumeLater(8000);
+  });
+  map.on('mouseenter', 'buoy-hit', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'buoy-hit', () => { map.getCanvas().style.cursor = ''; });
+  // ---- Focus Florida: zoom to Jacksonville / NE Florida and back ----
+  const fb = document.getElementById('focusFL');
+  if (fb) fb.addEventListener('click', () => {
+    focused = !focused; fb.setAttribute('aria-pressed', focused); fb.textContent = focused ? 'Back to globe' : 'Focus Florida';
+    pause(); const dur = reduce ? 0 : 2600;
+    if (focused) { // keep Jacksonville clear of the hero text: shift right on landscape, down on portrait
+      const r = document.getElementById('globe').getBoundingClientRect(), land = r.width / r.height > 1.15;
+      const fz = mobile ? 6.7 : 7.4, ppd = 512 * 2 ** fz / 360;
+      map.flyTo({ center: land ? [-81.55 - r.width * 0.22 / ppd, 30.2] : [-81.55, 30.2 + r.height * 0.12 / ppd], zoom: fz, duration: dur, essential: true }); }
+    else { map.flyTo({ center: FL, zoom: Z, duration: dur, essential: true }); resumeLater(dur + 500); }
+  });
   let settled = false;
   const settle = () => {
     if (settled) return; settled = true;
@@ -259,7 +338,7 @@ map.on('load', () => {
     anchor = map.getCenter().toArray();
     requestAnimationFrame(tick);
   };
-  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!settled) return; ({ Z, FL } = fitFL()); map.jumpTo({ center: FL, zoom: Z }); anchor = FL; }, 250); });
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!settled || focused) return; ({ Z, FL } = fitFL()); map.jumpTo({ center: FL, zoom: Z }); anchor = FL; }, 250); });
   if (reduce) map.once('idle', settle);
   else { map.flyTo({ center: FL, zoom: Z, duration: 4500, essential: false }); map.once('moveend', () => { map.once('idle', settle); setTimeout(settle, 3000); }); }
 });
