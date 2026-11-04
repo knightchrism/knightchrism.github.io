@@ -1,0 +1,8 @@
+/* Layout overrides written by the local site editor. Desktop only. */
+/* ge-data:{"e0027ec": {"translate": "-102px 0px"}, "e022ced": {"nowrap": true, "translate": "-103px -6px", "width": "578px"}, "eaa3279": {"translate": "-4px -61px", "width": "585px"}, "ef5c44a": {"fontSize": "0.875rem", "translate": "-103px -2px"}} */
+@media (min-width: 861px) {
+  [data-edit-id="e0027ec"]{transform:translate(-102px,0px) !important;position:relative !important;z-index:3 !important;}
+  [data-edit-id="e022ced"]{width:578px !important;max-width:none !important;white-space:nowrap !important;transform:translate(-103px,-6px) !important;position:relative !important;z-index:3 !important;}
+  [data-edit-id="eaa3279"]{width:585px !important;max-width:none !important;transform:translate(-4px,-61px) !important;position:relative !important;z-index:3 !important;}
+  [data-edit-id="ef5c44a"]{font-size:0.875rem !important;transform:translate(-103px,-2px) !important;position:relative !important;z-index:3 !important;}
+}
