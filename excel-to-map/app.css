@@ -1,0 +1,49 @@
+body.excelmap{background:var(--alt);overflow:hidden}
+.excelmap .app{height:calc(100dvh - 72px);display:flex;flex-direction:column;min-height:0}
+.excelbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line)}
+.excelbar .filebtn{position:relative;overflow:hidden;cursor:pointer}
+.excelbar .filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.excelbar .fname{color:var(--mu);font-size:.9rem;min-width:0;overflow-wrap:anywhere}
+#coord-mode,#address-mode{font:inherit;border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:999px;padding:8px 12px;cursor:pointer}
+#coord-mode[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.stage{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 300px}
+.mapcol{min-width:0;min-height:0;display:flex;flex-direction:column;position:relative}
+.maptools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 10px;background:#fff;border-bottom:1px solid var(--line)}
+.maptools input,.maptools select,.stylebox select{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;max-width:100%}
+.maptools input{min-width:0;flex:1}
+.mapstage{flex:1;min-height:240px;position:relative;background:#e7eef2}
+#map,#gmap{position:absolute;inset:0}
+.review{max-height:168px;overflow:auto;background:#fff;border-top:1px solid var(--line);padding:8px 12px}
+.review h2{font-size:.95rem;margin:0 0 6px}
+.review ul{list-style:none;margin:0;padding:0}
+.review li{display:flex;gap:8px;justify-content:space-between;align-items:baseline;padding:6px 0;border-top:1px solid var(--line);font-size:.85rem}
+.review button{font:inherit;background:none;border:0;color:var(--navy2);font-weight:700;cursor:pointer;padding:4px}
+.statusline{padding:6px 12px;background:#fffaf0;color:var(--navy);font-size:.85rem;border-bottom:1px solid var(--line)}
+.statusline button{font:inherit;font-weight:700;background:none;border:0;color:var(--navy2);cursor:pointer;text-decoration:underline}
+.stylebox{background:#fff;border-left:1px solid var(--line);overflow:auto;padding:16px}
+.stylebox h2{font-size:1rem}
+.style-row{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.style-row button,.review .morebtn{font:inherit;border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:999px;padding:8px 12px;cursor:pointer}
+.style-row button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.legend{display:flex;flex-direction:column;gap:4px;margin:8px 0 12px;font-size:.85rem}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.checks{display:flex;flex-direction:column;gap:4px;max-height:160px;overflow:auto;margin-bottom:12px}
+.checks label{font-size:.85rem}
+.note{color:var(--mu);font-size:.8rem}
+dialog{border:1px solid var(--line);border-radius:16px;padding:20px;max-width:440px;color:var(--ink)}
+dialog::backdrop{background:rgba(11,31,58,.45)}
+dialog h2{margin-top:0}
+.dactions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.mapcol .empty{position:absolute;left:16px;right:16px;top:64px;z-index:500;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-width:420px}
+.e2m-label{font-weight:700}
+.pin{background:transparent;border:0}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+[hidden]{display:none !important}
+@media (max-width:800px){
+  body.excelmap{overflow-x:hidden;overflow-y:auto}
+  .excelmap .app{height:auto;min-height:calc(100dvh - 64px)}
+  .stage{display:flex;flex-direction:column}
+  .stylebox{border-left:0;border-top:1px solid var(--line)}
+  .mapstage{height:68vh;flex:none}
+  .maptools input{flex-basis:100%}
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://maps.gstatic.com https://maps.googleapis.com https://*.googleapis.com https://*.gstatic.com https://*.google.com https://*.ggpht.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://maps.googleapis.com https://*.googleapis.com; worker-src blob:; base-uri 'self'; form-action 'self'; object-src 'none'">
+<title>Excel to map | GeoKnight GIS</title>
+<meta name="description" content="Load an Excel or CSV file and map the rows. Address lookup uses Google only after you agree, and only when the quota service is configured.">
+<link rel="canonical" href="https://geoknightgis.com/excel-to-map/">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../styles.css?v=20261103insured">
+<link rel="stylesheet" href="../assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="excelmap">
+<a class="skip" href="#map">Skip to map</a>
+<header class="nav"><div class="wrap navin">
+<a class="brand" href="../index.html"><span class="mark" aria-hidden="true">GK</span><span>GeoKnight <b>GIS</b></span></a>
+<nav aria-label="Main"><a href="https://globes.geoknightgis.com/login.html" class="navnew" rel="noopener noreferrer">Globe Login</a><a href="../services.html">Services</a><a href="../work.html">Work</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a class="btn btn-sm" href="https://cal.com/christopher-uzhh5z" rel="noopener noreferrer">Book a call</a></nav>
+</div></header>
+<div class="app">
+<div class="excelbar">
+<label class="btn btn-sm filebtn">Load Excel<input id="file" type="file" accept=".xlsx,.csv,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label>
+<button type="button" class="btn btn-sm btn-ghost" id="sample">Load fictional sample</button>
+<span class="fname" id="fname">No file loaded. Files stay in this browser.</span>
+<button type="button" id="coord-mode" aria-pressed="false">Use latitude/longitude</button>
+<button type="button" id="address-mode">Look up addresses</button>
+</div>
+<p class="statusline" id="status" role="status">Load a .xlsx or .csv file. Address columns are used by default. Google stays off until the quota service on this origin allows it.</p>
+<div class="stage">
+<div class="mapcol">
+<div class="maptools">
+<label class="visually-hidden" for="search">Search rows</label>
+<input id="search" type="search" placeholder="Search" autocomplete="off">
+<label>Filter <select id="filter-field"></select></label>
+<select id="filter-value" aria-label="Filter value"></select>
+</div>
+<div class="mapstage">
+<div id="map" role="region" aria-label="Map of rows that have coordinates"></div>
+<div id="gmap" hidden></div>
+</div>
+<p class="empty" id="empty">No points yet. Load a file, or open the fictional sample. The sample names and streets are made up.</p>
+<div class="review" id="review">
+<h2 id="review-title">Rows needing review</h2>
+<p class="note" id="review-count">None yet.</p>
+<ul id="review-list"></ul>
+</div>
+</div>
+<aside class="stylebox" aria-label="Symbol style">
+<h2>Style</h2>
+<p class="note">Changes apply on the map.</p>
+<p>Shape</p>
+<div class="style-row" role="group" aria-label="Shape">
+<button type="button" data-shape="circle" aria-pressed="true">Circle</button>
+<button type="button" data-shape="square" aria-pressed="false">Square</button>
+<button type="button" data-shape="pin" aria-pressed="false">Pin</button>
+</div>
+<p>Color</p>
+<div class="style-row" role="group" aria-label="Color">
+<button type="button" data-color="single" aria-pressed="true">Single</button>
+<button type="button" data-color="category" aria-pressed="false">By category</button>
+</div>
+<label>Color field <select id="color-field"></select></label>
+<p>Size</p>
+<div class="style-row" role="group" aria-label="Size">
+<button type="button" data-size="fixed" aria-pressed="true">Fixed</button>
+<button type="button" data-size="number" aria-pressed="false">By number</button>
+</div>
+<label>Size field <select id="size-field"></select></label>
+<p>Labels</p>
+<div class="style-row" role="group" aria-label="Labels">
+<button type="button" data-label="off" aria-pressed="true">Off</button>
+<button type="button" data-label="field" aria-pressed="false">Field</button>
+</div>
+<label>Label field <select id="label-field"></select></label>
+<p>Popup columns</p>
+<div class="checks" id="popups"></div>
+<div class="legend" id="legend" hidden></div>
+</aside>
+</div>
+</div>
+<dialog id="columns">
+<h2>Which columns should we use?</h2>
+<p>The headers are not clear enough to choose automatically. Nothing is sent off this browser.</p>
+<div id="column-fields"></div>
+<p class="note" id="column-error" role="alert"></p>
+<div class="dactions"><button type="button" id="column-cancel">Cancel</button><button type="button" class="btn btn-sm" id="column-ok">Use these columns</button></div>
+</dialog>
+<dialog id="address">
+<h2 id="address-title">Address lookup is off</h2>
+<p id="address-lead">No street, city, state, or ZIP is sent until you agree, and only when Google Geocoding is configured on this origin.</p>
+<p id="address-reason"></p>
+<p id="address-setup"></p>
+<div class="dactions"><button type="button" id="address-close">Close</button><button type="button" class="btn btn-sm" id="address-agree" hidden>Send street, city, state, and ZIP</button></div>
+</dialog>
+<script src="../assets/js/nav.js" defer></script>
+<script src="../assets/vendor/leaflet/leaflet.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="lib/csv.js"></script>
+<script src="lib/table.js"></script>
+<script src="lib/files.js"></script>
+<script src="lib/geocode.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

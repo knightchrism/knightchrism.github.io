@@ -1,0 +1,11 @@
+id,name,category,acres,street,city,state,zip,latitude,longitude
+s1,North Sample Shelter,Shelter,4,100 Sample Lane,Sampletown,FL,00000,30.32,-81.66
+s2,Lake Sample Office,Office,12.5,200 Sample Lane,Sampletown,FL,00000,30.33,-81.65
+s3,"Pine Sample, Court",Court,1,300 Sample Lane,Sampletown,FL,00000,30.31,-81.67
+s4,West Sample Dock,Dock,0.5,,,,,30.34,-81.64
+s5,Address only,Shelter,2,400 Sample Lane,Sampletown,FL,00000,,
+s6,Bad coordinates,Office,8,500 Sample Lane,Sampletown,FL,00000,95,10
+s7,<img src=x onerror=alert(1)>,Court,2,600 Sample Lane,Sampletown,FL,00000,30.325,-81.655
+s8,"=HYPERLINK(""https://example.invalid"",""click"")",Dock,3,700 Sample Lane,Sampletown,FL,00000,30.315,-81.665
+s9,Blank size,Shelter,,800 Sample Lane,Sampletown,FL,00000,30.335,-81.645
+s10,Negative size,Office,-4,900 Sample Lane,Sampletown,FL,00000,30.318,-81.675
