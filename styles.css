@@ -268,3 +268,9 @@ fieldset.field{border:0;padding:0}.radios{display:flex;gap:var(--s3);flex-wrap:w
 @media (max-width:900px){.spotin{grid-template-columns:1fr}.spot-stats{grid-template-columns:1fr}}
 .foot p.insured{grid-column:1/-1;margin:0;font-size:.8rem;color:#8fa0b8;letter-spacing:.01em}.foot p.insured::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#c9a227;margin-right:8px;vertical-align:middle}
 .insured{font-size:.8rem;opacity:.85}
+.sample-banner{background:var(--alt);border-left:4px solid var(--gold);padding:14px 18px;border-radius:8px;margin:0 0 32px}
+.sample-flag{display:inline-block;margin:0 0 12px;background:#fff7e0;color:var(--navy);border:1px solid var(--gold);font-weight:800;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.samples{display:flex;flex-direction:column;gap:48px}
+.samples figure{margin:16px 0 0}
+.samples img{width:100%;height:auto;border:1px solid var(--line);border-radius:16px;border-bottom:3px solid var(--gold);background:var(--alt)}
+.samples figcaption{color:var(--mu);font-size:.9rem;margin-top:8px}
