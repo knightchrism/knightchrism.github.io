@@ -11,7 +11,8 @@ body.excelmap{background:var(--alt);overflow:hidden}
 .maptools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 10px;background:#fff;border-bottom:1px solid var(--line)}
 .maptools input,.maptools select,.stylebox select{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;max-width:100%}
 .maptools input{min-width:0;flex:1}
-#map{flex:1;min-height:240px;background:#e7eef2}
+.mapstage{flex:1;min-height:240px;position:relative;background:#e7eef2}
+#map,#gmap{position:absolute;inset:0}
 .review{max-height:168px;overflow:auto;background:#fff;border-top:1px solid var(--line);padding:8px 12px}
 .review h2{font-size:.95rem;margin:0 0 6px}
 .review ul{list-style:none;margin:0;padding:0}
@@ -37,11 +38,12 @@ dialog h2{margin-top:0}
 .e2m-label{font-weight:700}
 .pin{background:transparent;border:0}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+[hidden]{display:none !important}
 @media (max-width:800px){
   body.excelmap{overflow-x:hidden;overflow-y:auto}
   .excelmap .app{height:auto;min-height:calc(100dvh - 64px)}
   .stage{display:flex;flex-direction:column}
   .stylebox{border-left:0;border-top:1px solid var(--line)}
-  #map{height:68vh;flex:none}
+  .mapstage{height:68vh;flex:none}
   .maptools input{flex-basis:100%}
 }

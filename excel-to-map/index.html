@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://tile.openstreetmap.org; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org https://maps.gstatic.com https://maps.googleapis.com https://*.googleapis.com https://*.gstatic.com https://*.google.com https://*.ggpht.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://maps.googleapis.com https://*.googleapis.com; worker-src blob:; base-uri 'self'; form-action 'self'; object-src 'none'">
 <title>Excel to map | GeoKnight GIS</title>
-<meta name="description" content="Load an Excel or CSV file in your browser and plot rows that already have latitude and longitude. Address lookup is off.">
+<meta name="description" content="Load an Excel or CSV file and map the rows. Address lookup uses Google only after you agree, and only when the quota service is configured.">
 <link rel="canonical" href="https://geoknightgis.com/excel-to-map/">
 <meta name="theme-color" content="#0b1f3a">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -26,10 +26,10 @@
 <label class="btn btn-sm filebtn">Load Excel<input id="file" type="file" accept=".xlsx,.csv,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label>
 <button type="button" class="btn btn-sm btn-ghost" id="sample">Load fictional sample</button>
 <span class="fname" id="fname">No file loaded. Files stay in this browser.</span>
-<button type="button" id="coord-mode" aria-pressed="true">Use latitude/longitude</button>
+<button type="button" id="coord-mode" aria-pressed="false">Use latitude/longitude</button>
 <button type="button" id="address-mode">Look up addresses</button>
 </div>
-<p class="statusline" id="status" role="status">Load a .xlsx or .csv file. Points are drawn only from latitude and longitude in the file.</p>
+<p class="statusline" id="status" role="status">Load a .xlsx or .csv file. Address columns are used by default. Google stays off until the quota service on this origin allows it.</p>
 <div class="stage">
 <div class="mapcol">
 <div class="maptools">
@@ -38,7 +38,10 @@
 <label>Filter <select id="filter-field"></select></label>
 <select id="filter-value" aria-label="Filter value"></select>
 </div>
-<div id="map" role="region" aria-label="Map of rows that have coordinates in the file"></div>
+<div class="mapstage">
+<div id="map" role="region" aria-label="Map of rows that have coordinates"></div>
+<div id="gmap" hidden></div>
+</div>
 <p class="empty" id="empty">No points yet. Load a file, or open the fictional sample. The sample names and streets are made up.</p>
 <div class="review" id="review">
 <h2 id="review-title">Rows needing review</h2>
@@ -87,12 +90,11 @@
 <div class="dactions"><button type="button" id="column-cancel">Cancel</button><button type="button" class="btn btn-sm" id="column-ok">Use these columns</button></div>
 </dialog>
 <dialog id="address">
-<h2>Address lookup is off</h2>
-<p>A street lookup would send only <b>street, city, state, and ZIP</b> to the <b>U.S. Census Bureau Geocoder</b> at geocoding.geo.census.gov. No other column would leave this browser. The service is free and does not use an API key.</p>
+<h2 id="address-title">Address lookup is off</h2>
+<p id="address-lead">No street, city, state, or ZIP is sent until you agree, and only when Google Geocoding is configured on this origin.</p>
 <p id="address-reason"></p>
 <p id="address-setup"></p>
-<p>Rows without coordinates stay in the review list. They are not dropped, and they are not sent anywhere.</p>
-<div class="dactions"><button type="button" class="btn btn-sm" id="address-close">Close</button></div>
+<div class="dactions"><button type="button" id="address-close">Close</button><button type="button" class="btn btn-sm" id="address-agree" hidden>Send street, city, state, and ZIP</button></div>
 </dialog>
 <script src="../assets/js/nav.js" defer></script>
 <script src="../assets/vendor/leaflet/leaflet.js"></script>
