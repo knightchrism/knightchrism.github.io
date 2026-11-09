@@ -268,3 +268,7 @@ fieldset.field{border:0;padding:0}.radios{display:flex;gap:var(--s3);flex-wrap:w
 @media (max-width:900px){.spotin{grid-template-columns:1fr}.spot-stats{grid-template-columns:1fr}}
 .foot p.insured{grid-column:1/-1;margin:0;font-size:.8rem;color:#8fa0b8;letter-spacing:.01em}.foot p.insured::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#c9a227;margin-right:8px;vertical-align:middle}
 .insured{font-size:.8rem;opacity:.85}
+
+/* pricing page: three-step how-it-works */
+.steps.steps3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.steps.steps3{grid-template-columns:1fr}}
